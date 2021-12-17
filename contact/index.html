@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签, 水墨-丹青">
+    <meta name="keywords" content="contact, 水墨-丹青">
     <meta name="description" content="123">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签 | 水墨-丹青</title>
+    <title>contact | 水墨-丹青</title>
     <link rel="icon" type="image/png" href="/dkllts.github.io/ring.png">
 
     <link rel="stylesheet" type="text/css" href="/dkllts.github.io/libs/awesome/css/all.min.css">
@@ -305,7 +305,13 @@
 
 </header>
 
-            <div class="bg-cover pd-header about-cover">
+            <link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/barrager.css">
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.barrager.js"></script>
+
+<div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
@@ -353,25 +359,106 @@
     </div>
 </div>
 
+<style>
+    #send{
+        margin-bottom: 10px;
+        width: 49%;
+        background-color: #0ba360;
+    }
+    #clear{
+        margin-bottom: 10px;
+        width: 49%;
+        background-color: #e7c65c;
+    }
+    p{
+        text-align: center;
+    }
+</style>
 <main class="content">
-
-    
-
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
+    <div id="contact" class="container chip-container">
+        <div class="card">
+            <div class="card-content">
+                <div class="tag-title center-align">
+                    <i class="fas fa-comments"></i>&nbsp;&nbsp;留言板
+                </div>
                 
             </div>
+            <!--valine评论弹幕-->
+            
         </div>
+
+        <!--其他评论card-->
+        <div class="card">
+            
+                <link rel="stylesheet" href="/dkllts.github.io/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/dkllts.github.io/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
     </div>
+    <div id="gitalk-container" class="card-content"></div>
 </div>
 
-    
+<script src="/dkllts.github.io/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: null,
+        id: '2020-08-10T16-39-20',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
 
+    gitalk.render('gitalk-container');
+</script>
+
+            
+
+            
+                <link rel="stylesheet" href="/dkllts.github.io/libs/gitment/gitment-default.css">
+<link rel="stylesheet" href="/dkllts.github.io/css/gitment.css">
+
+<div class="gitment-card card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitment-content" class="card-content"></div>
+</div>
+
+<script src="/dkllts.github.io/libs/gitment/gitment.js"></script>
+<script>
+var gitment = new Gitment({
+    id: 'Mon Aug 10 2020 16:39:20 GMT+0800',
+    owner: '',
+    repo: '',
+    oauth: {
+        client_id: '',
+        client_secret: ''
+    }
+});
+
+gitment.render('gitment-content');
+</script>
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
 </main>
 
 
@@ -689,12 +776,6 @@ $(function () {
                                   
 
                                     
-                                      <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-                                      <script
-                                        src="/dkllts.github.io/libs/others/TencentCaptcha.js"></script>
-                                      <button id="TencentCaptcha" data-appid="xxxxxxxxxx"
-                                        data-cbfn="callback" type="button" hidden></button>
-                                      
 
                                         <!-- Baidu Analytics -->
 
@@ -730,8 +811,8 @@ $(function () {
                                                           var OriginTitile = document.title,
                                                             st;
                                                           document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "看不见我🙈~看不见我🙈~", clearTimeout(st)) : (document.title =
-                                                              "(๑•̀ㅂ•́) ✧被发现了～", st = setTimeout(function () {
+                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
                                                                 document.title = OriginTitile
                                                               }, 3e3))
                                                           })
