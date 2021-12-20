@@ -507,15 +507,15 @@ trim_trailing_whitespace = false
 <li><p>trailingComma：在多行输入的尾逗号是否添加，设置为 none；</p>
 </li>
 <li><p>semi：语句末尾是否要加分号，默认值true，选择false表示不加；</p>
-<p>  {</p>
-<pre><code>&quot;useTabs&quot;: false,
+<pre><code>&#123;
+&quot;useTabs&quot;: false,
 &quot;tabWidth&quot;: 2,
 &quot;printWidth&quot;: 80,
 &quot;singleQuote&quot;: true,
 &quot;trailingComma&quot;: &quot;none&quot;,
 &quot;semi&quot;: false
+&#125;
 </code></pre>
-<p>  }</p>
 </li>
 </ul>
 <p>3.创建.prettierignore忽略文件</p>
@@ -541,8 +541,8 @@ trim_trailing_whitespace = false
 <li><p>解决eslint和prettier冲突的问题<br><code>npm i eslint-plugin-prettier eslint-config-prettier -D</code></p>
 </li>
 <li><p>添加prettier插件</p>
-<p>  extends: [</p>
-<pre><code>    &quot;plugin:vue/vue3-essential&quot;,
+<pre><code>extends: [
+    &quot;plugin:vue/vue3-essential&quot;,
     &quot;eslint:recommended&quot;,
     &quot;@vue/typescript/recommended&quot;,
     &quot;@vue/prettier&quot;,
@@ -585,8 +585,7 @@ module.exports = &#123;
 <p><code>defineComponent</code>：定义组件，更好的支持ts</p>
 </li>
 <li><p>创建router对象</p>
-<p> import { createRouter, createWebHashHistory } from ‘vue-router’;<br> import type { RouteRecordRaw } from ‘vue-router’; // 声明导入的是一个type，可不加</p>
-<p> const routes: RouteRecordRaw[] = [<br>   {</p>
+<p>   import { createRouter, createWebHashHistory } from ‘vue-router’;<br>   import type { RouteRecordRaw } from ‘vue-router’; // 声明导入的是一个type，可不加<br>   const routes: RouteRecordRaw[] = [<br>   {</p>
 <pre><code> path: &#39;/&#39;,
  redirect: &#39;/login&#39;
 </code></pre>
@@ -598,21 +597,23 @@ module.exports = &#123;
 <pre><code> path: &#39;/main&#39;,
  component: () =&gt; import(&#39;@/views/main/index.vue&#39;)
 </code></pre>
-<p>   }<br> ]</p>
-<p> const router = createRouter({<br>   routes,<br>   history: createWebHashHistory()<br> })</p>
-<p> export default router</p>
+<p>   }]<br>   const router = createRouter({<br>   routes,<br>   history: createWebHashHistory()<br>   })</p>
+<p>   export default router</p>
 </li>
 </ol>
 <h3 id="2-3-element-plus集成"><a href="#2-3-element-plus集成" class="headerlink" title="2.3 element-plus集成"></a>2.3 element-plus集成</h3><ol>
 <li><p>全局引用：所有组件全部集成</p>
-<p>   优点：集成简单，方便使用<br>缺点：全部会打包</p>
-<p> import ElementPlus from ‘element-plus’;<br> import ‘element-plus/theme-chalk/index.css’;<br> app.use(ElementPlus)</p>
+<p>   优点：集成简单，方便使用<br>   缺点：全部会打包</p>
+<p>  import ElementPlus from ‘element-plus’;<br>  import ‘element-plus/theme-chalk/index.css’;<br>  app.use(ElementPlus)</p>
 </li>
 <li><p>按需引用</p>
-<p>   优点：包会小一些<br>缺点：引用麻烦</p>
+<p>   优点：包会小一些<br>   缺点：引用麻烦</p>
 <pre><code>&lt;el-button type=&quot;primary&quot;&gt;哈哈哈哈&lt;/el-button&gt;
+
+import &#123; ElButton &#125; from &#39;element-plus&#39;
+import &#39;element-plus/theme-chalk/base.css&#39;;
+import &#39;element-plus/theme-chalk/el-button.css&#39;;
 </code></pre>
-<p> import { ElButton } from ‘element-plus’<br> import ‘element-plus/theme-chalk/base.css’;<br> import ‘element-plus/theme-chalk/el-button.css’;</p>
 <p> components: {<br>  ElButton<br> }</p>
 </li>
 </ol>
