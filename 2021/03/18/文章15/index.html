@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/0003.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/img/0003.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -535,7 +535,7 @@ const Divider: React.FC&lt;DividerProps&gt; = props =&gt; (
 
 export default Divider;
 </code></pre>
-<h3 id="如何暴露组件属性"><a href="#如何暴露组件属性" class="headerlink" title="如何暴露组件属性"></a>如何暴露组件属性</h3><p>在源码中，最先看到的是以下内容，这些属性也就是divider组件所暴露的属性，我们可以 <code>&lt;Divider type=&#39;vertical&#39; /&gt;</code> 这样来传入 type 属性，那么 divider 分割线样式就会渲染为垂直分割线，是不是很熟悉！</p>
+<h3 id="如何暴露组件属性"><a href="#如何暴露组件属性" class="headerlink" title="如何暴露组件属性"></a>如何暴露组件属性</h3><p>在源码中，最先看到的是以下内容，这些属性也就是 divider 组件所暴露的属性，我们可以 <code>&lt;Divider type=&#39;vertical&#39; /&gt;</code> 这样来传入 type 属性，那么 divider 分割线样式就会渲染为垂直分割线，是不是很熟悉！</p>
 <pre><code>export interface DividerProps &#123; // interface 是 TypeScript 的语法
     prefixCls?: string;
     type?: &#39;horizontal&#39; | &#39;vertical&#39;; // 限定 type 只能传入两个值中的一个
@@ -547,7 +547,7 @@ export default Divider;
     plain?: boolean;
 &#125;
 </code></pre>
-<p>在上面的属性中，我们还发现 className 和 style是比较常见的属性，这代表我们可以 <code>&lt;Divider type=&#39;vertical&#39; className=&#39;myClassName&#39; style=&#123;&#123;width: '1em'&#125;&#125; /&gt;</code> 这样使用这些属性。</p>
+<p>在上面的属性中，我们还发现 className 和 style 是比较常见的属性，这代表我们可以 <code>&lt;Divider type=&#39;vertical&#39; className=&#39;myClassName&#39; style=&#123;&#123;width: '1em'&#125;&#125; /&gt;</code> 这样使用这些属性。</p>
 <h3 id="如何设置统一类名前缀"><a href="#如何设置统一类名前缀" class="headerlink" title="如何设置统一类名前缀"></a>如何设置统一类名前缀</h3><p>我们知道，antd 的组件类名会有他们独特的前缀 <code>ant-</code>，这是如何处理的呢？继续看源码。</p>
 <pre><code>&lt;ConfigConsumer&gt;
     &#123;(&#123; getPrefixCls, direction &#125;: ConfigConsumerProps) =&gt; &#123;
@@ -563,7 +563,7 @@ export default Divider;
         &#125; = props;
         const prefixCls = getPrefixCls(&#39;divider&#39;, customizePrefixCls);
 </code></pre>
-<p>​<br>    从源码中，发现 prefixCls ，是通过 getPrefixCls 方法生成，再看看 getPrefixCls 方法的源码，如下。</p>
+<p>​<br> 从源码中，发现 prefixCls ，是通过 getPrefixCls 方法生成，再看看 getPrefixCls 方法的源码，如下。</p>
 <pre><code>    export interface ConfigConsumerProps &#123;
   ...
   getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) =&gt; string;
@@ -579,7 +579,7 @@ const defaultGetPrefixCls = (suffixCls?: string, customizePrefixCls?: string) =&
 <p>不难发现此时会生成的类名前缀为 <code>ant-divider</code> 。</p>
 <h3 id="如何处理样式与类名"><a href="#如何处理样式与类名" class="headerlink" title="如何处理样式与类名"></a>如何处理样式与类名</h3><p>我们封装的组件肯定是有预设的样式，又因为样式要通过类名来定义，而我们传入的属性值则会决定组件上要添加哪个类名，这又是如何实现的呢？下面看源码。</p>
 <pre><code> import classNames from &#39;classnames&#39;;
- 
+
  const classString = classNames(
      prefixCls,
      `$&#123;prefixCls&#125;-$&#123;type&#125;`,
@@ -598,9 +598,9 @@ const defaultGetPrefixCls = (suffixCls?: string, customizePrefixCls?: string) =&
      &lt;/div&gt;
  );
 </code></pre>
-<p>它通过 classNames 方法（<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/classnames">classNames是React处理多类名的组件</a>）定义了一个所有类名的常量，然后传给了 div 中的 className 属性。</p>
-<p>其实生成的类名也就是 <code>ant-divider-horizontal</code> 这个样子，那么css中以此类名定义的样式也就自然会生效了。而 className 和 style 属性则是通过 <code>&#123;...restProps&#125;</code> 来传入。</p>
-<p>最后我们再看看它的css样式代码是怎么写的！</p>
+<p>它通过 classNames 方法（<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/classnames">classNames 是 React 处理多类名的组件</a>）定义了一个所有类名的常量，然后传给了 div 中的 className 属性。</p>
+<p>其实生成的类名也就是 <code>ant-divider-horizontal</code> 这个样子，那么 css 中以此类名定义的样式也就自然会生效了。而 className 和 style 属性则是通过 <code>&#123;...restProps&#125;</code> 来传入。</p>
+<p>最后我们再看看它的 css 样式代码是怎么写的！</p>
 <h3 id="divider-组件样式源代码"><a href="#divider-组件样式源代码" class="headerlink" title="divider 组件样式源代码"></a>divider 组件样式源代码</h3><p>antd 组件的样式使用 Less 书写，不了解 Less 语法的同学一定要了解一下。</p>
 <pre><code>@import &#39;../../style/themes/index&#39;;
 @import &#39;../../style/mixins/index&#39;;
@@ -627,7 +627,7 @@ const defaultGetPrefixCls = (suffixCls?: string, customizePrefixCls?: string) =&
     display: flex;
     clear: both;
     width: 100%;
-    min-width: 100%; 
+    min-width: 100%;
     margin: 24px 0;
   &#125;
 
@@ -831,7 +831,7 @@ const defaultGetPrefixCls = (suffixCls?: string, customizePrefixCls?: string) =&
                 <a href="/2021/03/11/%E6%96%87%E7%AB%A014/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/0007.jpg" class="responsive-img" alt="HTTP图解">
+                        <img src="/medias/banner/img/0007.jpg" class="responsive-img" alt="HTTP图解">
                         
                         <span class="card-title">HTTP图解</span>
                     </div>
