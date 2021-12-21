@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -476,7 +476,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>go中可以使用http.DefaultClient进行http请求，也可以自己创建http.Client，传入自定义Transport可以实现对request的处理。</p>
+                <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>go 中可以使用 http.DefaultClient 进行 http 请求，也可以自己创建 http.Client，传入自定义 Transport 可以实现对 request 的处理。</p>
 <p>http.Client</p>
 <pre><code>// A Client is an HTTP client. Its zero value (DefaultClient) is a
 // usable client that uses DefaultTransport.
@@ -507,7 +507,7 @@
 // with the updated values (assuming the origin matches).
 // If Jar is nil, the initial cookies are forwarded without change.
 </code></pre>
-<p>type Client  struct</p>
+<p>type Client struct</p>
 <pre><code>// Transport specifies the mechanism by which individual
 // HTTP requests are made.
 // If nil, DefaultTransport is used.
@@ -532,7 +532,7 @@ CheckRedirect func(req *Request, via []*Request) error
  // The Jar is used to insert relevant cookies into every
  // outbound Request and is updated with the cookie values
  // of every inbound Response. The Jar is consulted for every
- // redirect that the Client follows.`` 
+ // redirect that the Client follows.``
  //
  // If Jar is nil, cookies are only sent if they are explicitly
  // set on the Request.
@@ -587,7 +587,7 @@ type RoundTripper interface&#123;
 // The Request&#39;s URL and Header fields must be initialized.
 RoundTrip(*Request) (*Response, error)&#125;
 </code></pre>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>先写一个server，打印出访问的payload信息。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>先写一个 server，打印出访问的 payload 信息。</p>
 <pre><code>package main
 import
 (&quot;fmt&quot; &quot;io/ioutil&quot; &quot;net/http&quot;) func main() &#123;
@@ -601,7 +601,7 @@ import
         &#125;
         fmt.Println(string(req))
     &#125;)
-    if err := http.ListenAndServe(&quot;:8000&quot;, mux); 
+    if err := http.ListenAndServe(&quot;:8000&quot;, mux);
     err != nil &#123;
         panic(err)
     &#125;
@@ -616,12 +616,12 @@ import
 (&quot;fmt&quot; &quot;io/ioutil&quot; &quot;net/http&quot; &quot;strings&quot; &quot;github.com/google/uuid&quot;)
 func main() &#123;
     id := uuid.NewString()
-    req, _ := http.NewRequest(&quot;GET&quot;, &quot;http://localhost:8000&quot;, strings.NewReader(fmt.Sprintf(&#123;&quot;id&quot;:&quot;%s&quot;&#125;, id)))  
-    req.Header.Add(&quot;Authorization&quot;, fmt.Sprintf(&quot;Bearer token%s&quot;, id))  
-    resp, err := http.DefaultClient.Do(req)  
-    if err != nil &#123;    
-        panic(err)  
-    &#125;  
+    req, _ := http.NewRequest(&quot;GET&quot;, &quot;http://localhost:8000&quot;, strings.NewReader(fmt.Sprintf(&#123;&quot;id&quot;:&quot;%s&quot;&#125;, id)))
+    req.Header.Add(&quot;Authorization&quot;, fmt.Sprintf(&quot;Bearer token%s&quot;, id))
+    resp, err := http.DefaultClient.Do(req)
+    if err != nil &#123;
+        panic(err)
+    &#125;
     fmt.Println(resp)
 &#125;()
 </code></pre>
@@ -629,19 +629,19 @@ func main() &#123;
 <pre><code>&#123;&quot;id&quot;:&quot;912733ce-4e17-4209-ad9e-71159fd37845&quot;&#125;
 &amp;&#123;200 OK 200 HTTP/1.1 1 1 map[Content-Length:[0] Date:[Sun, 28 Nov 2021 06:48:50 GMT]] &#123;&#125; 0 [] false false map[] 0xc000194000 &lt;nil&gt;&#125;
 </code></pre>
-<p>使用自定义Transport</p>
+<p>使用自定义 Transport</p>
 <pre><code>package main
 import
 ( &quot;bytes&quot;  &quot;encoding/json&quot; &quot;io/ioutil&quot; &quot;net/http&quot; &quot;strings&quot;)
 type customTransport struct &#123;
-  
+
 &#125;
 func (t *customTransport) RoundTrip(req *http.Request) (*http.Response, error) &#123;
   token := req.Header.Get(&quot;Authorization&quot;)
   if len(token) != 0 &amp;&amp;  strings .HasPrefix(token,  &quot;Bearer &quot; ) &#123;
     token = token[7:]
     var bodyBytes []byte
-    if req.Body != nil &#123; 
+    if req.Body != nil &#123;
       bodyBytes, _ = ioutil.ReadAll(req.Body)
       &#125;
       var payload map[string]interface&#123;&#125;
@@ -664,21 +664,21 @@ func (t *customTransport) RoundTrip(req *http.Request) (*http.Response, error) &
   return resp, nil
 &#125;
 </code></pre>
-<p>使用自定义Client</p>
+<p>使用自定义 Client</p>
 <pre><code>package main
 import
-(  &quot;fmt&quot;  &quot;io/ioutil&quot;  &quot;net/http&quot;  &quot;strings&quot;   &quot;github.com/google/uuid&quot;) func main() &#123;  
+(  &quot;fmt&quot;  &quot;io/ioutil&quot;  &quot;net/http&quot;  &quot;strings&quot;   &quot;github.com/google/uuid&quot;) func main() &#123;
     id := uuid.NewString()  req, _ := http.NewRequest(&quot;GET&quot;, &quot;http://localhost:8000&quot;, strings.NewReader(fmt.Sprintf(&#123;
         &quot;id&quot;:&quot;%s&quot;
-    &#125;, id)))  
-    req.Header.Add(&quot;Authorization&quot;, fmt.Sprintf(&quot;Bearer token%s&quot;, id))  
+    &#125;, id)))
+    req.Header.Add(&quot;Authorization&quot;, fmt.Sprintf(&quot;Bearer token%s&quot;, id))
     client := &amp;http.Client&#123;
-        Transport: &amp;customTransport&#123;&#125;, 
-    &#125;  
-    resp, err := client.Do(req)  
-    if err != nil &#123;   
-    panic(err)  
-  &#125;  
+        Transport: &amp;customTransport&#123;&#125;,
+    &#125;
+    resp, err := client.Do(req)
+    if err != nil &#123;
+    panic(err)
+  &#125;
 fmt.Println(resp)
 &#125;()
 </code></pre>
@@ -754,7 +754,7 @@ fmt.Println(resp)
                 <a href="/2020/10/23/%E6%96%87%E7%AB%A04/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="欲罢不能的node.js">
+                        <img src="/medias/banner/0005.jpg" class="responsive-img" alt="欲罢不能的node.js">
                         
                         <span class="card-title">欲罢不能的node.js</span>
                     </div>
@@ -802,8 +802,7 @@ fmt.Println(resp)
                 <a href="/2020/09/27/%E6%96%87%E7%AB%A02/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="JS设计模式之建造者模式">
+                        <img src="/medias/banner/2.jpg" class="responsive-img" alt="JS设计模式之建造者模式">
                         
                         <span class="card-title">JS设计模式之建造者模式</span>
                     </div>
@@ -822,8 +821,8 @@ fmt.Println(resp)
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/js/" class="post-category">
-                                    js
+                            <a href="/categories/JavaScript/" class="post-category">
+                                    JavaScript
                                 </a>
                             
                             
@@ -833,8 +832,8 @@ fmt.Println(resp)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/js/">
-                        <span class="chip bg-color">js</span>
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>
@@ -1295,34 +1294,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -1338,63 +1339,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

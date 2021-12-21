@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/0008.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -506,7 +506,7 @@
        position: relative;
        width: 160px;
        height: 64px;
-   
+
 <pre><code>   &amp;::before &#123;
        content: &quot;&quot;;
        position: absolute;
@@ -518,7 +518,7 @@
        transform: skewX(15deg);
    &#125;
 </code></pre>
-<p>   }</p>
+<p>}</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d02e72e6e0af4b23b5c5bbf2fbcb63c1~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>如果不想使用伪元素，除了 <code>transform: skewX()</code>，平行四边形使用渐变也是可以实现的。</p>
 <p>大概就是这样：</p>
@@ -558,7 +558,7 @@
 <p>基于此，我们只需要利用多重渐变，实现 4 个这样的图形即可，并且，利用 <code>background-position</code> 定位到四个角：</p>
 <pre><code>&lt;div class=&quot;notching&quot;&gt;notching&lt;/div&gt;
 .notching &#123;
-    background: 
+    background:
         linear-gradient(135deg, transparent 10px, #ff1493 0) top left,
         linear-gradient(-135deg, transparent 10px, #ff1493 0) top right,
         linear-gradient(-45deg, transparent 10px, #ff1493 0) bottom right,
@@ -759,16 +759,16 @@ div &#123;
     &#125;
 &#125;
 </code></pre>
-<p>  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d4f471820794d58a80f81f5c4c00052~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>  由于一个伪元素叠加在另外一个之上，所以对其中一个使用渐变，一个则是纯色，其颜色是可以完美衔接在一起的，这样就实现了渐变色的该图形：</p>
-<p>  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c4bb1de4018421a9eb142d7b7590cfa~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="外圆角按钮"><a href="#外圆角按钮" class="headerlink" title="外圆角按钮"></a>外圆角按钮</h2><p>  接下来这个按钮形状，常见于 Tab 页上，类似于 Chrome 的分页：</p>
-<p>  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d516c287fa9a40738b77f91ea92fc152~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>  我们对这个按钮形状拆解一下，这里其实是 3 块的叠加：</p>
-<p>  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1b933f02fc54a34a36a0430254b4a12~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>  只需要想清楚如何实现两侧的弧形三角即可。这里还是借助了渐变 – <strong>径向渐变</strong>，其实他是这样，如下图所示，我们只需要把黑色部分替换为透明即可，  两个伪    元素即可：</p>
-<p>  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851ef119668d4670b14989db2ad105a0~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>  代码如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d4f471820794d58a80f81f5c4c00052~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>由于一个伪元素叠加在另外一个之上，所以对其中一个使用渐变，一个则是纯色，其颜色是可以完美衔接在一起的，这样就实现了渐变色的该图形：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c4bb1de4018421a9eb142d7b7590cfa~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="外圆角按钮"><a href="#外圆角按钮" class="headerlink" title="外圆角按钮"></a>外圆角按钮</h2><p>接下来这个按钮形状，常见于 Tab 页上，类似于 Chrome 的分页：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d516c287fa9a40738b77f91ea92fc152~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>我们对这个按钮形状拆解一下，这里其实是 3 块的叠加：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1b933f02fc54a34a36a0430254b4a12~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>只需要想清楚如何实现两侧的弧形三角即可。这里还是借助了渐变 – <strong>径向渐变</strong>，其实他是这样，如下图所示，我们只需要把黑色部分替换为透明即可， 两个伪 元素即可：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851ef119668d4670b14989db2ad105a0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>代码如下：</p>
 <pre><code>&lt;div class=&quot;outside-circle&quot;&gt;outside-circle&lt;/div&gt;
 .outside-circle &#123;
     position: relative;
@@ -881,8 +881,7 @@ div &#123;
                 <a href="/2021/02/22/%E6%96%87%E7%AB%A012/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="html完整语法学习">
+                        <img src="/medias/banner/8.jpg" class="responsive-img" alt="html完整语法学习">
                         
                         <span class="card-title">html完整语法学习</span>
                     </div>
@@ -930,7 +929,7 @@ div &#123;
                 <a href="/2021/02/01/%E6%96%87%E7%AB%A010/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/9.jpg" class="responsive-img" alt="windows注册表自启项">
+                        <img src="/medias/banner/7.jpg" class="responsive-img" alt="windows注册表自启项">
                         
                         <span class="card-title">windows注册表自启项</span>
                     </div>
@@ -1422,34 +1421,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -1465,63 +1466,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

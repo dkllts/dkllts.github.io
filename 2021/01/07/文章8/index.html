@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -476,13 +476,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="天地图组件的引用"><a href="#天地图组件的引用" class="headerlink" title="天地图组件的引用"></a>天地图组件的引用</h3><p>首先去<a target="_blank" rel="noopener" href="https://www.tianditu.gov.cn/">天地图官网</a>，登录或者注册。<br>依次点击开发资源-网页Api-新弹出页面右上角控制台</p>
+                <h3 id="天地图组件的引用"><a href="#天地图组件的引用" class="headerlink" title="天地图组件的引用"></a>天地图组件的引用</h3><p>首先去<a target="_blank" rel="noopener" href="https://www.tianditu.gov.cn/">天地图官网</a>，登录或者注册。<br>依次点击开发资源-网页 Api-新弹出页面右上角控制台</p>
 <p>在控制台页面，单击右上角创建新应用，随便填一填巴拉巴拉。</p>
-<p>申请成功后记住你的key。</p>
-<p>我新建了一个vue项目，这个项目啥也没有，像丁真一样纯真。</p>
-<p>找到 index.html 这个文件 把下列代码复制进去，实现全局引入 （当然你也可以粘贴在某个vue页面上来实现按需引入）</p>
+<p>申请成功后记住你的 key。</p>
+<p>我新建了一个 vue 项目，这个项目啥也没有，像丁真一样纯真。</p>
+<p>找到 index.html 这个文件 把下列代码复制进去，实现全局引入 （当然你也可以粘贴在某个 vue 页面上来实现按需引入）</p>
 <p><code>&lt;script src=&quot;http://api.tianditu.gov.cn/api?v=4.0&amp;tk=你的密钥&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></p>
-<p>保存，刷新Vue项目，打开F12控制台发现请求成功。<br>新建一个vue文件，在你像要防止地图的地方新建一个div，定义他的大小，id自己命名，我取名为map。<br>    <div class="bodyAll"><br>      <div id="map" style="height:100%;width:100%"></div><br>    </div><br>在methods书写initMap()方法并在mounted里引用。别忘在data return 里注入map:{}</p>
+<p>保存，刷新 Vue 项目，打开 F12 控制台发现请求成功。<br>新建一个 vue 文件，在你像要防止地图的地方新建一个 div，定义他的大小，id 自己命名，我取名为 map。</p>
+<div class="bodyAll">
+<div id="map" style="height:100%;width:100%"></div>
+</div>
+在 methods 书写 initMap()方法并在 mounted 里引用。别忘在 data return 里注入 map:{}
+
 <pre><code>methods: &#123;
   initMap() &#123;
     let T = window.T;//全局引入后T被注册到window里，在从这儿拿到T。T包含了天地图提供的各种方法等。
@@ -495,15 +500,15 @@ mounted() &#123;
 &#125;,
 </code></pre>
 <p>芜湖~已经能加载出来啦。能加载出来就算成功^^_</p>
-<h3 id="图层组件"><a href="#图层组件" class="headerlink" title="图层组件"></a>图层组件</h3><p>可以用继承于TControl的MapType类来构造图层组件。示例代码的参数是个数组，如果什么都不传会有一个默认的图层系列。</p>
-<p>以下这些图层都可以在官方的api里找到</p>
+<h3 id="图层组件"><a href="#图层组件" class="headerlink" title="图层组件"></a>图层组件</h3><p>可以用继承于 TControl 的 MapType 类来构造图层组件。示例代码的参数是个数组，如果什么都不传会有一个默认的图层系列。</p>
+<p>以下这些图层都可以在官方的 api 里找到</p>
 <pre><code>//添加切换地图图层的组件
 addCtrl() &#123;
   var ctrl = new T.Control.MapType([
     &#123;
-      title: &quot;地图&quot;, 
+      title: &quot;地图&quot;,
       //地图控件上所要显示的图层名称
-      icon: &quot;http://api.tianditu.gov.cn/v4.0/image/map/maptype/vector.png&quot;, 
+      icon: &quot;http://api.tianditu.gov.cn/v4.0/image/map/maptype/vector.png&quot;,
       //地图控件上所要显示的图层图标（默认图标大小80x80）
       layer: TMAP_NORMAL_MAP, //地图类型对象，即MapType。
     &#125;,
@@ -559,7 +564,7 @@ this.map.addControl(ctrl);
   );
 &#125;,
 </code></pre>
-<p>目前的这些api都可以从天地图官网找到，如果你需要要更多需求，官方也许也有现成的api。建议先熟悉一下官方api再进行开发。</p>
+<p>目前的这些 api 都可以从天地图官网找到，如果你需要要更多需求，官方也许也有现成的 api。建议先熟悉一下官方 api 再进行开发。</p>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
 <li>天地图官网：<a target="_blank" rel="noopener" href="https://www.tianditu.gov.cn/">https://www.tianditu.gov.cn/</a></li>
 </ul>
@@ -631,7 +636,7 @@ this.map.addControl(ctrl);
                 <a href="/2021/01/16/%E6%96%87%E7%AB%A09/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/4.jpg" class="responsive-img" alt="Linux基础学习">
+                        <img src="/medias/banner/0009.jpg" class="responsive-img" alt="Linux基础学习">
                         
                         <span class="card-title">Linux基础学习</span>
                     </div>
@@ -679,7 +684,7 @@ this.map.addControl(ctrl);
                 <a href="/2020/12/21/%E6%96%87%E7%AB%A07/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/6.jpg" class="responsive-img" alt="30个类手写Spring核心原理之自定义ORM">
+                        <img src="/medias/banner/0006.jpg" class="responsive-img" alt="30个类手写Spring核心原理之自定义ORM">
                         
                         <span class="card-title">30个类手写Spring核心原理之自定义ORM</span>
                     </div>
@@ -1171,34 +1176,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -1214,63 +1221,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

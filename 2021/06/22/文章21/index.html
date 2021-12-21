@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JavaScript事件、事件类型、事件流和事件模型, 水墨-丹青">
-    <meta name="description" content="当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。">
+    <meta name="keywords" content="13 行 JavaScript 代码让你看起来像是高手, 水墨-丹青">
+    <meta name="description" content="有趣的13 行 JavaScript 代码">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JavaScript事件、事件类型、事件流和事件模型 | 水墨-丹青</title>
+    <title>13 行 JavaScript 代码让你看起来像是高手 | 水墨-丹青</title>
     <link rel="icon" type="image/png" href="/logo3.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JavaScript事件、事件类型、事件流和事件模型</h1>
+                    <h1 class="description center-align post-title">13 行 JavaScript 代码让你看起来像是高手</h1>
                 </div>
             </div>
         </div>
@@ -338,6 +338,10 @@
                         
                             <a href="/tags/JavaScript/">
                                 <span class="chip bg-color">JavaScript</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%BD%AC%E8%BD%BD/">
+                                <span class="chip bg-color">转载</span>
                             </a>
                         
                     </div>
@@ -382,7 +386,87 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>JavaScript 可以做许多神奇的事情，也有很多东西需要学习，今天我们介绍几个短小精悍的代码段。</p>
+<h3 id="获取随机布尔值（True-False）"><a href="#获取随机布尔值（True-False）" class="headerlink" title="获取随机布尔值（True/False）"></a>获取随机布尔值（True/False）</h3><p>使用 <code>Math.random()</code> 会返回 0 到 1 的随机数，之后判断它是否大于 0.5，将会得到一个 50% 概率为 <code>True</code> 或 <code>False</code> 的值</p>
+<pre><code>const randomBoolean = () =&gt; Math.random() &gt;= 0.5;
+console.log(randomBoolean());
+</code></pre>
+<h3 id="判断一个日期是否是工作日"><a href="#判断一个日期是否是工作日" class="headerlink" title="判断一个日期是否是工作日"></a>判断一个日期是否是工作日</h3><pre><code>const isWeekday = (date) =&gt; date.getDay() % 6 !== 0;
+console.log(isWeekday(new Date(2021, 0, 11)));
+// Result: true (周一)
+console.log(isWeekday(new Date(2021, 0, 10)));
+// Result: false (周日)
+</code></pre>
+<h3 id="反转字符串"><a href="#反转字符串" class="headerlink" title="反转字符串"></a>反转字符串</h3><p>有许多反转字符串的方法，这里使用一种最简单的，使用了 <code>split()</code>，<code>reverse()</code> 和 <code>join()</code></p>
+<pre><code>const reverse = str =&gt; str.split(&#39;&#39;).reverse().join(&#39;&#39;);
+reverse(&#39;hello world&#39;);
+// Result: &#39;dlrow olleh&#39;
+</code></pre>
+<h3 id="判断当前标签页是否为可视状态"><a href="#判断当前标签页是否为可视状态" class="headerlink" title="判断当前标签页是否为可视状态"></a>判断当前标签页是否为可视状态</h3><p>浏览器可以打开很多标签页，下面 👇🏻 的代码段就是判断当前标签页是否是激活的标签页</p>
+<pre><code>const isBrowserTabInView = () =&gt; document.hidden;
+isBrowserTabInView();
+</code></pre>
+<h3 id="判断数字为奇数或者偶数"><a href="#判断数字为奇数或者偶数" class="headerlink" title="判断数字为奇数或者偶数"></a>判断数字为奇数或者偶数</h3><p>取模运算符 <code>%</code> 可以很好地完成这个任务</p>
+<pre><code>const isEven = num =&gt; num % 2 === 0;
+console.log(isEven(2));
+// Result: true
+console.log(isEven(3));
+// Result: false
+</code></pre>
+<h3 id="从-Date-对象中获取时间"><a href="#从-Date-对象中获取时间" class="headerlink" title="从 Date 对象中获取时间"></a>从 Date 对象中获取时间</h3><p>使用 <code>Date</code> 对象的 <code>.toTimeString()</code> 方法转换为时间字符串，之后截取字符串即可</p>
+<pre><code>const timeFromDate = date =&gt; date.toTimeString().slice(0, 8);
+console.log(timeFromDate(new Date(2021, 0, 10, 17, 30, 0)));
+// Result: &quot;17:30:00&quot;
+console.log(timeFromDate(new Date()));
+// Result: 返回当前时间
+</code></pre>
+<h3 id="保留指定的小数位"><a href="#保留指定的小数位" class="headerlink" title="保留指定的小数位"></a>保留指定的小数位</h3><pre><code>const toFixed = (n, fixed) =&gt; ~~(Math.pow(10, fixed) * n) / Math.pow(10, fixed);
+// Examples
+toFixed(25.198726354, 1);       // 25.1
+toFixed(25.198726354, 2);       // 25.19
+toFixed(25.198726354, 3);       // 25.198
+toFixed(25.198726354, 4);       // 25.1987
+toFixed(25.198726354, 5);       // 25.19872
+toFixed(25.198726354, 6);       // 25.198726
+</code></pre>
+<h3 id="检查指定元素是否处于聚焦状态"><a href="#检查指定元素是否处于聚焦状态" class="headerlink" title="检查指定元素是否处于聚焦状态"></a>检查指定元素是否处于聚焦状态</h3><p>可以使用 <code>document.activeElement</code> 来判断元素是否处于聚焦状态</p>
+<pre><code>const elementIsInFocus = (el) =&gt; (el === document.activeElement);
+elementIsInFocus(anyElement)
+// Result: 如果处于焦点状态会返回 True 否则返回 False
+</code></pre>
+<h3 id="检查当前用户是否支持触摸事件"><a href="#检查当前用户是否支持触摸事件" class="headerlink" title="检查当前用户是否支持触摸事件"></a>检查当前用户是否支持触摸事件</h3><pre><code>const touchSupported = () =&gt; &#123;
+  (&#39;ontouchstart&#39; in window || window.DocumentTouch &amp;&amp; document instanceof window.DocumentTouch);
+&#125;
+console.log(touchSupported());
+// Result: 如果支持触摸事件会返回 True 否则返回 False
+</code></pre>
+<h3 id="检查当前用户是否是苹果设备"><a href="#检查当前用户是否是苹果设备" class="headerlink" title="检查当前用户是否是苹果设备"></a>检查当前用户是否是苹果设备</h3><p>可以使用 <code>navigator.platform</code> 判断当前用户是否是苹果设备</p>
+<pre><code>const isAppleDevice = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+console.log(isAppleDevice);
+// Result: 是苹果设备会返回 True
+</code></pre>
+<h3 id="滚动至页面顶部"><a href="#滚动至页面顶部" class="headerlink" title="滚动至页面顶部"></a>滚动至页面顶部</h3><p><code>window.scrollTo()</code> 会滚动至指定的坐标，如果设置坐标为（0，0），就会回到页面顶部</p>
+<pre><code>const goToTop = () =&gt; window.scrollTo(0, 0);
+goToTop();
+// Result: 将会滚动至顶部
+</code></pre>
+<h3 id="获取所有参数的平均值"><a href="#获取所有参数的平均值" class="headerlink" title="获取所有参数的平均值"></a>获取所有参数的平均值</h3><p>可以使用 <code>reduce()</code> 函数来计算所有参数的平均值</p>
+<pre><code>const average = (...args) =&gt; args.reduce((a, b) =&gt; a + b) / args.length;
+average(1, 2, 3, 4);
+// Result: 2.5
+</code></pre>
+<h3 id="转换华氏-摄氏"><a href="#转换华氏-摄氏" class="headerlink" title="转换华氏/摄氏"></a>转换华氏/摄氏</h3><p>再也不怕处理温度单位了，下面两个函数是两个温度单位的相互转换。</p>
+<pre><code>const celsiusToFahrenheit = (celsius) =&gt; celsius * 9/5 + 32;
+const fahrenheitToCelsius = (fahrenheit) =&gt; (fahrenheit - 32) * 5/9;
+// Examples
+celsiusToFahrenheit(15);    // 59
+celsiusToFahrenheit(0);     // 32
+celsiusToFahrenheit(-20);   // -4
+fahrenheitToCelsius(59);    // 15
+fahrenheitToCelsius(32);    // 0
+</code></pre>
+<p>来源：稀土掘金——<a target="_blank" rel="noopener" href="https://juejin.cn/post/7043062481954013197">夜色镇歌</a></p>
+
                 
             </div>
             <hr/>
@@ -398,6 +482,10 @@
                             
                                 <a href="/tags/JavaScript/">
                                     <span class="chip bg-color">JavaScript</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%BD%AC%E8%BD%BD/">
+                                    <span class="chip bg-color">转载</span>
                                 </a>
                             
                         </div>
@@ -450,15 +538,15 @@
                 <a href="/2021/07/18/%E6%96%87%E7%AB%A022/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="JavaScript事件、事件类型、事件流和事件模型">
+                        <img src="/medias/banner/0002.jpg" class="responsive-img" alt="前端必备八股文">
                         
-                        <span class="card-title">JavaScript事件、事件类型、事件流和事件模型</span>
+                        <span class="card-title">前端必备八股文</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。
+                            八股文——旧时科举考试的一种文体，也称制义、制艺、时文、八比文。通俗来说（八股文就是指文章的八个部分）而计算机技术相关岗位面试中，八股文多指面试中常出现的问题，往往都是一些看起来高大上但是实际工作中没啥用的东西（科普结束，原文开始）
                         
                     </div>
                     <div class="publish-info">
@@ -469,8 +557,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JavaScript/" class="post-category">
-                                    JavaScript
+                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
                                 </a>
                             
                             
@@ -480,8 +568,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
                     </a>
                     
                 </div>
@@ -498,7 +586,7 @@
                 <a href="/2021/06/04/%E6%96%87%E7%AB%A020/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="vue2与vue3">
+                        <img src="/medias/banner/14.jpg" class="responsive-img" alt="vue2与vue3">
                         
                         <span class="card-title">vue2与vue3</span>
                     </div>
@@ -506,7 +594,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。
+                            Vue2与Vue3的区别
                         
                     </div>
                     <div class="publish-info">
@@ -896,34 +984,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -939,63 +1029,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

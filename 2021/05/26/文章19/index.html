@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -386,61 +386,140 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h4><p>npm init 初始化项目<br>npm i -D snabbdom 安装<br>npm i -D webpack@5 webpack-cli@3 webpack-dev-server@3 </p>
-<h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>snabbdom 是一个DOM库.[重要]<br>不能够直接运行在Node环境中，<br>我们需要搭建一个webpack和webpack-dev-server的开发环境<br>需要注意的是必须安装webpck5. 不能够安装webpack4.<br>因为webpck4中没有读取 exports的能力哈<br>然后安装：目的是搭建开发的运行环境</p>
+                <h4 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h4><p>npm init 初始化项目<br><code>npm i -D snabbdom 安装</code><br><code>npm i -D webpack@5 webpack-cli@3 webpack-dev-server@3 </code></p>
+<h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>snabbdom 是一个 DOM 库.[重要]<br>不能够直接运行在 Node 环境中，<br>我们需要搭建一个 webpack 和 webpack-dev-server 的开发环境<br>需要注意的是必须安装 webpck5. 不能够安装 webpack4.<br>因为 webpck4 中没有读取 exports 的能力哈<br>然后安装：目的是搭建开发的运行环境</p>
 <p><code>npm i -D webpack@5 webpack-cli@3 webpack-dev-server@3 </code><br>这个千万不忘记配置呀</p>
-<h4 id="创建-webpack-config文件"><a href="#创建-webpack-config文件" class="headerlink" title="创建 webpack.config文件"></a>创建 webpack.config文件</h4><p>//这个webpack.config文件在项目的根目录下<br>// 安装官网配置直接复制 <a target="_blank" rel="noopener" href="https://webpack.js.org/">https://webpack.js.org/</a> 然后做简单的修改<br>const path = require(‘path’);<br>module.exports = {<br>    // 入口，需要靠你去创建<br>    entry: ‘./src/index.js’,<br>    // 出口<br>    output: {<br>      // path: path.resolve(__dirname, ‘dist’),<br>      //虚拟的打包路径 也就是说文件夹不会真正的生成，而是在8080端口虚拟生成的<br>      // xuni 这个不会真正的生成，在内存中，打包后的文件名是 bundle<br>      publicPath:’xuni’,<br>      filename: ‘bundle.js’,<br>    },<br>    <!-- 配置的是 开发服务 --><br>    devServer: {<br>        port: 8080, //端口<br>        // 静态资源文件夹,你创建一个，跟src 同级，<br>        contentBase:’www’<br>    }<br>};</p>
-<h4 id="需要创建的文件"><a href="#需要创建的文件" class="headerlink" title="需要创建的文件"></a>需要创建的文件</h4><p>根据上面的配置要求。<br>我们需要在项目的跟目录下创建 src文件夹，src下有index.js文件<br>我们需要在项目的跟目录下创建 www文件夹，src下有index.html文件</p>
-<p>我们在index.js文件中写<br>console.log(“你好啊，环境已经搭建ok,我好高兴”)<br>这个文件打包后对应的虚拟文件是bundle.js</p>
-<p>我们在index.html文件中写</p>
-<body>
+<h4 id="创建-webpack-config-文件"><a href="#创建-webpack-config-文件" class="headerlink" title="创建 webpack.config 文件"></a>创建 webpack.config 文件</h4><pre><code>//这个webpack.config文件在项目的根目录下
+// 安装官网配置直接复制 https://webpack.js.org/ 然后做简单的修改
+const path = require(&#39;path&#39;);
+module.exports = &#123;
+    // 入口，需要靠你去创建
+    entry: &#39;./src/index.js&#39;,
+    // 出口
+    output: &#123;
+      // path: path.resolve(__dirname, &#39;dist&#39;),
+      //虚拟的打包路径 也就是说文件夹不会真正的生成，而是在8080端口虚拟生成的
+      // xuni 这个不会真正的生成，在内存中，打包后的文件名是 bundle
+      publicPath:&#39;xuni&#39;,
+      filename: &#39;bundle.js&#39;,
+    &#125;,
+    &lt;!-- 配置的是 开发服务 --&gt;
+    devServer: &#123;
+        port: 8080, //端口
+        // 静态资源文件夹,你创建一个，跟src 同级，
+        contentBase:&#39;www&#39;
+    &#125;
+&#125;;
+</code></pre>
+<h4 id="需要创建的文件"><a href="#需要创建的文件" class="headerlink" title="需要创建的文件"></a>需要创建的文件</h4><p>根据上面的配置要求。<br>我们需要在项目的跟目录下创建 src 文件夹，src 下有 index.js 文件<br>我们需要在项目的跟目录下创建 www 文件夹，src 下有 index.html 文件</p>
+<p>我们在 index.js 文件中写<br>console.log(“你好啊，环境已经搭建 ok,我好高兴”)<br>这个文件打包后对应的虚拟文件是 bundle.js</p>
+<p>我们在 index.html 文件中写</p>
+<pre><code>&lt;body&gt;
 
-<h1>你好啊！</h1>
+&lt;h1&gt;你好啊！&lt;/h1&gt;
 
-  <!-- 
+  &lt;!--
     这个container 在我们等会使用snabbdom的时候需要，
     我们现在就将他创建好
-    -->
+    --&gt;
 
-  <div id="container"></div>
-</body>
+  &lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
 
-<!--
+&lt;!--
  bundle.js 是我们生成在内存中的，在物理上看不见。
  我们等会写的xuni/bundle.js 是打包后的。
  它打包前的是 src下有index.js文件
- -->
+ --&gt;
 
-<script src="xuni/bundle.js"></script>
-</html>
+&lt;script src=&quot;xuni/bundle.js&quot;&gt;&lt;/script&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="更改-package-json-文件配置"><a href="#更改-package-json-文件配置" class="headerlink" title="更改 package.json 文件配置"></a>更改 package.json 文件配置</h4><p>在 package.json 文件中。<br>我们需要更改一下配置</p>
+<pre><code>&quot;scripts&quot;: &#123;
+&quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+&#125;,
+更改为
+&quot;scripts&quot;: &#123;
+&quot;dev&quot;: &quot;webpack-dev-server&quot;
+&#125;,
+</code></pre>
+<p>这样我们执行 npm run dev 就会将,<br>我们下载的 webpack-dev-server 服务启动起来</p>
+<h4 id="然后简单去走一下-snabbdom-的流程"><a href="#然后简单去走一下-snabbdom-的流程" class="headerlink" title="然后简单去走一下 snabbdom 的流程"></a>然后简单去走一下 snabbdom 的流程</h4><p>snabbdom 的地址：<a href="https://github.com/snabbdom/snabbdom">https://github.com/snabbdom/snabbdom</a><br>复制 Example。到我们的 index.js 文件中</p>
+<p>我们会发现有<br><code>const container = document.getElementById(&quot;container&quot;);</code><br>所以我们需要在 index.html 中去创建<br>这就解释了为啥我们的 index.html 需要有一个 id 为 container<br>不过我们刚刚已经创建了</p>
+<p>然后我们会发现有两个函数报错<br><code>someFn is not undefined</code><br><code>anotherEventHandler is not undefined</code><br>我们将这两个函数更改为普通函数 就 ok 了</p>
+<h4 id="index-js-简单使用-h-函数"><a href="#index-js-简单使用-h-函数" class="headerlink" title="index.js 简单使用 h 函数"></a>index.js 简单使用 h 函数</h4><pre><code>import &#123;
+init,
+classModule,
+propsModule,
+styleModule,
+eventListenersModule,
+h,
+&#125; from &quot;snabbdom&quot;;
 
-<h4 id="更改-package-json-文件配置"><a href="#更改-package-json-文件配置" class="headerlink" title="更改 package.json 文件配置"></a>更改 package.json 文件配置</h4><p>在package.json文件中。<br>我们需要更改一下配置<br>“scripts”: {<br>   “test”: “echo &quot;Error: no test specified&quot; &amp;&amp; exit 1”<br>},<br>更改为<br>  “scripts”: {<br>  “dev”: “webpack-dev-server”<br>},<br>这样我们执行 npm  run dev 就会将,<br>我们下载的 webpack-dev-server服务启动起来</p>
-<h4 id="然后简单去走一下-snabbdom的流程"><a href="#然后简单去走一下-snabbdom的流程" class="headerlink" title="然后简单去走一下 snabbdom的流程"></a>然后简单去走一下 snabbdom的流程</h4><p>snabbdom的地址：<a href="https://github.com/snabbdom/snabbdom">https://github.com/snabbdom/snabbdom</a><br>复制Example。到我们的 index.js文件中</p>
-<p>我们会发现有<br>const container = document.getElementById(“container”);<br>所以我们需要在index.html中去创建<br>这就解释了为啥我们的index.html需要有一个id为container<br>不过我们刚刚已经创建了</p>
-<p>然后我们会发现有两个函数报错 someFn is not  undefined<br>anotherEventHandler is not  undefined<br>我们将这两个函数更改为普通函数 就ok了</p>
-<h4 id="index-js简单使用h函数"><a href="#index-js简单使用h函数" class="headerlink" title="index.js简单使用h函数"></a>index.js简单使用h函数</h4><p>import {<br>  init,<br>  classModule,<br>  propsModule,<br>  styleModule,<br>  eventListenersModule,<br>  h,<br>} from “snabbdom”;</p>
-<p>let myVnode1 = h<br>(<br>  ‘a’,<br>  { props:<br>    { href: ‘<a target="_blank" rel="noopener" href="https://www.cnblogs.com/IwishIcould/&#39;">https://www.cnblogs.com/IwishIcould/&#39;</a> }<br>  },<br>  ‘我的博客’<br>)<br>console.log(“myVnode1”, myVnode1) //输出来的内容就是虚拟dom节点<br>这行代码说明了: h函数产生虚拟dom节点</p>
-<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><div>
-    <p>123</p>
-</div>
+let myVnode1 = h
+(
+&#39;a&#39;,
+&#123; props:
+&#123; href: &#39;https://www.cnblogs.com/IwishIcould/&#39; &#125;
+&#125;,
+&#39;我的博客&#39;
+)
+console.log(&quot;myVnode1&quot;, myVnode1) //输出来的内容就是虚拟 dom 节点
+这行代码说明了: h 函数产生虚拟 dom 节点
+</code></pre>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><pre><code>&lt;div&gt;
+    &lt;p&gt;123&lt;/p&gt;
+&lt;/div&gt;
 转化为这个
-let obj={
-  'tag':'div',
-  'child':[
-      'tag':'p',
-      'text':'123'
+let obj=&#123;
+  &#39;tag&#39;:&#39;div&#39;,
+  &#39;child&#39;:[
+      &#39;tag&#39;:&#39;p&#39;,
+      &#39;text&#39;:&#39;123&#39;
   ]
-}
-不是h函数做的。
-而是模板编译原理做的 
+&#125;
+</code></pre>
+<p>不是 h 函数做的。<br>而是模板编译原理做的</p>
+<h4 id="使用-patch-函数让虚拟-dom-节点上树"><a href="#使用-patch-函数让虚拟-dom-节点上树" class="headerlink" title="使用 patch 函数让虚拟 dom 节点上树"></a>使用 patch 函数让虚拟 dom 节点上树</h4><pre><code>import &#123;
+init,
+classModule,
+propsModule,
+styleModule,
+eventListenersModule,
+h,
+&#125; from &quot;snabbdom&quot;;
 
-<h4 id="使用patch函数让虚拟dom节点上树"><a href="#使用patch函数让虚拟dom节点上树" class="headerlink" title="使用patch函数让虚拟dom节点上树"></a>使用patch函数让虚拟dom节点上树</h4><p>import {<br>  init,<br>  classModule,<br>  propsModule,<br>  styleModule,<br>  eventListenersModule,<br>  h,<br>} from “snabbdom”;</p>
-<p>let myVnode1 = h(‘a’, { props: { href: ‘<a target="_blank" rel="noopener" href="https://www.cnblogs.com/IwishIcould/&#39;">https://www.cnblogs.com/IwishIcould/&#39;</a> } }, ‘我的博客’)<br>console.log(“myVnode1”, myVnode1) //输出来的内容就是虚拟dom节点</p>
-<p>// 使用init函数创建 patch函数<br>const patch = init([classModule, propsModule, styleModule, eventListenersModule])<br>const container = document.getElementById(‘container’)<br>// 让虚拟节点上树<br>patch(container,myVnode1)</p>
-<h4 id="init函数创建patch函数"><a href="#init函数创建patch函数" class="headerlink" title="init函数创建patch函数"></a>init函数创建patch函数</h4><p>使用init函数创建patch函数 ,init函数接受4个参数。<br>const patch = init([classModule, propsModule, styleModule, eventListenersModule])<br>[类模块，属性模块，style模块，事件模块 ]</p>
-<h4 id="patch函数让虚拟dom节点上树"><a href="#patch函数让虚拟dom节点上树" class="headerlink" title="patch函数让虚拟dom节点上树"></a>patch函数让虚拟dom节点上树</h4><p>// 让虚拟节点上树<br>patch(container,myVnode1)<br>patch函数接受两个参数，上树到哪一个容器下，上树的虚拟节点</p>
-<h4 id="一个容器让多个虚拟节点上树，可以使用h函数的嵌套"><a href="#一个容器让多个虚拟节点上树，可以使用h函数的嵌套" class="headerlink" title="一个容器让多个虚拟节点上树，可以使用h函数的嵌套"></a>一个容器让多个虚拟节点上树，可以使用h函数的嵌套</h4><p>let myVnode1 = h(‘ul’, {}, [<br>  h(‘li’, {}, ‘姓名’),<br>  h(‘li’, {}, ‘年龄’),<br>  h(‘li’, {}, ‘爱好’),<br>])<br>console.log(“myVnode1”, myVnode1) //输出来的内容就是虚拟dom节点</p>
-<p>// 使用init函数创建 patch函数<br>const patch = init([classModule, propsModule, styleModule, eventListenersModule])<br>const container = document.getElementById(‘container’)<br>// 让虚拟节点上树<br>patch(container, myVnode1)<br>console.log(“上树后”, myVnode1) //输出来的内容就是虚拟dom节点</p>
+let myVnode1 = h(&#39;a&#39;, &#123; props: &#123; href: &#39;https://www.cnblogs.com/IwishIcould/&#39; &#125; &#125;, &#39;我的博客&#39;)
+console.log(&quot;myVnode1&quot;, myVnode1) //输出来的内容就是虚拟 dom 节点
+
+// 使用 init 函数创建 patch 函数
+const patch = init([classModule, propsModule, styleModule, eventListenersModule])
+const container = document.getElementById(&#39;container&#39;)
+// 让虚拟节点上树
+patch(container,myVnode1)
+</code></pre>
+<h4 id="init-函数创建-patch-函数"><a href="#init-函数创建-patch-函数" class="headerlink" title="init 函数创建 patch 函数"></a>init 函数创建 patch 函数</h4><p>使用 init 函数创建 patch 函数 ,init 函数接受 4 个参数。<br><code>const patch = init([classModule, propsModule, styleModule, eventListenersModule])</code><br>[类模块，属性模块，style 模块，事件模块 ]</p>
+<h4 id="patch-函数让虚拟-dom-节点上树"><a href="#patch-函数让虚拟-dom-节点上树" class="headerlink" title="patch 函数让虚拟 dom 节点上树"></a>patch 函数让虚拟 dom 节点上树</h4><pre><code>// 让虚拟节点上树
+patch(container,myVnode1)
+patch 函数接受两个参数，上树到哪一个容器下，上树的虚拟节点
+
+#### 一个容器让多个虚拟节点上树，可以使用 h 函数的嵌套
+
+let myVnode1 = h(&#39;ul&#39;, &#123;&#125;, [
+h(&#39;li&#39;, &#123;&#125;, &#39;姓名&#39;),
+h(&#39;li&#39;, &#123;&#125;, &#39;年龄&#39;),
+h(&#39;li&#39;, &#123;&#125;, &#39;爱好&#39;),
+])
+console.log(&quot;myVnode1&quot;, myVnode1) //输出来的内容就是虚拟 dom 节点
+
+// 使用 init 函数创建 patch 函数
+const patch = init([classModule, propsModule, styleModule, eventListenersModule])
+const container = document.getElementById(&#39;container&#39;)
+// 让虚拟节点上树
+patch(container, myVnode1)
+console.log(&quot;上树后&quot;, myVnode1) //输出来的内容就是虚拟 dom 节点
+</code></pre>
 
                 
             </div>
@@ -513,7 +592,7 @@ let obj={
                 <a href="/2021/06/04/%E6%96%87%E7%AB%A020/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="vue2与vue3">
+                        <img src="/medias/banner/14.jpg" class="responsive-img" alt="vue2与vue3">
                         
                         <span class="card-title">vue2与vue3</span>
                     </div>
@@ -521,7 +600,7 @@ let obj={
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。
+                            Vue2与Vue3的区别
                         
                     </div>
                     <div class="publish-info">
@@ -561,7 +640,7 @@ let obj={
                 <a href="/2021/05/08/%E6%96%87%E7%AB%A018/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="ES6 Promise用法">
+                        <img src="/medias/banner/12.jpg" class="responsive-img" alt="ES6 Promise用法">
                         
                         <span class="card-title">ES6 Promise用法</span>
                     </div>
@@ -963,34 +1042,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -1006,63 +1087,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

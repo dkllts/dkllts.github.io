@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -384,12 +384,12 @@
             <div id="articleContent">
                 <h2 id="一、事件是什么？"><a href="#一、事件是什么？" class="headerlink" title="一、事件是什么？"></a>一、事件是什么？</h2><p>事件 (Event) 是 JavaScript 应用跳动的心脏 ，进行交互，使网页动起来。当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。</p>
 <p>通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。</p>
-<h3 id="1、事件作用"><a href="#1、事件作用" class="headerlink" title="1、事件作用"></a>1、事件作用</h3><p>（1）验证用户输入的数据。 </p>
-<p>（2）增加页面的动感效果。 </p>
+<h3 id="1、事件作用"><a href="#1、事件作用" class="headerlink" title="1、事件作用"></a>1、事件作用</h3><p>（1）验证用户输入的数据。</p>
+<p>（2）增加页面的动感效果。</p>
 <p>（3）增强用户的体验度</p>
-<h3 id="2、事件中的几个名词"><a href="#2、事件中的几个名词" class="headerlink" title="2、事件中的几个名词"></a>2、事件中的几个名词</h3><p>-事件源: 谁触发的事件<br>-事件名: 触发了什么事件<br>-事件监听: 谁管这个事情，谁监视？<br>-事件处理:发生了怎么办</p>
+<h3 id="2、事件中的几个名词"><a href="#2、事件中的几个名词" class="headerlink" title="2、事件中的几个名词"></a>2、事件中的几个名词</h3><p>-事件源: 谁触发的事件 -事件名: 触发了什么事件 -事件监听: 谁管这个事情，谁监视？ -事件处理:发生了怎么办</p>
 <p>例如</p>
-<p>-闯红灯     事件源:车 ;   事件名: 闯红灯;    监听：摄像头、交警 ;     处理:扣分罚款<br>-单击按钮   事件源:按钮;   事件名: 单击;     监听:窗口 ;             处理:执行函数</p>
+<p>-闯红灯 事件源:车 ; 事件名: 闯红灯; 监听：摄像头、交警 ; 处理:扣分罚款 -单击按钮 事件源:按钮; 事件名: 单击; 监听:窗口 ; 处理:执行函数</p>
 <p>当我们用户在页面中进行的点击动作，鼠标移动的动作，网页页面加载完成的动作等，都可以称之为事件名称，即：click、mousemove、load 等都是事件名称，具体的执行代码处理，响应某个事件的函数。</p>
 <pre><code>&lt;body onload=&quot;loadWindow();&quot;&gt;&lt;/body&gt;
 &lt;script&gt;
@@ -398,7 +398,7 @@
     &#125;
 &lt;/script&gt;
 </code></pre>
-<h2 id="二、事件类型"><a href="#二、事件类型" class="headerlink" title="二、事件类型"></a>二、事件类型</h2><p>JavaScript可以处理的事件类型为：鼠标事件、键盘事件、HTML事件。</p>
+<h2 id="二、事件类型"><a href="#二、事件类型" class="headerlink" title="二、事件类型"></a>二、事件类型</h2><p>JavaScript 可以处理的事件类型为：鼠标事件、键盘事件、HTML 事件。</p>
 <p><a target="_blank" rel="noopener" href="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp">http://www.w3school.com.cn/tags/html_ref_eventattributes.asp</a> 用+查</p>
 <p>Window 事件属性：针对 window 对象触发的事件（应用到 <body> 标签）</p>
 <p>Form 事件：由 HTML 表单内的动作触发的事件（应用到几乎所有 HTML 元素，但最常用在 form 元素中）</p>
@@ -409,35 +409,35 @@
 <p>onclick 、onblur 、onfocus 、onload 、onchange</p>
 <p>onmouseover、onmouseout、onkeyup、onkeydown</p>
 <p>onload：当页面或图像加载完后立即触发<br>onblur：元素失去焦点<br>onfocus：元素获得焦点<br>onclick：鼠标点击某个对象<br>onchange：用户改变域的内容<br>onmouseover：鼠标移动到某个元素上<br>onmouseout：鼠标从某个元素上离开<br>onkeyup：某个键盘的键被松开<br>onkeydown：某个键盘的键被按下</p>
-<h2 id="三、事件流和事件模型"><a href="#三、事件流和事件模型" class="headerlink" title="三、事件流和事件模型"></a>三、事件流和事件模型</h2><p>我们的事件最后都有一个特定的事件源，暂且将事件源看做是HTML的某个元素，那么当一个HTML元素产生一个事件时，该事件会在元素节点与根节点之间按特定的顺序传播，路径所经过的节点都会受到该事件，这个传播过程称为DOM事件流。</p>
+<h2 id="三、事件流和事件模型"><a href="#三、事件流和事件模型" class="headerlink" title="三、事件流和事件模型"></a>三、事件流和事件模型</h2><p>我们的事件最后都有一个特定的事件源，暂且将事件源看做是 HTML 的某个元素，那么当一个 HTML 元素产生一个事件时，该事件会在元素节点与根节点之间按特定的顺序传播，路径所经过的节点都会受到该事件，这个传播过程称为 DOM 事件流。</p>
 <p>事件顺序有两种类型：事件捕获 和 事件冒泡。</p>
-<p>冒泡和捕获其实都是事件流的不同表现，这两者的产生是因为IE和Netscape两个大公司完全不同的事件流概念产生的。（事件流：是指页面接受事件的顺序）IE的事件流是事件冒泡，Netscape的事件流是事件捕获流。</p>
-<h3 id="1、事件冒泡"><a href="#1、事件冒泡" class="headerlink" title="1、事件冒泡"></a>1、事件冒泡</h3><p>IE的事件流叫做事件冒泡，即事件开始时由最具体的元素接受，然后逐级向上传播到较为不具体的节点（文档）。例如下面的：</p>
-<pre><code>&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;head&gt; 
-&lt;meta charset=&quot;UTF-8&quot;&gt; 
-&lt;title&gt;JavaScript&lt;/title&gt; 
-&lt;/head&gt; 
-&lt;body&gt; 
-  &lt;div id=&quot;myDiv&quot;&gt;Click me&lt;/div&gt; 
-&lt;/body&gt; 
+<p>冒泡和捕获其实都是事件流的不同表现，这两者的产生是因为 IE 和 Netscape 两个大公司完全不同的事件流概念产生的。（事件流：是指页面接受事件的顺序）IE 的事件流是事件冒泡，Netscape 的事件流是事件捕获流。</p>
+<h3 id="1、事件冒泡"><a href="#1、事件冒泡" class="headerlink" title="1、事件冒泡"></a>1、事件冒泡</h3><p>IE 的事件流叫做事件冒泡，即事件开始时由最具体的元素接受，然后逐级向上传播到较为不具体的节点（文档）。例如下面的：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;JavaScript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;myDiv&quot;&gt;Click me&lt;/div&gt;
+&lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<p>如果点击了页面中的<div>元素，那么这个click事件会按照如下顺序传播：</p>
+<p>如果点击了页面中的<div>元素，那么这个 click 事件会按照如下顺序传播：</p>
 <p><code>1、&lt;div&gt;</code></p>
 <p><code>2、&lt;body&gt;</code></p>
 <p><code>3、&lt;html&gt;</code></p>
 <p><code>4、document</code></p>
-<p>也就是说，click事件首先在div元素上发生，而这个元素就是我们单击的元素。然后，click事件沿DOM树向上传播，在每一级节点上都会发生，直到传播到document对象。</p>
+<p>也就是说，click 事件首先在 div 元素上发生，而这个元素就是我们单击的元素。然后，click 事件沿 DOM 树向上传播，在每一级节点上都会发生，直到传播到 document 对象。</p>
 <p>所有现代浏览器都支持事件冒泡，但在具体实现上还是有一些差别。</p>
-<h3 id="2、事件捕获"><a href="#2、事件捕获" class="headerlink" title="2、事件捕获"></a>2、事件捕获</h3><p>Netscape提出的另一种事件流叫做事件捕获，事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在事件到达预定目标之前捕获它。还以前面的例子为例。那么单击<div>元素就会按下列顺序触发click事件：</p>
+<h3 id="2、事件捕获"><a href="#2、事件捕获" class="headerlink" title="2、事件捕获"></a>2、事件捕获</h3><p>Netscape 提出的另一种事件流叫做事件捕获，事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在事件到达预定目标之前捕获它。还以前面的例子为例。那么单击<div>元素就会按下列顺序触发 click 事件：</p>
 <p><code>1、document</code></p>
 <p><code>2、&lt;html&gt;</code></p>
 <p><code>3、&lt;body&gt;</code></p>
 <p><code>4、&lt;div&gt;</code></p>
-<p>在事件捕获过程中，document对象首先接收到click事件，然后沿DOM树依次向下，一直传播到事件的实际目标，即<div>元素。</p>
-<p>虽然事件捕获是Netscape唯一支持的事件流模式，但很多主流浏览器目前也都支持这种事件流模型。尽管“DOM2级事件”规范要求事件应该从document对象开始时传播，但这些浏览器都是从window对象开始捕获的。</p>
+<p>在事件捕获过程中，document 对象首先接收到 click 事件，然后沿 DOM 树依次向下，一直传播到事件的实际目标，即<div>元素。</p>
+<p>虽然事件捕获是 Netscape 唯一支持的事件流模式，但很多主流浏览器目前也都支持这种事件流模型。尽管“DOM2 级事件”规范要求事件应该从 document 对象开始时传播，但这些浏览器都是从 window 对象开始捕获的。</p>
 
                 
             </div>
@@ -506,7 +506,7 @@
                 <a href="/2021/05/08/%E6%96%87%E7%AB%A018/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="ES6 Promise用法">
+                        <img src="/medias/banner/12.jpg" class="responsive-img" alt="ES6 Promise用法">
                         
                         <span class="card-title">ES6 Promise用法</span>
                     </div>
@@ -558,7 +558,7 @@
                 <a href="/2021/04/04/%E6%96%87%E7%AB%A016/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/2.jpg" class="responsive-img" alt="Vue3项目搭建规范">
+                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="Vue3项目搭建规范">
                         
                         <span class="card-title">Vue3项目搭建规范</span>
                     </div>
@@ -956,34 +956,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -999,63 +1001,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JavaScript事件、事件类型、事件流和事件模型, 水墨-丹青">
-    <meta name="description" content="当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。">
+    <meta name="keywords" content="防止数据重复提交的6种方法, 水墨-丹青">
+    <meta name="description" content="6种超简单的方法！">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JavaScript事件、事件类型、事件流和事件模型 | 水墨-丹青</title>
+    <title>防止数据重复提交的6种方法 | 水墨-丹青</title>
     <link rel="icon" type="image/png" href="/logo3.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JavaScript事件、事件类型、事件流和事件模型</h1>
+                    <h1 class="description center-align post-title">防止数据重复提交的6种方法</h1>
                 </div>
             </div>
         </div>
@@ -336,8 +336,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/JavaScript/">
-                                <span class="chip bg-color">JavaScript</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
                     </div>
@@ -348,8 +348,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/JavaScript/" class="post-category">
-                                JavaScript
+                            <a href="/categories/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -382,7 +382,341 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="模拟用户场景"><a href="#模拟用户场景" class="headerlink" title="模拟用户场景"></a>模拟用户场景</h2><p>大致的场景是这样的，如下图所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3106d1c474bc4dd7abbad7d478a14811~tplv-k3u1fbpfcp-watermark.awebp"></p>
+<p>简化的模拟代码如下（基于 Spring Boot）：</p>
+<pre><code>import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequestMapping(&quot;/user&quot;)
+@RestController
+public class UserController &#123;
+   /**
+     * 被重复请求的方法
+     */
+    @RequestMapping(&quot;/add&quot;)
+    public String addUser(String id) &#123;
+        // 业务代码...
+        System.out.println(&quot;添加用户ID:&quot; + id);
+        return &quot;执行成功！&quot;;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="前端拦截"><a href="#前端拦截" class="headerlink" title="前端拦截"></a>前端拦截</h2><p>前端拦截是指通过 HTML 页面来拦截重复请求，比如在用户点击完“提交”按钮后，我们可以把按钮设置为不可用或者隐藏状态。</p>
+<p>执行效果如下图所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/41abe74140434045874f902a113b5b08~tplv-k3u1fbpfcp-watermark.awebp"></p>
+<p>前端拦截的实现代码：</p>
+<pre><code>&lt;html&gt;
+&lt;script&gt;
+    function subCli()&#123;
+        // 按钮设置为不可用
+        document.getElementById(&quot;btn_sub&quot;).disabled=&quot;disabled&quot;;
+        document.getElementById(&quot;dv1&quot;).innerText = &quot;按钮被点击了~&quot;;
+    &#125;
+&lt;/script&gt;
+&lt;body style=&quot;margin-top: 100px;margin-left: 100px;&quot;&gt;
+    &lt;input id=&quot;btn_sub&quot; type=&quot;button&quot;  value=&quot; 提 交 &quot;  onclick=&quot;subCli()&quot;&gt;
+    &lt;div id=&quot;dv1&quot; style=&quot;margin-top: 80px;&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>但前端拦截有一个致命的问题，如果是懂行的程序员或非法用户可以直接绕过前端页面，通过模拟请求来重复提交请求，比如充值了 100 元，重复提交了 10 次变成了 1000 元（瞬间发现了一个致富的好办法）。</p>
+<p>所以除了前端拦截一部分正常的误操作之外，后端的拦截也是必不可少。</p>
+<h2 id="后端拦截"><a href="#后端拦截" class="headerlink" title="后端拦截"></a>后端拦截</h2><p>后端拦截的实现思路是在方法执行之前，先判断此业务是否已经执行过，如果执行过则不再执行，否则就正常执行。</p>
+<p>我们将请求的业务 ID 存储在内存中，并且通过添加互斥锁来保证多线程下的程序执行安全，大体实现思路如下图所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cfb589c81df64f0abee57cda25219ef0~tplv-k3u1fbpfcp-watermark.awebp"></p>
+<p>然而，将数据存储在内存中，最简单的方法就是使用 <code>HashMap</code> 存储，或者是使用 Guava Cache 也是同样的效果，但很显然 <code>HashMap</code> 可以更快的实现功能，所以我们先来实现一个 <code>HashMap</code> 的防重（防止重复）版本。</p>
+<h3 id="1-基础版——HashMap"><a href="#1-基础版——HashMap" class="headerlink" title="1.基础版——HashMap"></a>1.基础版——HashMap</h3><pre><code>import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/\*\*
+
+- 普通 Map 版本
+\*/
+@RequestMapping(&quot;/user&quot;)
+@RestController
+public class UserController3 &#123;
+
+  // 缓存 ID 集合
+  private Map&lt;String, Integer&gt; reqCache = new HashMap&lt;&gt;();
+
+  @RequestMapping(&quot;/add&quot;)
+      public String addUser(String id) &#123;
+          // 非空判断(忽略)...
+          synchronized (this.getClass()) &#123;
+              // 重复请求判断
+              if (reqCache.containsKey(id)) &#123;
+                  // 重复请求
+                  System.out.println(&quot;请勿重复提交！！！&quot; + id);
+                  return &quot;执行失败&quot;;
+              &#125;
+              // 存储请求 ID
+              reqCache.put(id, 1);
+          &#125;
+          // 业务代码...
+          System.out.println(&quot;添加用户ID:&quot; + id);
+          return &quot;执行成功！&quot;;
+      &#125;
+&#125;
+</code></pre>
+<p>实现效果如下图所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f2c073fd03734f448715d215875c19cf~tplv-k3u1fbpfcp-watermark.awebp"></p>
+<p><strong>存在的问题</strong>：此实现方式有一个致命的问题，因为 <code>HashMap</code> 是无限增长的，因此它会占用越来越多的内存，并且随着 <code>HashMap</code> 数量的增加查找的速度也会降低，所以我们需要实现一个可以自动“清除”过期数据的实现方案。</p>
+<h3 id="2-优化版——固定大小的数组"><a href="#2-优化版——固定大小的数组" class="headerlink" title="2.优化版——固定大小的数组"></a>2.优化版——固定大小的数组</h3><p>此版本解决了 <code>HashMap</code> 无限增长的问题，它使用数组加下标计数器（reqCacheCounter）的方式，实现了固定数组的循环存储。</p>
+<p>当数组存储到最后一位时，将数组的存储下标设置 0，再从头开始存储数据，实现代码如下：</p>
+<pre><code>import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.Arrays;
+
+@RequestMapping(&quot;/user&quot;)
+@RestController
+public class UserController &#123;
+
+    private static String[] reqCache = new String[100]; // 请求 ID 存储集合
+    private static Integer reqCacheCounter = 0; // 请求计数器（指示 ID 存储的位置）
+
+    @RequestMapping(&quot;/add&quot;)
+    public String addUser(String id) &#123;
+        // 非空判断(忽略)...
+        synchronized (this.getClass()) &#123;
+            // 重复请求判断
+            if (Arrays.asList(reqCache).contains(id)) &#123;
+                // 重复请求
+                System.out.println(&quot;请勿重复提交！！！&quot; + id);
+                return &quot;执行失败&quot;;
+            &#125;
+            // 记录请求 ID
+            if (reqCacheCounter &gt;= reqCache.length) reqCacheCounter = 0; // 重置计数器
+            reqCache[reqCacheCounter] = id; // 将 ID 保存到缓存
+            reqCacheCounter++; // 下标往后移一位
+        &#125;
+        // 业务代码...
+        System.out.println(&quot;添加用户ID:&quot; + id);
+        return &quot;执行成功！&quot;;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="3-扩展版——双重检测锁-DCL"><a href="#3-扩展版——双重检测锁-DCL" class="headerlink" title="3.扩展版——双重检测锁(DCL)"></a>3.扩展版——双重检测锁(DCL)</h3><p>上一种实现方法将判断和添加业务，都放入 <code>synchronized</code> 中进行加锁操作，这样显然性能不是很高，于是我们可以使用单例中著名的 DCL（Double Checked Locking，双重检测锁）来优化代码的执行效率，实现代码如下：</p>
+<pre><code>import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.Arrays;
+
+@RequestMapping(&quot;/user&quot;)
+@RestController
+public class UserController &#123;
+
+    private static String[] reqCache = new String[100]; // 请求 ID 存储集合
+    private static Integer reqCacheCounter = 0; // 请求计数器（指示 ID 存储的位置）
+
+    @RequestMapping(&quot;/add&quot;)
+    public String addUser(String id) &#123;
+        // 非空判断(忽略)...
+        // 重复请求判断
+        if (Arrays.asList(reqCache).contains(id)) &#123;
+            // 重复请求
+            System.out.println(&quot;请勿重复提交！！！&quot; + id);
+            return &quot;执行失败&quot;;
+        &#125;
+        synchronized (this.getClass()) &#123;
+            // 双重检查锁（DCL,double checked locking）提高程序的执行效率
+            if (Arrays.asList(reqCache).contains(id)) &#123;
+                // 重复请求
+                System.out.println(&quot;请勿重复提交！！！&quot; + id);
+                return &quot;执行失败&quot;;
+            &#125;
+            // 记录请求 ID
+            if (reqCacheCounter &gt;= reqCache.length) reqCacheCounter = 0; // 重置计数器
+            reqCache[reqCacheCounter] = id; // 将 ID 保存到缓存
+            reqCacheCounter++; // 下标往后移一位
+        &#125;
+        // 业务代码...
+        System.out.println(&quot;添加用户ID:&quot; + id);
+        return &quot;执行成功！&quot;;
+    &#125;
+&#125;
+</code></pre>
+<p><code>注意：DCL 适用于重复提交频繁比较高的业务场景，对于相反的业务场景下 DCL 并不适用。</code></p>
+<h3 id="4-完善版——LRUMap"><a href="#4-完善版——LRUMap" class="headerlink" title="4.完善版——LRUMap"></a>4.完善版——LRUMap</h3><p>上面的代码基本已经实现了重复数据的拦截，但显然不够简洁和优雅，比如下标计数器的声明和业务处理等，但值得庆幸的是 Apache 为我们提供了一个 commons-collections 的框架，里面有一个非常好用的数据结构 <code>LRUMap</code> 可以保存指定数量的固定的数据，并且它会按照 LRU 算法，帮你清除最不常用的数据。</p>
+<blockquote>
+<p>小贴士：LRU 是 Least Recently Used 的缩写，即最近最少使用，是一种常用的数据淘汰算法，选择最近最久未使用的数据予以淘汰。</p>
+</blockquote>
+<p>首先，我们先来添加 Apache commons collections 的引用：</p>
+<pre><code>&lt;!-- 集合工具类 apache commons collections --&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+  &lt;artifactId&gt;commons-collections4&lt;/artifactId&gt;
+  &lt;version&gt;4.4&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>实现代码如下：</p>
+<pre><code>import org.apache.commons.collections4.map.LRUMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequestMapping(&quot;/user&quot;)
+@RestController
+public class UserController &#123;
+
+    // 最大容量 100 个，根据 LRU 算法淘汰数据的 Map 集合
+    private LRUMap&lt;String, Integer&gt; reqCache = new LRUMap&lt;&gt;(100);
+
+    @RequestMapping(&quot;/add&quot;)
+    public String addUser(String id) &#123;
+        // 非空判断(忽略)...
+        synchronized (this.getClass()) &#123;
+            // 重复请求判断
+            if (reqCache.containsKey(id)) &#123;
+                // 重复请求
+                System.out.println(&quot;请勿重复提交！！！&quot; + id);
+                return &quot;执行失败&quot;;
+            &#125;
+            // 存储请求 ID
+            reqCache.put(id, 1);
+        &#125;
+        // 业务代码...
+        System.out.println(&quot;添加用户ID:&quot; + id);
+        return &quot;执行成功！&quot;;
+    &#125;
+
+&#125;
+</code></pre>
+<p>使用了 <code>LRUMap</code> 之后，代码显然简洁了很多。</p>
+<h3 id="5-最终版——封装"><a href="#5-最终版——封装" class="headerlink" title="5.最终版——封装"></a>5.最终版——封装</h3><p>以上都是方法级别的实现方案，然而在实际的业务中，我们可能有很多的方法都需要防重，那么接下来我们就来封装一个公共的方法，以供所有类使用：</p>
+<pre><code>import org.apache.commons.collections4.map.LRUMap;
+
+/**
+ * 幂等性判断
+ */
+public class IdempotentUtils &#123;
+
+    // 根据 LRU(Least Recently Used，最近最少使用)算法淘汰数据的 Map 集合，最大容量 100 个
+    private static LRUMap&lt;String, Integer&gt; reqCache = new LRUMap&lt;&gt;(100);
+
+    /**
+     * 幂等性判断
+     * @return
+     */
+    public static boolean judge(String id, Object lockClass) &#123;
+        synchronized (lockClass) &#123;
+            // 重复请求判断
+            if (reqCache.containsKey(id)) &#123;
+                // 重复请求
+                System.out.println(&quot;请勿重复提交！！！&quot; + id);
+                return false;
+            &#125;
+            // 非重复请求，存储请求 ID
+            reqCache.put(id, 1);
+        &#125;
+        return true;
+    &#125;
+&#125;
+</code></pre>
+<p>调用代码如下：</p>
+<pre><code>import com.example.idempote.util.IdempotentUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequestMapping(&quot;/user&quot;)
+@RestController
+public class UserController4 &#123;
+@RequestMapping(&quot;/add&quot;)
+public String addUser(String id) &#123;
+// 非空判断(忽略)...
+// -------------- 幂等性调用（开始） --------------
+if (!IdempotentUtils.judge(id, this.getClass())) &#123;
+return &quot;执行失败&quot;;
+&#125;
+// -------------- 幂等性调用（结束） --------------
+// 业务代码...
+System.out.println(&quot;添加用户 ID:&quot; + id);
+return &quot;执行成功！&quot;;
+&#125;
+&#125;
+</code></pre>
+<p>小贴士：一般情况下代码写到这里就结束了，但想要更简洁也是可以实现的，你可以通过自定义注解，将业务代码写到注解中，需要调用的方法只需要写一行注解就可以防止数据重复提交了，可以自行尝试一下）。</p>
+<h2 id="扩展知识——LRUMap-实现原理分析"><a href="#扩展知识——LRUMap-实现原理分析" class="headerlink" title="扩展知识——LRUMap 实现原理分析"></a>扩展知识——LRUMap 实现原理分析</h2><p>既然 <code>LRUMap</code> 如此强大，我们就来看看它是如何实现的。</p>
+<p><code>LRUMap</code> 的本质是持有头结点的环回双链表结构，它的存储结构如下：</p>
+<p><code>AbstractLinkedMap.LinkEntry entry;</code></p>
+<p>当调用查询方法时，会将使用的元素放在双链表 header 的前一个位置，源码如下：</p>
+<pre><code>public V get(Object key, boolean updateToMRU) &#123;
+LinkEntry&lt;K, V&gt; entry = this.getEntry(key);
+if (entry == null) &#123;
+return null;
+&#125; else &#123;
+if (updateToMRU) &#123;
+this.moveToMRU(entry);
+&#125;
+
+        return entry.getValue();
+    &#125;
+
+&#125;
+protected void moveToMRU(LinkEntry&lt;K, V&gt; entry) &#123;
+if (entry.after != this.header) &#123;
+++this.modCount;
+if (entry.before == null) &#123;
+throw new IllegalStateException(&quot;Entry.before is null. This should not occur if your keys are immutable, and you have used synchronization properly.&quot;);
+&#125;
+
+        entry.before.after = entry.after;
+        entry.after.before = entry.before;
+        entry.after = this.header;
+        entry.before = this.header.before;
+        this.header.before.after = entry;
+        this.header.before = entry;
+    &#125; else if (entry == this.header) &#123;
+        throw new IllegalStateException(&quot;Can&#39;t move header to MRU This should not occur if your keys are immutable, and you have used synchronization properly.&quot;);
+    &#125;
+
+&#125;
+</code></pre>
+<p>如果新增元素时，容量满了就会移除 header 的后一个元素，添加源码如下：</p>
+<pre><code>protected void addMapping(int hashIndex, int hashCode, K key, V value) &#123;
+    // 判断容器是否已满
+    if (this.isFull()) &#123;
+        LinkEntry&lt;K, V&gt; reuse = this.header.after;
+        boolean removeLRUEntry = false;
+        if (!this.scanUntilRemovable) &#123;
+            removeLRUEntry = this.removeLRU(reuse);
+        &#125; else &#123;
+            while(reuse != this.header &amp;&amp; reuse != null) &#123;
+                if (this.removeLRU(reuse)) &#123;
+                    removeLRUEntry = true;
+                    break;
+                &#125;
+                reuse = reuse.after;
+            &#125;
+            if (reuse == null) &#123;
+                throw new IllegalStateException(&quot;Entry.after=null, header.after=&quot; + this.header.after + &quot; header.before=&quot; + this.header.before + &quot; key=&quot; + key + &quot; value=&quot; + value + &quot; size=&quot; + this.size + &quot; maxSize=&quot; + this.maxSize + &quot; This should not occur if your keys are immutable, and you have used synchronization properly.&quot;);
+            &#125;
+        &#125;
+        if (removeLRUEntry) &#123;
+            if (reuse == null) &#123;
+                throw new IllegalStateException(&quot;reuse=null, header.after=&quot; + this.header.after + &quot; header.before=&quot; + this.header.before + &quot; key=&quot; + key + &quot; value=&quot; + value + &quot; size=&quot; + this.size + &quot; maxSize=&quot; + this.maxSize + &quot; This should not occur if your keys are immutable, and you have used synchronization properly.&quot;);
+            &#125;
+            this.reuseMapping(reuse, hashIndex, hashCode, key, value);
+        &#125; else &#123;
+            super.addMapping(hashIndex, hashCode, key, value);
+        &#125;
+    &#125; else &#123;
+        super.addMapping(hashIndex, hashCode, key, value);
+    &#125;
+&#125;
+</code></pre>
+<p>判断容量的源码：</p>
+<pre><code>public boolean isFull() &#123;
+  return size &gt;= maxSize;
+&#125;
+</code></pre>
+<p>容量未满就直接添加数据：<br><code>super.addMapping(hashIndex, hashCode, key, value);</code></p>
+<p>如果容量满了，就调用 <code>reuseMapping</code> 方法使用 LRU 算法对数据进行清除。</p>
+<p>综合来说：**<code>LRUMap</code> 的本质是持有头结点的环回双链表结构，当使用元素时，就将该元素放在双链表 <code>header</code> 的前一个位置，在新增元素时，如果容量满了就会移除 <code>header</code> 的后一个元素**。</p>
+<p>稀土掘金——<a target="_blank" rel="noopener" href="https://juejin.cn/post/7033231706270367775">码农出击 666</a></p>
+
                 
             </div>
             <hr/>
@@ -396,8 +730,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/JavaScript/">
-                                    <span class="chip bg-color">JavaScript</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
                         </div>
@@ -450,7 +784,7 @@
                 <a href="/2021/12/10/%E6%96%87%E7%AB%A029/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="圣诞树">
+                        <img src="/medias/banner/21.jpg" class="responsive-img" alt="圣诞树">
                         
                         <span class="card-title">圣诞树</span>
                     </div>
@@ -467,8 +801,12 @@
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            琳琅-天上
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JavaScript/" class="post-category">
+                                    JavaScript
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -498,15 +836,15 @@
                 <a href="/2021/11/10/%E6%96%87%E7%AB%A027/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="JavaScript事件、事件类型、事件流和事件模型">
+                        <img src="/medias/banner/0001.jpg" class="responsive-img" alt="upload">
                         
-                        <span class="card-title">JavaScript事件、事件类型、事件流和事件模型</span>
+                        <span class="card-title">upload</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。
+                            文件上传，大文件分片上传、断点续传
                         
                     </div>
                     <div class="publish-info">
@@ -517,8 +855,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JavaScript/" class="post-category">
-                                    JavaScript
+                            <a href="/categories/Node/" class="post-category">
+                                    Node
                                 </a>
                             
                             
@@ -528,8 +866,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                    <a href="/tags/Node/">
+                        <span class="chip bg-color">Node</span>
                     </a>
                     
                 </div>
@@ -896,34 +1238,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -939,63 +1283,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

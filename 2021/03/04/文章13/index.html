@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -383,48 +383,48 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>1、什么是索引？</p>
-<p>索引是帮助MySQL高效获取数据的数据结构（有序）。</p>
+<p>索引是帮助 MySQL 高效获取数据的数据结构（有序）。</p>
 <p>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法，这种数据结构就是索引。</p>
 <p>索引本身也很大，一般以索引文件的形式存在磁盘上。</p>
-<p> 2、说一下索引有哪些优势有哪些劣势？</p>
+<p>2、说一下索引有哪些优势有哪些劣势？</p>
 <p>优势：</p>
-<p>1、提高数据的查询效率，降低了数据库的IO成本；</p>
-<p>2、通过索引列对数据进行排序，可以大大降低排序的成本，即降低了CPU的消耗。</p>
+<p>1、提高数据的查询效率，降低了数据库的 IO 成本；</p>
+<p>2、通过索引列对数据进行排序，可以大大降低排序的成本，即降低了 CPU 的消耗。</p>
 <p>劣势：</p>
 <p>1、实际上索引也是一张表，该表中保存了主键和索引字段，并指向实体表的记录，所以索引列也是要占用空间的；</p>
-<p>2、虽然索引大大提高了查询效率，但同时也降低了更新表的速度，如对表进行insert，update，delete。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。每次更新或添加了索引列的字段，都会调整因为更新所带来的键值变化后的索引信息。</p>
-<p> 3、介绍一下索引的数据结构？</p>
-<p>索引是在MySQL的引擎层中实现的，所以每种存储引擎的索引都不一定完全相同，也不是所有的存储引擎都支持所有的索引类型。</p>
-<p>MySQL目前提供了以下四种结构的索引：</p>
-<p>1、BTREE索引：最常见的索引类型，大部分索引都支持B树索引。</p>
-<p>2、HASH索引（了解）：只有Memory引擎支持，适用场景简单。</p>
-<p>3、R-TREE索引（了解）：即空间索引，是MyISAM引擎的一个特殊索引类型，主要用于地理空间数据类型。</p>
-<p>4、Full-text索引（了解）：即全文索引，也是MyISAM引擎的一个特殊索引类型，主要用于全文检索，InnoDB从MySQL5.6开始支持全文检索。</p>
-<p>我们平常所说的索引，如果没有特别指明，都指的是B+树索引。其中InnoDB引擎，默认使用的就是B+树结构的索引。</p>
-<p>4、BTREE索引的检索原理</p>
+<p>2、虽然索引大大提高了查询效率，但同时也降低了更新表的速度，如对表进行 insert，update，delete。因为更新表时，MySQL 不仅要保存数据，还要保存一下索引文件。每次更新或添加了索引列的字段，都会调整因为更新所带来的键值变化后的索引信息。</p>
+<p>3、介绍一下索引的数据结构？</p>
+<p>索引是在 MySQL 的引擎层中实现的，所以每种存储引擎的索引都不一定完全相同，也不是所有的存储引擎都支持所有的索引类型。</p>
+<p>MySQL 目前提供了以下四种结构的索引：</p>
+<p>1、BTREE 索引：最常见的索引类型，大部分索引都支持 B 树索引。</p>
+<p>2、HASH 索引（了解）：只有 Memory 引擎支持，适用场景简单。</p>
+<p>3、R-TREE 索引（了解）：即空间索引，是 MyISAM 引擎的一个特殊索引类型，主要用于地理空间数据类型。</p>
+<p>4、Full-text 索引（了解）：即全文索引，也是 MyISAM 引擎的一个特殊索引类型，主要用于全文检索，InnoDB 从 MySQL5.6 开始支持全文检索。</p>
+<p>我们平常所说的索引，如果没有特别指明，都指的是 B+树索引。其中 InnoDB 引擎，默认使用的就是 B+树结构的索引。</p>
+<p>4、BTREE 索引的检索原理</p>
 <p>初始化简介：</p>
-<p>一颗B+树，浅蓝色的块我们称之为一个磁盘块，每个磁盘块包含几个数据项（深蓝色）和指针（黄色）；</p>
-<p>如：磁盘块1包含数据项17和35，包含指针P1，P2，P3；</p>
-<p>P1表示小于17的磁盘块，P2表示在17和35之间的磁盘块，P3表示大于35的磁盘块；</p>
+<p>一颗 B+树，浅蓝色的块我们称之为一个磁盘块，每个磁盘块包含几个数据项（深蓝色）和指针（黄色）；</p>
+<p>如：磁盘块 1 包含数据项 17 和 35，包含指针 P1，P2，P3；</p>
+<p>P1 表示小于 17 的磁盘块，P2 表示在 17 和 35 之间的磁盘块，P3 表示大于 35 的磁盘块；</p>
 <p>真实的数据只存在于叶子节点，即：3、5、9、10、13、15、28、29、36、60、75、79、90、99；</p>
-<p>非叶子节点不存储真实的数据，只存储指引搜索方向的数据项，如：17、35并不真实存在于数据表中。</p>
+<p>非叶子节点不存储真实的数据，只存储指引搜索方向的数据项，如：17、35 并不真实存在于数据表中。</p>
 <p>查找过程：</p>
-<p>如果要查找数据项29，那么首先会把磁盘块1由磁盘加载到内存，此时发生一次IO，在内存中用二分查找确定29在17和35之间，锁定磁盘块1的P2指针；</p>
-<p>通过磁盘块1的P2指针的磁盘地址把磁盘块3由磁盘加载到内存，发生第二次IO，29在26和30之间，锁定磁盘块3的P2指针；</p>
-<p>通过磁盘块3的P2指针的磁盘地址把磁盘块8由磁盘加载到内存，发生第三次IO，同时内存中做二分查找找到29，结束查询，共计3次IO。</p>
+<p>如果要查找数据项 29，那么首先会把磁盘块 1 由磁盘加载到内存，此时发生一次 IO，在内存中用二分查找确定 29 在 17 和 35 之间，锁定磁盘块 1 的 P2 指针；</p>
+<p>通过磁盘块 1 的 P2 指针的磁盘地址把磁盘块 3 由磁盘加载到内存，发生第二次 IO，29 在 26 和 30 之间，锁定磁盘块 3 的 P2 指针；</p>
+<p>通过磁盘块 3 的 P2 指针的磁盘地址把磁盘块 8 由磁盘加载到内存，发生第三次 IO，同时内存中做二分查找找到 29，结束查询，共计 3 次 IO。</p>
 <p>总结：</p>
-<p>真实的情况是，3层的B+树可以表示上百万的数据，如果上百万的数据查找只需要3次IO，性能提高将是巨大的；</p>
-<p>如果没有索引，每个数据项都要发生一次IO，那么总共需要百万次的IO，成本非常高。</p>
+<p>真实的情况是，3 层的 B+树可以表示上百万的数据，如果上百万的数据查找只需要 3 次 IO，性能提高将是巨大的；</p>
+<p>如果没有索引，每个数据项都要发生一次 IO，那么总共需要百万次的 IO，成本非常高。</p>
 <p>5、索引分为哪些类型？</p>
 <p>单值索引：即一个索引只包含单个列，一个表可以有多个单列索引。</p>
 <p>唯一索引：索引列的值必须唯一，但允许有空值。</p>
 <p>复合索引：即一个索引包含多个列。</p>
 <p>6、索引的基本语法？</p>
 <p>1、创建索引：</p>
-<p>方式1：</p>
+<p>方式 1：</p>
 <p>create [UNIQUE] index 索引名 on 表名(字段名…)；</p>
 <p>示例：create [UNIQUE] index idx_city_name on city(city_name);</p>
-<p>方式2：</p>
+<p>方式 2：</p>
 <p>alter table 表名 add index 索引名(字段名…)</p>
 <p>示例：alter table city add index idx_city_name(city_name);</p>
 <p>2、查看索引：</p>
@@ -439,14 +439,14 @@
 <p>3、查询中与其它表关联的字段，外键关系建立索引</p>
 <p>4、查询中排序的字段，排序字段若通过索引去访问将大大提高排序速度</p>
 <p>5、查询中统计或分组字段</p>
-<p> 8、哪些情况不需要创建索引？</p>
+<p>8、哪些情况不需要创建索引？</p>
 <p>1、数据量太少</p>
 <p>2、经常做增删改频繁操作的的字段</p>
 <p>3、数据重复且分布平均的表字段</p>
-<p>解释：假如一个表有10万记录，有一个字段只有true和false两种值，且每个值的分布概率大约为50%，那么这个对该字段建索引不会提高查询效率；</p>
+<p>解释：假如一个表有 10 万记录，有一个字段只有 true 和 false 两种值，且每个值的分布概率大约为 50%，那么这个对该字段建索引不会提高查询效率；</p>
 <p>索引的选择性：索引列中不同的值的数目/表记录数</p>
-<p>如果一个表中有2000条数据，索引列有1980个不同的值，那么这个索引的选择性就是1980/2000=0.99，选择性越接近1，索引的效率越高。</p>
-<p>4、where条件里用不到的字段</p>
+<p>如果一个表中有 2000 条数据，索引列有 1980 个不同的值，那么这个索引的选择性就是 1980/2000=0.99，选择性越接近 1，索引的效率越高。</p>
+<p>4、where 条件里用不到的字段</p>
 
                 
             </div>
@@ -515,7 +515,7 @@
                 <a href="/2021/03/11/%E6%96%87%E7%AB%A014/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/7.jpg" class="responsive-img" alt="HTTP图解">
+                        <img src="/medias/banner/0007.jpg" class="responsive-img" alt="HTTP图解">
                         
                         <span class="card-title">HTTP图解</span>
                     </div>
@@ -563,8 +563,7 @@
                 <a href="/2021/02/22/%E6%96%87%E7%AB%A012/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="html完整语法学习">
+                        <img src="/medias/banner/8.jpg" class="responsive-img" alt="html完整语法学习">
                         
                         <span class="card-title">html完整语法学习</span>
                     </div>
@@ -962,34 +961,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -1005,63 +1006,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/0006.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -476,7 +476,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-实现思路概述"><a href="#1-实现思路概述" class="headerlink" title="1 实现思路概述#"></a>1 实现思路概述<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#1--%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E6%A6%82%E8%BF%B0">#</a></h2><h3 id="1-1-从ResultSet说起"><a href="#1-1-从ResultSet说起" class="headerlink" title="1.1 从ResultSet说起#"></a>1.1 从ResultSet说起<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#11--%E4%BB%8Eresultset%E8%AF%B4%E8%B5%B7">#</a></h3><p>说到ResultSet，有Java开发经验的“小伙伴”自然最熟悉不过了，不过我相信对于大多数人来说也算是“最熟悉的陌生人”。从ResultSet取值操作大家都会，比如：</p>
+                <h2 id="1-实现思路概述"><a href="#1-实现思路概述" class="headerlink" title="1 实现思路概述#"></a>1 实现思路概述<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#1--%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E6%A6%82%E8%BF%B0">#</a></h2><h3 id="1-1-从-ResultSet-说起"><a href="#1-1-从-ResultSet-说起" class="headerlink" title="1.1 从 ResultSet 说起#"></a>1.1 从 ResultSet 说起<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#11--%E4%BB%8Eresultset%E8%AF%B4%E8%B5%B7">#</a></h3><p>说到 ResultSet，有 Java 开发经验的“小伙伴”自然最熟悉不过了，不过我相信对于大多数人来说也算是“最熟悉的陌生人”。从 ResultSet 取值操作大家都会，比如：</p>
 <pre><code>private static List&lt;Member&gt; select(String sql) &#123;
     List&lt;Member&gt; result = new ArrayList&lt;&gt;();
     Connection con = null;
@@ -516,7 +516,7 @@
     return result;
 &#125;
 </code></pre>
-<p>以上我们在没有使用框架以前的常规操作。随着业务和开发量的增加，在数据持久层这样的重复代码出现频次非常高。因此，我们就想到将非功能性代码和业务代码进行分离。我们首先想到将ResultSet封装数据的代码逻辑分离，增加一个mapperRow()方法，专门处理对结果的封装，代码如下：</p>
+<p>以上我们在没有使用框架以前的常规操作。随着业务和开发量的增加，在数据持久层这样的重复代码出现频次非常高。因此，我们就想到将非功能性代码和业务代码进行分离。我们首先想到将 ResultSet 封装数据的代码逻辑分离，增加一个 mapperRow()方法，专门处理对结果的封装，代码如下：</p>
 <pre><code>private static List&lt;Member&gt; select(String sql) &#123;
     List&lt;Member&gt; result = new ArrayList&lt;&gt;();
     Connection con = null;
@@ -561,7 +561,7 @@ private static Member mapperRow(ResultSet rs, int i) throws Exception &#123;
     return instance;
 &#125;
 </code></pre>
-<p>但在真实的业务场景中，这样的代码逻辑重复率实在太高，上面的改造只能应用Member类，换一个实体类又要重新封装，聪明的程序员肯定不会通过纯体力劳动给每一个实体类写一个mapperRow()方法，一定会想到代码复用方案。我们不妨来做这样一个改造。<br>先创建Member类：</p>
+<p>但在真实的业务场景中，这样的代码逻辑重复率实在太高，上面的改造只能应用 Member 类，换一个实体类又要重新封装，聪明的程序员肯定不会通过纯体力劳动给每一个实体类写一个 mapperRow()方法，一定会想到代码复用方案。我们不妨来做这样一个改造。<br>先创建 Member 类：</p>
 <pre><code>package com.gupaoedu.vip.orm.demo.entity;
 
 import lombok.Data;
@@ -590,20 +590,10 @@ public class Member implements Serializable &#123;
                 &#39;&#125;&#39;;
     &#125;
 &#125;
-
-
-优化JDBC操作：
-
-
-public static void main(String[] args) &#123;
-    Member condition = new Member();
-    condition.setName(&quot;Tom&quot;);
-    condition.setAge(19);
-    List&lt;?&gt; result =  select(condition);
-    System.out.println(Arrays.toString(result.toArray()));
-&#125;
-
-private static List&lt;?&gt; select(Object condition) &#123;
+</code></pre>
+<p>​<br> 优化 JDBC 操作：</p>
+<p>​<br> public static void main(String[] args) {<br>Member condition = new Member();<br>condition.setName(“Tom”);<br>condition.setAge(19);<br>List&lt;?&gt; result = select(condition);<br>System.out.println(Arrays.toString(result.toArray()));<br>}</p>
+<pre><code>private static List&lt;?&gt; select(Object condition) &#123;
 
     List&lt;Object&gt; result = new ArrayList&lt;&gt;();
 
@@ -699,8 +689,8 @@ private static List&lt;?&gt; select(Object condition) &#123;
     return result;
 &#125;
 </code></pre>
-<p>上面巧妙地利用反射机制读取Class信息和Annotation信息，将数据库表中的列和类中的字段进行关联映射并赋值，以减少重复代码。</p>
-<h3 id="1-2-为什么需要ORM框架"><a href="#1-2-为什么需要ORM框架" class="headerlink" title="1.2 为什么需要ORM框架#"></a>1.2 为什么需要ORM框架<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#12--%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81orm%E6%A1%86%E6%9E%B6">#</a></h3><p>通过前面的讲解，我们已经了解ORM框架的基本实现原理。ORM是指对象关系映射（Object Relation Mapping），映射的不只是对象值，还有对象与对象之间的关系，例如一对多、多对多、一对一这样的表关系。现在市面上ORM框架也非常多，有大家所熟知的Hibernate、Spring JDBC、MyBatis、JPA等。在这里做一个简单的总结，如下表所示。</p>
+<p>上面巧妙地利用反射机制读取 Class 信息和 Annotation 信息，将数据库表中的列和类中的字段进行关联映射并赋值，以减少重复代码。</p>
+<h3 id="1-2-为什么需要-ORM-框架"><a href="#1-2-为什么需要-ORM-框架" class="headerlink" title="1.2 为什么需要 ORM 框架#"></a>1.2 为什么需要 ORM 框架<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#12--%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81orm%E6%A1%86%E6%9E%B6">#</a></h3><p>通过前面的讲解，我们已经了解 ORM 框架的基本实现原理。ORM 是指对象关系映射（Object Relation Mapping），映射的不只是对象值，还有对象与对象之间的关系，例如一对多、多对多、一对一这样的表关系。现在市面上 ORM 框架也非常多，有大家所熟知的 Hibernate、Spring JDBC、MyBatis、JPA 等。在这里做一个简单的总结，如下表所示。</p>
 <table>
 <thead>
 <tr>
@@ -712,20 +702,20 @@ private static List&lt;?&gt; select(Object condition) &#123;
 <tbody><tr>
 <td>Hibernate</td>
 <td>全自动（挡）</td>
-<td>不需要写一句SQL</td>
+<td>不需要写一句 SQL</td>
 </tr>
 <tr>
 <td>MyBatis</td>
 <td>半自动（挡）</td>
-<td>手自一体，支持简单的映射，复杂关系需要自己写SQL</td>
+<td>手自一体，支持简单的映射，复杂关系需要自己写 SQL</td>
 </tr>
 <tr>
 <td>Spring JDBC</td>
 <td>纯手动（挡）</td>
-<td>所有的SQL都要自己写，它帮我们设计了一套标准流程</td>
+<td>所有的 SQL 都要自己写，它帮我们设计了一套标准流程</td>
 </tr>
 </tbody></table>
-<p>既然市面上有这么多选择，我为什么还要自己写 ORM框架呢？<br>这得从我的一次空降担任架构师的经验说起。空降面临最大的难题就是如何取得团队“小伙伴们”的信任。当时，团队总共就8人，每个人的水平参差不齐，甚至有些人还没接触过MySQL，诸如Redis等缓存中间件更不用说了。基本只会使用Hibernate的CRUD，而且已经影响到了系统性能。由于工期紧张，没有时间和精力给团队做系统培训，也为了兼顾可控性，于是就产生了自研ORM框架的想法。我做了这样的顶层设计，以降低团队“小伙伴们”的存息成本，顶层接口统一参数、统一返回值，具体如下。</p>
+<p>既然市面上有这么多选择，我为什么还要自己写 ORM 框架呢？<br>这得从我的一次空降担任架构师的经验说起。空降面临最大的难题就是如何取得团队“小伙伴们”的信任。当时，团队总共就 8 人，每个人的水平参差不齐，甚至有些人还没接触过 MySQL，诸如 Redis 等缓存中间件更不用说了。基本只会使用 Hibernate 的 CRUD，而且已经影响到了系统性能。由于工期紧张，没有时间和精力给团队做系统培训，也为了兼顾可控性，于是就产生了自研 ORM 框架的想法。我做了这样的顶层设计，以降低团队“小伙伴们”的存息成本，顶层接口统一参数、统一返回值，具体如下。</p>
 <p>**（1）规定查询方法的接口模型为： **</p>
 <pre><code>/**
  * 获取列表
@@ -759,19 +749,10 @@ List&lt;Map&lt;String,Object&gt;&gt; selectBySql(String sql, Object... args) thr
  * @return
  */
 Page&lt;Map&lt;String,Object&gt;&gt; selectBySqlToPage(String sql, Object [] param, int pageNo, int pageSize) throws Exception;
-
-
-**（2）规定删除方法的接口模型为：**
-
-
-/**
- * 删除一条记录
- * @param entity entity中的ID不能为空，如果ID为空，其他条件不能为空，都为空不予执行
- * @return
- */
-boolean delete(T entity) throws Exception;
-
-/**
+</code></pre>
+<p>​<br> <strong>（2）规定删除方法的接口模型为：</strong></p>
+<p>​<br> /**<br>_ 删除一条记录<br>_ @param entity entity 中的 ID 不能为空，如果 ID 为空，其他条件不能为空，都为空不予执行<br>_ @return<br>_/<br>boolean delete(T entity) throws Exception;</p>
+<pre><code>/**
  * 批量删除
  * @param list
  * @return 返回受影响的行数
@@ -812,8 +793,8 @@ int insertAll(List&lt;T&gt; list) throws Exception;
  */
 boolean update(T entity) throws Exception;
 </code></pre>
-<p>利用这套基础的API，后面我又基于Redis、MongoDB、ElasticSearch、Hive、HBase各封装了一套，以此来降低团队的学习成本，也大大提升了程序的可控性，更方便统一监控。</p>
-<h2 id="2-搭建基础架构"><a href="#2-搭建基础架构" class="headerlink" title="2 搭建基础架构#"></a>2 搭建基础架构<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#2--%E6%90%AD%E5%BB%BA%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84">#</a></h2><h3 id="2-1-Page"><a href="#2-1-Page" class="headerlink" title="2.1 Page#"></a>2.1 Page<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#21--page">#</a></h3><p>定义Page类的主要目的是为后面的分页查询统一返回结果做顶层支持，其主要功能包括分页逻辑的封装、分页数据。</p>
+<p>利用这套基础的 API，后面我又基于 Redis、MongoDB、ElasticSearch、Hive、HBase 各封装了一套，以此来降低团队的学习成本，也大大提升了程序的可控性，更方便统一监控。</p>
+<h2 id="2-搭建基础架构"><a href="#2-搭建基础架构" class="headerlink" title="2 搭建基础架构#"></a>2 搭建基础架构<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#2--%E6%90%AD%E5%BB%BA%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84">#</a></h2><h3 id="2-1-Page"><a href="#2-1-Page" class="headerlink" title="2.1 Page#"></a>2.1 Page<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#21--page">#</a></h3><p>定义 Page 类的主要目的是为后面的分页查询统一返回结果做顶层支持，其主要功能包括分页逻辑的封装、分页数据。</p>
 <pre><code>package javax.core.common;
 
 import java.io.Serializable;
@@ -846,7 +827,7 @@ public class Page&lt;T&gt; implements Serializable &#123;
 
    /**
     * 默认构造方法
-    * 
+    *
     * @param start 本页数据在数据库中的起始位置
     * @param totalSize 数据库中总记录条数
     * @param pageSize 本页容量
@@ -865,7 +846,7 @@ public class Page&lt;T&gt; implements Serializable &#123;
    public long getTotal() &#123;
       return this.total;
    &#125;
-   
+
    public void setTotal(long total) &#123;
       this.total = total;
    &#125;
@@ -894,7 +875,7 @@ public class Page&lt;T&gt; implements Serializable &#123;
    public List&lt;T&gt; getRows() &#123;
       return rows;
    &#125;
-   
+
    public void setRows(List&lt;T&gt; rows) &#123;
       this.rows = rows;
    &#125;
@@ -922,7 +903,7 @@ public class Page&lt;T&gt; implements Serializable &#123;
 
    /**
     * 获取任意一页第一条数据在数据集中的位置，每页条数使用默认值
-    * 
+    *
     * @see #getStartOfPage(int,int)
     */
    protected static int getStartOfPage(int pageNo) &#123;
@@ -931,7 +912,7 @@ public class Page&lt;T&gt; implements Serializable &#123;
 
    /**
     * 获取任意一页第一条数据在数据集中的位置
-    * 
+    *
     * @param pageNo 从1开始的页号
     * @param pageSize 每页记录条数
     * @return 该页第一条数据
@@ -941,16 +922,12 @@ public class Page&lt;T&gt; implements Serializable &#123;
    &#125;
 
 &#125;
-
-
-### 2.2 ResultMsg[#](https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#22--resultmsg)
-
-ResultMsg类主要是为统一返回结果做的顶层设计，主要包括状态码、结果说明内容和返回数据。
-
-
-package javax.core.common;
-
-import java.io.Serializable;
+</code></pre>
+<p>​  </p>
+<h3 id="2-2-ResultMsg"><a href="#2-2-ResultMsg" class="headerlink" title="2.2 ResultMsg#"></a>2.2 ResultMsg<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#22--resultmsg">#</a></h3><pre><code>ResultMsg类主要是为统一返回结果做的顶层设计，主要包括状态码、结果说明内容和返回数据。
+</code></pre>
+<p>​<br> package javax.core.common;</p>
+<pre><code>import java.io.Serializable;
 
 //底层设计
 public class ResultMsg&lt;T&gt; implements Serializable &#123;
@@ -962,7 +939,7 @@ public class ResultMsg&lt;T&gt; implements Serializable &#123;
    private T data;  //放任意结果
 
    public ResultMsg() &#123;&#125;
-   
+
    public ResultMsg(int status) &#123;
       this.status = status;
    &#125;
@@ -971,7 +948,7 @@ public class ResultMsg&lt;T&gt; implements Serializable &#123;
       this.status = status;
       this.msg = msg;
    &#125;
-   
+
    public ResultMsg(int status, T data) &#123;
       this.status = status;
       this.data = data;
@@ -1009,14 +986,14 @@ public class ResultMsg&lt;T&gt; implements Serializable &#123;
 
 &#125;
 </code></pre>
-<h3 id="2-3-BaseDao"><a href="#2-3-BaseDao" class="headerlink" title="2.3 BaseDao#"></a>2.3 BaseDao<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#23--basedao">#</a></h3><p>作为所有BaseDao持久化框架的顶层接口，主要定义增、删、改、查统一的参数列表和返回值。</p>
+<h3 id="2-3-BaseDao"><a href="#2-3-BaseDao" class="headerlink" title="2.3 BaseDao#"></a>2.3 BaseDao<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#23--basedao">#</a></h3><p>作为所有 BaseDao 持久化框架的顶层接口，主要定义增、删、改、查统一的参数列表和返回值。</p>
 <pre><code>package javax.core.common.jdbc;
 
 import com.gupaoedu.vip.orm.framework.QueryRule;
 
 import javax.core.common.Page;
 import java.util.List;
-import java.util.Map;    
+import java.util.Map;
 
 public interface BaseDao&lt;T,PK&gt; &#123;
     /**
@@ -1024,7 +1001,7 @@ public interface BaseDao&lt;T,PK&gt; &#123;
      * @param queryRule 查询条件
      * @return
      */
-    List&lt;T&gt; select(QueryRule queryRule) throws Exception;    
+    List&lt;T&gt; select(QueryRule queryRule) throws Exception;
 
     /**
      * 获取分页结果
@@ -1033,7 +1010,7 @@ public interface BaseDao&lt;T,PK&gt; &#123;
      * @param pageSize 每页条数
      * @return
      */
-    Page&lt;?&gt; select(QueryRule queryRule,int pageNo,int pageSize) throws Exception;    
+    Page&lt;?&gt; select(QueryRule queryRule,int pageNo,int pageSize) throws Exception;
 
     /**
      * 根据SQL获取列表
@@ -1041,7 +1018,7 @@ public interface BaseDao&lt;T,PK&gt; &#123;
      * @param args 参数
      * @return
      */
-    List&lt;Map&lt;String,Object&gt;&gt; selectBySql(String sql, Object... args) throws Exception;    
+    List&lt;Map&lt;String,Object&gt;&gt; selectBySql(String sql, Object... args) throws Exception;
 
     /**
      * 根据SQL获取分页
@@ -1050,14 +1027,14 @@ public interface BaseDao&lt;T,PK&gt; &#123;
      * @param pageSize 每页条数
      * @return
      */
-    Page&lt;Map&lt;String,Object&gt;&gt; selectBySqlToPage(String sql, Object [] param, int pageNo, int pageSize) throws Exception;    
+    Page&lt;Map&lt;String,Object&gt;&gt; selectBySqlToPage(String sql, Object [] param, int pageNo, int pageSize) throws Exception;
 
     /**
      * 删除一条记录
      * @param entity entity中的ID不能为空，如果ID为空，其他条件不能为空，都为空则不予执行
      * @return
      */
-    boolean delete(T entity) throws Exception;    
+    boolean delete(T entity) throws Exception;
 
     /**
      * 批量删除
@@ -1065,14 +1042,14 @@ public interface BaseDao&lt;T,PK&gt; &#123;
      * @return 返回受影响的行数
      * @throws Exception
      */
-    int deleteAll(List&lt;T&gt; list) throws Exception;    
+    int deleteAll(List&lt;T&gt; list) throws Exception;
 
     /**
      * 插入一条记录并返回插入后的ID
      * @param entity 只要entity不等于null，就执行插入操作
      * @return
      */
-    PK insertAndReturnId(T entity) throws Exception;    
+    PK insertAndReturnId(T entity) throws Exception;
 
     /**
      * 插入一条记录自增ID
@@ -1080,7 +1057,7 @@ public interface BaseDao&lt;T,PK&gt; &#123;
      * @return
      * @throws Exception
      */
-    boolean insert(T entity) throws Exception;    
+    boolean insert(T entity) throws Exception;
 
     /**
      * 批量插入
@@ -1088,7 +1065,7 @@ public interface BaseDao&lt;T,PK&gt; &#123;
      * @return 返回受影响的行数
      * @throws Exception
      */
-    int insertAll(List&lt;T&gt; list) throws Exception;    
+    int insertAll(List&lt;T&gt; list) throws Exception;
 
     /**
      *  修改一条记录
@@ -1097,17 +1074,17 @@ public interface BaseDao&lt;T,PK&gt; &#123;
      * @throws Exception
      */
     boolean update(T entity) throws Exception;
-&#125;    
+&#125;
 
 
-### 2.4 QueryRule[#](https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#24--queryrule)    
+### 2.4 QueryRule[#](https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#24--queryrule)
 </code></pre>
-<p>如果用QueryRule类来构建查询条件，用户在做条件查询时不需要手写SQL，实现业务代码与SQL解耦。    </p>
-<pre><code>package com.gupaoedu.vip.orm.framework;    
+<p>如果用 QueryRule 类来构建查询条件，用户在做条件查询时不需要手写 SQL，实现业务代码与 SQL 解耦。</p>
+<pre><code>package com.gupaoedu.vip.orm.framework;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;    
+import java.util.List;
 
 /**
  * QueryRule，主要功能用于构造查询条件
@@ -1135,18 +1112,18 @@ public final class QueryRule implements Serializable
    public static final int OR = 202;
    private List&lt;Rule&gt; ruleList = new ArrayList&lt;Rule&gt;();
    private List&lt;QueryRule&gt; queryRuleList = new ArrayList&lt;QueryRule&gt;();
-   private String propertyName;    
+   private String propertyName;
 
-   private QueryRule() &#123;&#125;    
+   private QueryRule() &#123;&#125;
 
    private QueryRule(String propertyName) &#123;
       this.propertyName = propertyName;
-   &#125;    
+   &#125;
 
    public static QueryRule getInstance() &#123;
       return new QueryRule();
    &#125;
-   
+
    /**
     * 添加升序规则
     * @param propertyName
@@ -1155,7 +1132,7 @@ public final class QueryRule implements Serializable
    public QueryRule addAscOrder(String propertyName) &#123;
       this.ruleList.add(new Rule(ASC_ORDER, propertyName));
       return this;
-   &#125;    
+   &#125;
 
    /**
     * 添加降序规则
@@ -1165,184 +1142,179 @@ public final class QueryRule implements Serializable
    public QueryRule addDescOrder(String propertyName) &#123;
       this.ruleList.add(new Rule(DESC_ORDER, propertyName));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andIsNull(String propertyName) &#123;
       this.ruleList.add(new Rule(ISNULL, propertyName).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andIsNotNull(String propertyName) &#123;
       this.ruleList.add(new Rule(ISNOTNULL, propertyName).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andIsEmpty(String propertyName) &#123;
       this.ruleList.add(new Rule(ISEMPTY, propertyName).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andIsNotEmpty(String propertyName) &#123;
       this.ruleList.add(new Rule(ISNOTEMPTY, propertyName).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andLike(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(LIKE, propertyName, new Object[] &#123; value &#125;).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andEqual(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(EQ, propertyName, new Object[] &#123; value &#125;).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andBetween(String propertyName, Object... values) &#123;
       this.ruleList.add(new Rule(BETWEEN, propertyName, values).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andIn(String propertyName, List&lt;Object&gt; values) &#123;
       this.ruleList.add(new Rule(IN, propertyName, new Object[] &#123; values &#125;).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andIn(String propertyName, Object... values) &#123;
       this.ruleList.add(new Rule(IN, propertyName, values).setAndOr(AND));
       return this;
    &#125;
-   
+
    public QueryRule andNotIn(String propertyName, List&lt;Object&gt; values) &#123;
       this.ruleList.add(new Rule(NOTIN, propertyName, new Object[] &#123; values &#125;).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orNotIn(String propertyName, Object... values) &#123;
       this.ruleList.add(new Rule(NOTIN, propertyName, values).setAndOr(OR));
       return this;
    &#125;
-       
+
 
    public QueryRule andNotEqual(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(NOTEQ, propertyName, new Object[] &#123; value &#125;).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andGreaterThan(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(GT, propertyName, new Object[] &#123; value &#125;).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andGreaterEqual(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(GE, propertyName, new Object[] &#123; value &#125;).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andLessThan(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(LT, propertyName, new Object[] &#123; value &#125;).setAndOr(AND));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule andLessEqual(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(LE, propertyName, new Object[] &#123; value &#125;).setAndOr(AND));
       return this;
    &#125;
-   
-   
-   public QueryRule orIsNull(String propertyName) &#123;
-      this.ruleList.add(new Rule(ISNULL, propertyName).setAndOr(OR));
-      return this;
-   &#125;    
-
-   public QueryRule orIsNotNull(String propertyName) &#123;
+</code></pre>
+<p>​<br> public QueryRule orIsNull(String propertyName) {<br>this.ruleList.add(new Rule(ISNULL, propertyName).setAndOr(OR));<br>return this;<br>}</p>
+<pre><code>   public QueryRule orIsNotNull(String propertyName) &#123;
       this.ruleList.add(new Rule(ISNOTNULL, propertyName).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orIsEmpty(String propertyName) &#123;
       this.ruleList.add(new Rule(ISEMPTY, propertyName).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orIsNotEmpty(String propertyName) &#123;
       this.ruleList.add(new Rule(ISNOTEMPTY, propertyName).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orLike(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(LIKE, propertyName, new Object[] &#123; value &#125;).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orEqual(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(EQ, propertyName, new Object[] &#123; value &#125;).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orBetween(String propertyName, Object... values) &#123;
       this.ruleList.add(new Rule(BETWEEN, propertyName, values).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orIn(String propertyName, List&lt;Object&gt; values) &#123;
       this.ruleList.add(new Rule(IN, propertyName, new Object[] &#123; values &#125;).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orIn(String propertyName, Object... values) &#123;
       this.ruleList.add(new Rule(IN, propertyName, values).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orNotEqual(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(NOTEQ, propertyName, new Object[] &#123; value &#125;).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orGreaterThan(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(GT, propertyName, new Object[] &#123; value &#125;).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orGreaterEqual(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(GE, propertyName, new Object[] &#123; value &#125;).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orLessThan(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(LT, propertyName, new Object[] &#123; value &#125;).setAndOr(OR));
       return this;
-   &#125;    
+   &#125;
 
    public QueryRule orLessEqual(String propertyName, Object value) &#123;
       this.ruleList.add(new Rule(LE, propertyName, new Object[] &#123; value &#125;).setAndOr(OR));
       return this;
    &#125;
-       
+
 
    public List&lt;Rule&gt; getRuleList() &#123;
       return this.ruleList;
-   &#125;    
+   &#125;
 
    public List&lt;QueryRule&gt; getQueryRuleList() &#123;
       return this.queryRuleList;
-   &#125;    
+   &#125;
 
    public String getPropertyName() &#123;
       return this.propertyName;
-   &#125;    
+   &#125;
 
    protected class Rule implements Serializable &#123;
       private static final long serialVersionUID = 1L;
       private int type;  //规则的类型
       private String property_name;
       private Object[] values;
-      private int andOr = AND;    
+      private int andOr = AND;
 
       public Rule(int paramInt, String paramString) &#123;
          this.property_name = paramString;
          this.type = paramInt;
-      &#125;    
+      &#125;
 
       public Rule(int paramInt, String paramString,
             Object[] paramArrayOfObject) &#123;
@@ -1350,23 +1322,23 @@ public final class QueryRule implements Serializable
          this.values = paramArrayOfObject;
          this.type = paramInt;
       &#125;
-      
+
       public Rule setAndOr(int andOr)&#123;
          this.andOr = andOr;
          return this;
       &#125;
-      
+
       public int getAndOr()&#123;
          return this.andOr;
-      &#125;    
+      &#125;
 
       public Object[] getValues() &#123;
          return this.values;
-      &#125;    
+      &#125;
 
       public int getType() &#123;
          return this.type;
-      &#125;    
+      &#125;
 
       public String getPropertyName() &#123;
          return this.property_name;
@@ -1374,7 +1346,7 @@ public final class QueryRule implements Serializable
    &#125;
 &#125;
 </code></pre>
-<h3 id="2-5-Order"><a href="#2-5-Order" class="headerlink" title="2.5 Order#"></a>2.5 Order<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#25--order">#</a></h3><p>Order类主要用于封装排序规则，代码如下：</p>
+<h3 id="2-5-Order"><a href="#2-5-Order" class="headerlink" title="2.5 Order#"></a>2.5 Order<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15697485.html#25--order">#</a></h3><p>Order 类主要用于封装排序规则，代码如下：</p>
 <pre><code>package com.gupaoedu.vip.orm.framework;
 
 /**
@@ -1383,7 +1355,7 @@ public final class QueryRule implements Serializable
 public class Order &#123;
    private boolean ascending; //升序还是降序
    private String propertyName; //哪个字段升序，哪个字段降序
-   
+
    public String toString() &#123;
       return propertyName + &#39; &#39; + (ascending ? &quot;asc&quot; : &quot;desc&quot;);
    &#125;
@@ -1417,7 +1389,7 @@ public class Order &#123;
    &#125;
 &#125;
 </code></pre>
-<h2 id="3-基于Spring-JDBC实现关键功能"><a href="#3-基于Spring-JDBC实现关键功能" class="headerlink" title="3 基于Spring JDBC实现关键功能#"></a>3 基于Spring JDBC实现关键功能<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#3--%E5%9F%BA%E4%BA%8Espring-jdbc%E5%AE%9E%E7%8E%B0%E5%85%B3%E9%94%AE%E5%8A%9F%E8%83%BD">#</a></h2><h3 id="3-1-ClassMappings"><a href="#3-1-ClassMappings" class="headerlink" title="3.1 ClassMappings#"></a>3.1 ClassMappings<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#31--classmappings">#</a></h3><p>ClassMappings主要定义基础的映射类型，代码如下：</p>
+<h2 id="3-基于-Spring-JDBC-实现关键功能"><a href="#3-基于-Spring-JDBC-实现关键功能" class="headerlink" title="3 基于 Spring JDBC 实现关键功能#"></a>3 基于 Spring JDBC 实现关键功能<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#3--%E5%9F%BA%E4%BA%8Espring-jdbc%E5%AE%9E%E7%8E%B0%E5%85%B3%E9%94%AE%E5%8A%9F%E8%83%BD">#</a></h2><h3 id="3-1-ClassMappings"><a href="#3-1-ClassMappings" class="headerlink" title="3.1 ClassMappings#"></a>3.1 ClassMappings<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#31--classmappings">#</a></h3><p>ClassMappings 主要定义基础的映射类型，代码如下：</p>
 <pre><code>package com.tom.orm.framework;
 
 import java.lang.reflect.Field;
@@ -1435,7 +1407,7 @@ import java.util.Set;
 public class ClassMappings &#123;
 
    private ClassMappings()&#123;&#125;
-   
+
     static final Set&lt;Class&lt;?&gt;&gt; SUPPORTED_SQL_OBJECTS = new HashSet&lt;Class&lt;?&gt;&gt;();
 
        static &#123;
@@ -1490,7 +1462,7 @@ public class ClassMappings &#123;
            &#125;
            return map;
        &#125;
-       
+
        public static Field[] findFields(Class&lt;?&gt; clazz)&#123;
            return clazz.getDeclaredFields();
        &#125;
@@ -1532,7 +1504,7 @@ public class ClassMappings &#123;
        &#125;
 &#125;
 </code></pre>
-<h3 id="3-2-EntityOperation"><a href="#3-2-EntityOperation" class="headerlink" title="3.2 EntityOperation#"></a>3.2 EntityOperation<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#32--entityoperation">#</a></h3><p>EntityOperation主要实现数据库表结构和对象类结构的映射关系，代码如下：</p>
+<h3 id="3-2-EntityOperation"><a href="#3-2-EntityOperation" class="headerlink" title="3.2 EntityOperation#"></a>3.2 EntityOperation<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#32--entityoperation">#</a></h3><p>EntityOperation 主要实现数据库表结构和对象类结构的映射关系，代码如下：</p>
 <pre><code>package com.tom.orm.framework;
 
 import java.lang.reflect.Field;
@@ -1562,11 +1534,11 @@ public class EntityOperation&lt;T&gt; &#123;
    public Class&lt;T&gt; entityClass = null; // 泛型实体Class对象
    public final Map&lt;String, PropertyMapping&gt; mappings;
    public final RowMapper&lt;T&gt; rowMapper;
-   
+
    public final String tableName;
    public String allColumn = &quot;*&quot;;
    public Field pkField;
-   
+
    public EntityOperation(Class&lt;T&gt; clazz,String pk) throws Exception&#123;
       if(!clazz.isAnnotationPresent(Entity.class))&#123;
          throw new Exception(&quot;在&quot; + clazz.getName() + &quot;中没有找到Entity注解，不能做ORM映射&quot;);
@@ -1586,7 +1558,7 @@ public class EntityOperation&lt;T&gt; &#123;
        this.allColumn = this.mappings.keySet().toString().replace(&quot;[&quot;, &quot;&quot;).replace(&quot;]&quot;,&quot;&quot;). replaceAll(&quot; &quot;,&quot;&quot;);
        this.rowMapper = createRowMapper();
    &#125;
-   
+
     Map&lt;String, PropertyMapping&gt; getPropertyMappings(Map&lt;String, Method&gt; getters, Map&lt;String, Method&gt; setters, Field[] fields) &#123;
         Map&lt;String, PropertyMapping&gt; mappings = new HashMap&lt;String, PropertyMapping&gt;();
         String name;
@@ -1612,7 +1584,7 @@ public class EntityOperation&lt;T&gt; &#123;
         &#125;
         return mappings;
     &#125;
-    
+
    RowMapper&lt;T&gt; createRowMapper() &#123;
            return new RowMapper&lt;T&gt;() &#123;
                public T mapRow(ResultSet rs, int rowNum) throws SQLException &#123;
@@ -1668,7 +1640,7 @@ public class EntityOperation&lt;T&gt; &#123;
          &#125;
       &#125;
    &#125;
-     
+
    public T parse(ResultSet rs) &#123;
       T t = null;
       if (null == rs) &#123;
@@ -1694,7 +1666,7 @@ public class EntityOperation&lt;T&gt; &#123;
    public Map&lt;String, Object&gt; parse(T t) &#123;
       Map&lt;String, Object&gt; _map = new TreeMap&lt;String, Object&gt;();
       try &#123;
-         
+
          for (String columnName : mappings.keySet()) &#123;
             Object value = mappings.get(columnName).getter.invoke(t);
             if (value == null)
@@ -1768,11 +1740,11 @@ class PropertyMapping &#123;
           */
          System.err.println(fieldName + &quot;--&quot; + value);
       &#125;
-      
+
     &#125;
 &#125;
 </code></pre>
-<h3 id="3-3-QueryRuleSqlBuilder"><a href="#3-3-QueryRuleSqlBuilder" class="headerlink" title="3.3 QueryRuleSqlBuilder#"></a>3.3 QueryRuleSqlBuilder<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#33--queryrulesqlbuilder">#</a></h3><p>QueryRuleSqlBuilder根据用户构建好的QueryRule来自动生成SQL语句，代码如下：</p>
+<h3 id="3-3-QueryRuleSqlBuilder"><a href="#3-3-QueryRuleSqlBuilder" class="headerlink" title="3.3 QueryRuleSqlBuilder#"></a>3.3 QueryRuleSqlBuilder<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#33--queryrulesqlbuilder">#</a></h3><p>QueryRuleSqlBuilder 根据用户构建好的 QueryRule 来自动生成 SQL 语句，代码如下：</p>
 <pre><code>package com.tom.orm.framework;
 
 import java.util.ArrayList;
@@ -1784,23 +1756,18 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.ArrayUtils;
 import com.tom.orm.framework.QueryRule.Rule;
 import javax.core.common.utils.StringUtils;
-
-
-/**
- * 根据QueryRule自动构建SQL语句
- */
-public class QueryRuleSqlBuilder &#123;
-
-   private int CURR_INDEX = 0; //记录参数所在的位置
+</code></pre>
+<p>​<br> /**<br>_ 根据 QueryRule 自动构建 SQL 语句<br>_/<br>public class QueryRuleSqlBuilder {</p>
+<pre><code>   private int CURR_INDEX = 0; //记录参数所在的位置
    private List&lt;String&gt; properties; //保存列名列表
    private List&lt;Object&gt; values; //保存参数值列表
    private List&lt;Order&gt; orders; //保存排序规则列表
-   
-   private String whereSql = &quot;&quot;; 
+
+   private String whereSql = &quot;&quot;;
    private String orderSql = &quot;&quot;;
    private Object [] valueArr = new Object[]&#123;&#125;;
    private Map&lt;Object,Object&gt; valueMap = new HashMap&lt;Object,Object&gt;();
-   
+
    /**
     * 获得查询条件
     * @return
@@ -1808,7 +1775,7 @@ public class QueryRuleSqlBuilder &#123;
    public String getWhereSql()&#123;
       return this.whereSql;
    &#125;
-   
+
    /**
     * 获得排序条件
     * @return
@@ -1816,7 +1783,7 @@ public class QueryRuleSqlBuilder &#123;
    public String getOrderSql()&#123;
       return this.orderSql;
    &#125;
-   
+
    /**
     * 获得参数值列表
     * @return
@@ -1824,7 +1791,7 @@ public class QueryRuleSqlBuilder &#123;
    public Object [] getValues()&#123;
       return this.valueArr;
    &#125;
-   
+
    /**
     * 获取参数列表
     * @return
@@ -1832,7 +1799,7 @@ public class QueryRuleSqlBuilder &#123;
    public Map&lt;Object,Object&gt; getValueMap()&#123;
       return this.valueMap;
    &#125;
-   
+
    /**
     * 创建SQL构造器
     * @param queryRule
@@ -1903,10 +1870,10 @@ public class QueryRuleSqlBuilder &#123;
       //拼装参数值
       appendValues();
    &#125;
-   
+
    /**
     * 去掉order
-    * 
+    *
     * @param sql
     * @return
     */
@@ -1920,10 +1887,10 @@ public class QueryRuleSqlBuilder &#123;
       m.appendTail(sb);
       return sb.toString();
    &#125;
-   
+
    /**
     * 去掉select
-    * 
+    *
     * @param sql
     * @return
     */
@@ -1935,7 +1902,7 @@ public class QueryRuleSqlBuilder &#123;
          return sql;
       &#125;
    &#125;
-   
+
    /**
     * 处理like
     * @param rule
@@ -1968,7 +1935,7 @@ public class QueryRuleSqlBuilder &#123;
       add(rule.getAndOr(),rule.getPropertyName(),&quot;&quot;,&quot;between&quot;,rule.getValues()[0],&quot;and&quot;);
       add(0,&quot;&quot;,&quot;&quot;,&quot;&quot;,rule.getValues()[1],&quot;&quot;);
    &#125;
-   
+
    /**
     * 处理 =
     * @param rule
@@ -2069,22 +2036,9 @@ public class QueryRuleSqlBuilder &#123;
    private  void processIsEmpty(QueryRule.Rule rule) &#123;
       add(rule.getAndOr(),rule.getPropertyName(),&quot;=&quot;,&quot;&#39;&#39;&quot;);
    &#125;
-
-   
-   /**
-    * 处理in和not in
-    * @param rule
-    * @param name
-    */
-   private void inAndNotIn(QueryRule.Rule rule,String name)&#123;
-      if (ArrayUtils.isEmpty(rule.getValues())) &#123;
-         return;
-      &#125;
-      if ((rule.getValues().length == 1) &amp;&amp; (rule.getValues()[0] != null)
-            &amp;&amp; (rule.getValues()[0] instanceof List)) &#123;
-         List&lt;Object&gt; list = (List) rule.getValues()[0];
-         
-         if ((list != null) &amp;&amp; (list.size() &gt; 0))&#123;
+</code></pre>
+<p>​<br> /**<br>_ 处理 in 和 not in<br>_ @param rule<br>_ @param name<br>_/<br>private void inAndNotIn(QueryRule.Rule rule,String name){<br>if (ArrayUtils.isEmpty(rule.getValues())) {<br>return;<br>}<br>if ((rule.getValues().length == 1) &amp;&amp; (rule.getValues()[0] != null)<br>&amp;&amp; (rule.getValues()[0] instanceof List)) {<br>List<Object> list = (List) rule.getValues()[0];</p>
+<pre><code>         if ((list != null) &amp;&amp; (list.size() &gt; 0))&#123;
             for (int i = 0; i &lt; list.size(); i++) &#123;
                if(i == 0 &amp;&amp; i == list.size() - 1)&#123;
                   add(rule.getAndOr(),rule.getPropertyName(),&quot;&quot;,name + &quot; (&quot;,list.get(i),&quot;)&quot;);
@@ -2116,7 +2070,7 @@ public class QueryRuleSqlBuilder &#123;
          &#125;
       &#125;
    &#125;
-   
+
    /**
     * 处理 not in
     * @param rule
@@ -2124,7 +2078,7 @@ public class QueryRuleSqlBuilder &#123;
    private void processNotIN(QueryRule.Rule rule)&#123;
       inAndNotIn(rule,&quot;not in&quot;);
    &#125;
-   
+
    /**
     * 处理 in
     * @param rule
@@ -2132,7 +2086,7 @@ public class QueryRuleSqlBuilder &#123;
    private  void processIN(QueryRule.Rule rule) &#123;
       inAndNotIn(rule,&quot;in&quot;);
    &#125;
-   
+
    /**
     * 处理 order by
     * @param rule 查询规则
@@ -2155,20 +2109,9 @@ public class QueryRuleSqlBuilder &#123;
          break;
       &#125;
    &#125;
-   
-   
-   /**
-    * 加入SQL查询规则队列
-    * @param andOr and 或者 or
-    * @param key 列名
-    * @param split 列名与值之间的间隔
-    * @param value 值
-    */
-   private  void add(int andOr,String key,String split ,Object value)&#123;
-      add(andOr,key,split,&quot;&quot;,value,&quot;&quot;);
-   &#125;
-   
-   /**
+</code></pre>
+<p>​<br> /**<br>_ 加入 SQL 查询规则队列<br>_ @param andOr and 或者 or<br>_ @param key 列名<br>_ @param split 列名与值之间的间隔<br>_ @param value 值<br>_/<br>private void add(int andOr,String key,String split ,Object value){<br>add(andOr,key,split,””,value,””);<br>}</p>
+<pre><code>   /**
     * 加入SQL查询规则队列
     * @param andOr and 或则 or
     * @param key 列名
@@ -2178,27 +2121,16 @@ public class QueryRuleSqlBuilder &#123;
     * @param suffix 值后缀
     */
    private void add(int andOr,String key,String split,String prefix,Object value,String suffix)&#123;
-      String andOrStr = (0 == andOr ? &quot;&quot; :(QueryRule.AND == andOr ? &quot; and &quot; : &quot; or &quot;));  
+      String andOrStr = (0 == andOr ? &quot;&quot; :(QueryRule.AND == andOr ? &quot; and &quot; : &quot; or &quot;));
       properties.add(CURR_INDEX, andOrStr + key + &quot; &quot; + split + prefix + (null != value ? &quot; ? &quot; : &quot; &quot;) + suffix);
       if(null != value)&#123;
          values.add(CURR_INDEX,value);
          CURR_INDEX ++;
       &#125;
    &#125;
-   
-   
-   /**
-    * 拼装 where 语句
-    */
-   private void appendWhereSql()&#123;
-      StringBuffer whereSql = new StringBuffer();
-      for (String p : properties) &#123;
-         whereSql.append(p);
-      &#125;
-      this.whereSql = removeSelect(removeOrders(whereSql.toString()));
-   &#125;
-   
-   /**
+</code></pre>
+<p>​<br> /**<br>_ 拼装 where 语句<br>_/<br>private void appendWhereSql(){<br>StringBuffer whereSql = new StringBuffer();<br>for (String p : properties) {<br>whereSql.append(p);<br>}<br>this.whereSql = removeSelect(removeOrders(whereSql.toString()));<br>}</p>
+<pre><code>   /**
     * 拼装排序语句
     */
    private void appendOrderSql()&#123;
@@ -2211,7 +2143,7 @@ public class QueryRuleSqlBuilder &#123;
       &#125;
       this.orderSql = removeSelect(removeOrders(orderSql.toString()));
    &#125;
-   
+
    /**
     * 拼装参数值
     */
@@ -2225,7 +2157,7 @@ public class QueryRuleSqlBuilder &#123;
    &#125;
 &#125;
 </code></pre>
-<h3 id="3-4-BaseDaoSupport"><a href="#3-4-BaseDaoSupport" class="headerlink" title="3.4 BaseDaoSupport#"></a>3.4 BaseDaoSupport<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#34--basedaosupport">#</a></h3><p>BaseDaoSupport主要是对JdbcTemplate的包装，下面讲一下其重要代码，请“小伙伴们” 关 注 公 众 号 『 Tom弹架构 』，回复 “ Spring “ 可下载全部源代码。先看全局定义：</p>
+<h3 id="3-4-BaseDaoSupport"><a href="#3-4-BaseDaoSupport" class="headerlink" title="3.4 BaseDaoSupport#"></a>3.4 BaseDaoSupport<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gupaoedu-tom/p/15702051.html#34--basedaosupport">#</a></h3><p>BaseDaoSupport 主要是对 JdbcTemplate 的包装，下面讲一下其重要代码，请“小伙伴们” 关 注 公 众 号 『 Tom 弹架构 』，回复 “ Spring “ 可下载全部源代码。先看全局定义：</p>
 <pre><code>package com.tom.orm.framework;
 
 ...
@@ -2295,44 +2227,22 @@ public abstract class BaseDaoSupport&lt;T extends Serializable, PK extends Seria
     * 还原默认表名
     */
    protected void restoreTableName()&#123; this.setTableName(op.tableName);  &#125;
-   
+
    /**
     * 获取主键列名称，建议子类重写
     * @return
     */
    protected abstract String getPKColumn();
-   
+
    protected abstract void setDataSource(DataSource dataSource);
 
 //此处有省略
 
 &#125;
-
-
-为了照顾程序员的一般使用习惯，查询方法的前缀命名主要有select、get、load，兼顾Hibernate和MyBatis的命名风格。
-
-
-/**
-    * 查询函数，使用查询规则
-    * 例如以下代码查询条件为匹配的数据
-    *
-    * @param queryRule 查询规则
-    * @return 查询的结果List
-    */
-   public List&lt;T&gt; select(QueryRule queryRule) throws Exception&#123;
-      QueryRuleSqlBuilder bulider = new QueryRuleSqlBuilder(queryRule);
-      String ws = removeFirstAnd(bulider.getWhereSql());
-      String whereSql = (&quot;&quot;.equals(ws) ? ws : (&quot; where &quot; + ws));
-      String sql = &quot;select &quot; + op.allColumn + &quot; from &quot; + getTableName() + whereSql;
-      Object [] values = bulider.getValues();
-      String orderSql = bulider.getOrderSql();
-      orderSql = (StringUtils.isEmpty(orderSql) ? &quot; &quot; : (&quot; order by &quot; + orderSql));
-      sql += orderSql;
-      log.debug(sql);
-      return (List&lt;T&gt;) this.jdbcTemplateReadOnly().query(sql, this.op.rowMapper, values);
-   &#125;
-
-...
+</code></pre>
+<p>​<br> 为了照顾程序员的一般使用习惯，查询方法的前缀命名主要有 select、get、load，兼顾 Hibernate 和 MyBatis 的命名风格。</p>
+<p>​<br> /**<br>_ 查询函数，使用查询规则<br>_ 例如以下代码查询条件为匹配的数据 *<br>_ @param queryRule 查询规则<br>_ @return 查询的结果 List<br>*/<br>public List<T> select(QueryRule queryRule) throws Exception{<br>QueryRuleSqlBuilder bulider = new QueryRuleSqlBuilder(queryRule);<br>String ws = removeFirstAnd(bulider.getWhereSql());<br>String whereSql = (“”.equals(ws) ? ws : (“ where “ + ws));<br>String sql = “select “ + op.allColumn + “ from “ + getTableName() + whereSql;<br>Object [] values = bulider.getValues();<br>String orderSql = bulider.getOrderSql();<br>orderSql = (StringUtils.isEmpty(orderSql) ? “ “ : (“ order by “ + orderSql));<br>sql += orderSql;<br>log.debug(sql);<br>return (List<T>) this.jdbcTemplateReadOnly().query(sql, this.op.rowMapper, values);<br>}</p>
+<pre><code>...
 
    /**
     * 根据SQL语句执行查询，参数为Object数组对象
@@ -2412,22 +2322,10 @@ public abstract class BaseDaoSupport&lt;T extends Serializable, PK extends Seria
       &#125;
       return null;
    &#125;
-     
-
-
-插入方法，均以insert开头：
-
-
-/**
-    * 插入并返回ID
-    * @param entity
-    * @return
-    */
-   public PK insertAndReturnId(T entity) throws Exception&#123;
-      return (PK)this.doInsertRuturnKey(parse(entity));
-   &#125;
-
-   /**
+</code></pre>
+<p>​<br>​<br> 插入方法，均以 insert 开头：</p>
+<p>​<br> /**<br>_ 插入并返回 ID<br>_ @param entity<br>_ @return<br>_/<br>public PK insertAndReturnId(T entity) throws Exception{<br>return (PK)this.doInsertRuturnKey(parse(entity));<br>}</p>
+<pre><code>   /**
     * 插入一条记录
     * @param entity
     * @return
@@ -2476,7 +2374,7 @@ private Serializable doInsertRuturnKey(Map&lt;String,Object&gt; params)&#123;
       final String sql = makeSimpleInsertSql(getTableName(),params,values);
       KeyHolder keyHolder = new GeneratedKeyHolder();
       final JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSourceWrite());
-        try &#123;              
+        try &#123;
 
              jdbcTemplate.update(new PreparedStatementCreator() &#123;
             public PreparedStatement createPreparedStatement(
@@ -2495,37 +2393,12 @@ private Serializable doInsertRuturnKey(Map&lt;String,Object&gt; params)&#123;
         &#125; catch (DataAccessException e) &#123;
            log.error(&quot;error&quot;,e);
         &#125;
-        
-
-
-      if (keyHolder == null) &#123; return &quot;&quot;; &#125;
-
-
-      Map&lt;String, Object&gt; keys = keyHolder.getKeys();
-      if (keys == null || keys.size() == 0 || keys.values().size() == 0) &#123;
-         return &quot;&quot;;
-      &#125;
-      Object key = keys.values().toArray()[0];
-      if (key == null || !(key instanceof Serializable)) &#123;
-         return &quot;&quot;;
-      &#125;
-      if (key instanceof Number) &#123;
-         //Long k = (Long) key;
-         Class clazz = key.getClass();
-//       return clazz.cast(key);
-         return (clazz == int.class || clazz == Integer.class) ? ((Number) key).intValue() : ((Number)key).longValue();
-
-
-      &#125; else if (key instanceof String) &#123;
-         return (String) key;
-      &#125; else &#123;
-         return (Serializable) key;
-      &#125;
-
-
-   &#125;
-
-/**
+</code></pre>
+<p>​<br>​<br> if (keyHolder == null) { return “”; }</p>
+<p>​<br> Map&lt;String, Object&gt; keys = keyHolder.getKeys();<br>if (keys == null || keys.size() == 0 || keys.values().size() == 0) {<br>return “”;<br>}<br>Object key = keys.values().toArray()[0];<br>if (key == null || !(key instanceof Serializable)) {<br>return “”;<br>}<br>if (key instanceof Number) {<br>//Long k = (Long) key;<br>Class clazz = key.getClass();<br>// return clazz.cast(key);<br>return (clazz == int.class || clazz == Integer.class) ? ((Number) key).intValue() : ((Number)key).longValue();</p>
+<p>​<br> } else if (key instanceof String) {<br>return (String) key;<br>} else {<br>return (Serializable) key;<br>}</p>
+<p>​<br> }</p>
+<pre><code>/**
     * 插入
     * @param params
     * @return
@@ -2538,18 +2411,9 @@ private Serializable doInsertRuturnKey(Map&lt;String,Object&gt; params)&#123;
 
 
 删除方法，均以delete开头：
-
-
-/**
-    * 删除对象.&lt;br&gt;
-    *
-    * @param entity 待删除的实体对象
-    */
-   public boolean delete(T entity) throws Exception &#123;
-        return this.doDelete(op.pkField.get(entity)) &gt; 0;
-   &#125;
-
-   /**
+</code></pre>
+<p>​<br> /**<br>_ 删除对象.<br><br>_<br>_ @param entity 待删除的实体对象<br>_/<br>public boolean delete(T entity) throws Exception {<br>return this.doDelete(op.pkField.get(entity)) &gt; 0;<br>}</p>
+<pre><code>   /**
     * 删除对象.&lt;br&gt;
     *
     * @param list 待删除的实体对象列表
@@ -2603,23 +2467,10 @@ private Serializable doInsertRuturnKey(Map&lt;String,Object&gt; params)&#123;
       int ret = this.jdbcTemplateWrite().update(sb.toString(), pkValue);
       return ret;
    &#125;
-
-
-修改方法，均以update开头：
-
-
-/**
-    * 更新对象.&lt;br&gt;
-    *
-    * @param entity 待更新对象
-    * @throws IllegalAccessException
-    * @throws IllegalArgumentException
-    */
-   public boolean update(T entity) throws Exception &#123;
-      return this.doUpdate(op.pkField.get(entity), parse(entity)) &gt; 0;
-   &#125;
-
-/**
+</code></pre>
+<p>​<br> 修改方法，均以 update 开头：</p>
+<p>​<br> /**<br>_ 更新对象.<br><br>_<br>_ @param entity 待更新对象<br>_ @throws IllegalAccessException<br>_ @throws IllegalArgumentException<br>_/<br>public boolean update(T entity) throws Exception {<br>return this.doUpdate(op.pkField.get(entity), parse(entity)) &gt; 0;<br>}</p>
+<pre><code>/**
     * 更新实例对象，返回删除记录数
     * @param pkValue
     * @param params
@@ -2631,9 +2482,8 @@ private Serializable doInsertRuturnKey(Map&lt;String,Object&gt; params)&#123;
       int ret = this.jdbcTemplateWrite().update(sql, params.values().toArray());
       return ret;
    &#125;
- 
 </code></pre>
-<p>至此一个完整的ORM框架就横空出世。当然，还有很多优化的地方，请小伙伴可以继续完善。</p>
+<p>至此一个完整的 ORM 框架就横空出世。当然，还有很多优化的地方，请小伙伴可以继续完善。</p>
 
                 
             </div>
@@ -2702,8 +2552,7 @@ private Serializable doInsertRuturnKey(Map&lt;String,Object&gt; params)&#123;
                 <a href="/2021/01/07/%E6%96%87%E7%AB%A08/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="基于Vue的天地图入门">
+                        <img src="/medias/banner/6.jpg" class="responsive-img" alt="基于Vue的天地图入门">
                         
                         <span class="card-title">基于Vue的天地图入门</span>
                     </div>
@@ -2751,8 +2600,7 @@ private Serializable doInsertRuturnKey(Map&lt;String,Object&gt; params)&#123;
                 <a href="/2020/12/07/%E6%96%87%E7%AB%A06/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="React框架-总结">
+                        <img src="/medias/banner/5.jpg" class="responsive-img" alt="React框架-总结">
                         
                         <span class="card-title">React框架-总结</span>
                     </div>
@@ -3244,34 +3092,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -3287,63 +3137,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

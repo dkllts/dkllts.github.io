@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="vue2与vue3, 水墨-丹青">
-    <meta name="description" content="当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。">
+    <meta name="description" content="Vue2与Vue3的区别">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -383,39 +383,27 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="1-全局属性"><a href="#1-全局属性" class="headerlink" title="1. 全局属性"></a>1. 全局属性</h2><h4 id="1-0-1-vue2"><a href="#1-0-1-vue2" class="headerlink" title="1.0.1. vue2"></a>1.0.1. vue2</h4><ul>
-<li>对于一些第三方插件，vue2中通常使用prototype原型来挂载到vue对象中</li>
+<li><p>对于一些第三方插件，vue2 中通常使用 prototype 原型来挂载到 vue 对象中</p>
+<p>import Vue from ‘vue’<br>Vue.prototype.$http=Axiox<br>  Vue.prototype.$echart= Echart</p>
+</li>
 </ul>
-<pre><code>import Vue from &#39;vue&#39;
-Vue.prototype.$http=Axiox
-Vue.prototype.$echart= Echart
-</code></pre>
 <h4 id="1-0-2-vue3"><a href="#1-0-2-vue3" class="headerlink" title="1.0.2. vue3"></a>1.0.2. vue3</h4><ul>
-<li>vue3中提供了一个名为<code>globalProperties</code>的全局属性配置，可以代替vue2中的prototype</li>
+<li><p>vue3 中提供了一个名为<code>globalProperties</code>的全局属性配置，可以代替 vue2 中的 prototype</p>
+<p>app.config.globalProperties.$http = Axios<br>  app.config.globalProperties.$echart = Echart</p>
+</li>
+<li><p>使用$http</p>
+<p>import {getCurrentInstance} from ‘vue’</p>
+<p>setup () {<br>const { ctx } = getCurrentInstance();<br>onMounted(() =&gt; {<br>console.log(ctx.$http)<br>})<br>…….<br>}</p>
+</li>
 </ul>
-<pre><code>app.config.globalProperties.$http = Axios
-app.config.globalProperties.$echart = Echart
-</code></pre>
-<ul>
-<li>使用$http</li>
-</ul>
-<pre><code>import &#123;getCurrentInstance&#125; from &#39;vue&#39;
-
-setup () &#123;
-      const &#123; ctx &#125; = getCurrentInstance();
-            onMounted(() =&gt; &#123;
-                console.log(ctx.$http)
-            &#125;)
-      .......
-&#125;
-</code></pre>
-<h2 id="2-ref与v-for的生成"><a href="#2-ref与v-for的生成" class="headerlink" title="2. ref与v-for的生成"></a>2. ref与v-for的生成</h2><h4 id="2-0-1-vue2"><a href="#2-0-1-vue2" class="headerlink" title="2.0.1. vue2"></a>2.0.1. vue2</h4><p>vue2中v-for与ref一起使用，批量模板引用的时候，获取的ref为一个数组</p>
+<h2 id="2-ref-与-v-for-的生成"><a href="#2-ref-与-v-for-的生成" class="headerlink" title="2. ref 与 v-for 的生成"></a>2. ref 与 v-for 的生成</h2><h4 id="2-0-1-vue2"><a href="#2-0-1-vue2" class="headerlink" title="2.0.1. vue2"></a>2.0.1. vue2</h4><p>vue2 中 v-for 与 ref 一起使用，批量模板引用的时候，获取的 ref 为一个数组</p>
 <pre><code>&lt;div v-for=&quot;i in 3&quot; ref=&quot;setItemRef&quot; :key=&quot;i&quot;&gt;&#123;&#123;i&#125;&#125;&lt;/div&gt; //这里是数组
- 
+
 mounted() &#123;
       console.log(this.$refs.setItemRef)
 &#125;,
 </code></pre>
-<h4 id="2-0-2-vue3"><a href="#2-0-2-vue3" class="headerlink" title="2.0.2. vue3"></a>2.0.2. vue3</h4><p>vue3 中ref绑定的是一个函数，</p>
+<h4 id="2-0-2-vue3"><a href="#2-0-2-vue3" class="headerlink" title="2.0.2. vue3"></a>2.0.2. vue3</h4><p>vue3 中 ref 绑定的是一个函数，</p>
 <pre><code>&lt;div v-for=&quot;item in 3&quot; :ref=&quot;setItemRef&quot;&gt;&lt;/div&gt; //这里绑定的是函数
 
 setup()&#123;
@@ -428,15 +416,15 @@ setup()&#123;
             &#125;)
 &#125;
 </code></pre>
-<p>二者获取ref的dom方式有变化，但是获取的结果相同</p>
+<p>二者获取 ref 的 dom 方式有变化，但是获取的结果相同</p>
 <p><a target="_blank" rel="noopener" href="https://gitee.com/baifangzi/blogimage/raw/master/img/image-20201218175111169.png"><img src="https://gitee.com/baifangzi/blogimage/raw/master/img/image-20201218175111169.png"></a></p>
 <h2 id="3-异步组件"><a href="#3-异步组件" class="headerlink" title="3. 异步组件"></a>3. 异步组件</h2><p>在路由中，常常使用懒加载的方式来引入组件</p>
 <h4 id="3-0-1-vue2"><a href="#3-0-1-vue2" class="headerlink" title="3.0.1. vue2"></a>3.0.1. vue2</h4><p><code>component: () =&gt; import(&#39;@/views/homePage/index.vue&#39;),</code></p>
-<h4 id="3-0-2-vue3"><a href="#3-0-2-vue3" class="headerlink" title="3.0.2. vue3"></a>3.0.2. vue3</h4><p>在vue3中引入了一个新的方法 —&gt;<code>defineAsyncComponent</code>定义异步组件，来包裹vue2引入方式里面的内容</p>
+<h4 id="3-0-2-vue3"><a href="#3-0-2-vue3" class="headerlink" title="3.0.2. vue3"></a>3.0.2. vue3</h4><p>在 vue3 中引入了一个新的方法 —&gt;<code>defineAsyncComponent</code>定义异步组件，来包裹 vue2 引入方式里面的内容</p>
 <pre><code>import &#123; defineAsyncComponent &#125; from &#39;vue&#39;
 component: defineAsyncComponent(() =&gt; import(&#39;./NextPage.vue&#39;))
 </code></pre>
-<h2 id="4-自定义指令"><a href="#4-自定义指令" class="headerlink" title="4. 自定义指令"></a>4. 自定义指令</h2><h3 id="4-1-改变钩子函数的命名"><a href="#4-1-改变钩子函数的命名" class="headerlink" title="4.1. 改变钩子函数的命名"></a>4.1. 改变钩子函数的命名</h3><h4 id="4-1-1-vue2"><a href="#4-1-1-vue2" class="headerlink" title="4.1.1. vue2"></a>4.1.1. vue2</h4><p>vue2中绑定的钩子函数为</p>
+<h2 id="4-自定义指令"><a href="#4-自定义指令" class="headerlink" title="4. 自定义指令"></a>4. 自定义指令</h2><h3 id="4-1-改变钩子函数的命名"><a href="#4-1-改变钩子函数的命名" class="headerlink" title="4.1. 改变钩子函数的命名"></a>4.1. 改变钩子函数的命名</h3><h4 id="4-1-1-vue2"><a href="#4-1-1-vue2" class="headerlink" title="4.1.1. vue2"></a>4.1.1. vue2</h4><p>vue2 中绑定的钩子函数为</p>
 <ul>
 <li><strong>bind</strong> - 指令绑定到元素后发生。只发生一次。</li>
 <li><strong>inserted</strong> - 元素插入父 DOM 后发生。</li>
@@ -455,53 +443,40 @@ component: defineAsyncComponent(() =&gt; import(&#39;./NextPage.vue&#39;))
 </ul>
 <h3 id="4-2-在钩子函数中引用组件实例的方式"><a href="#4-2-在钩子函数中引用组件实例的方式" class="headerlink" title="4.2. 在钩子函数中引用组件实例的方式"></a>4.2. 在钩子函数中引用组件实例的方式</h3><p>某些情况下需要去获取组件中实例的某些属性</p>
 <h4 id="4-2-1-vue2"><a href="#4-2-1-vue2" class="headerlink" title="4.2.1. vue2"></a>4.2.1. vue2</h4><ul>
-<li>需要通过vnod来获取实例</li>
+<li><p>需要通过 vnod 来获取实例</p>
+<p>Vue.directive(‘has’, {<br>inserted: (el, binding, vnode) =&gt; checkPermission(el, binding, vnode),<br>});</p>
+<p>export const checkPermission = (el, binding, vnode) =&gt; {<br>…<br>const permissionArr = vnode.context.$store.state.permissionId //所拥有的所有权限 id<br>…<br>}</p>
+</li>
 </ul>
-<pre><code>Vue.directive(&#39;has&#39;, &#123;
-  inserted: (el, binding, vnode) =&gt; checkPermission(el, binding, vnode),
-&#125;);
-
-export const checkPermission = (el, binding, vnode) =&gt; &#123;
-    ...
-  const permissionArr = vnode.context.$store.state.permissionId //所拥有的所有权限id
-    ...
-&#125;
-</code></pre>
 <h4 id="4-2-2-vue3"><a href="#4-2-2-vue3" class="headerlink" title="4.2.2. vue3"></a>4.2.2. vue3</h4><ul>
-<li>从binding中去获取对象</li>
+<li><p>从 binding 中去获取对象</p>
+<p>export const checkPermission = (el, binding, vnode) =&gt; {<br>…<br>const permissionArr =binding.instance.$store.state.permissionId //所拥有的所有权限 id<br>…<br>}</p>
+</li>
 </ul>
-<pre><code>export const checkPermission = (el, binding, vnode) =&gt; &#123;
-    ...
-  const permissionArr =binding.instance.$store.state.permissionId //所拥有的所有权限id
-    ...
-&#125;
-</code></pre>
-<h4 id="4-2-3-v-bind-”-attrs”"><a href="#4-2-3-v-bind-”-attrs”" class="headerlink" title="4.2.3. v-bind=”$attrs”"></a>4.2.3. v-bind=”$attrs”</h4><h2 id="5-自定义元素元素的交互"><a href="#5-自定义元素元素的交互" class="headerlink" title="5. 自定义元素元素的交互"></a>5. 自定义元素元素的交互</h2><h3 id="5-1-is的用法"><a href="#5-1-is的用法" class="headerlink" title="5.1. is的用法"></a>5.1. is的用法</h3><h4 id="5-1-1-vue2"><a href="#5-1-1-vue2" class="headerlink" title="5.1.1. vue2"></a>5.1.1. vue2</h4><ul>
+<h4 id="4-2-3-v-bind-”-attrs”"><a href="#4-2-3-v-bind-”-attrs”" class="headerlink" title="4.2.3. v-bind=”$attrs”"></a>4.2.3. v-bind=”$attrs”</h4><h2 id="5-自定义元素元素的交互"><a href="#5-自定义元素元素的交互" class="headerlink" title="5. 自定义元素元素的交互"></a>5. 自定义元素元素的交互</h2><h3 id="5-1-is-的用法"><a href="#5-1-is-的用法" class="headerlink" title="5.1. is 的用法"></a>5.1. is 的用法</h3><h4 id="5-1-1-vue2"><a href="#5-1-1-vue2" class="headerlink" title="5.1.1. vue2"></a>5.1.1. vue2</h4><ul>
 <li>组件：</li>
 </ul>
 <p><code>&lt;component :is=&quot;currentTabComponent&quot;&gt;&lt;/component&gt;</code></p>
 <ul>
-<li>html标签</li>
+<li><p>html 标签</p>
+  <table>
+    <tr is="blog-post-row"></tr>
+  </table></li>
 </ul>
-<pre><code>&lt;table&gt;
-  &lt;tr is=&quot;blog-post-row&quot;&gt;&lt;/tr&gt;
-&lt;/table&gt; 
-</code></pre>
 <h4 id="5-1-2-vue3"><a href="#5-1-2-vue3" class="headerlink" title="5.1.2. vue3"></a>5.1.2. vue3</h4><ul>
 <li>组件</li>
 </ul>
 <p><code>&lt;component is=&quot;currentTabComponent&quot;&gt;&lt;/component&gt;</code></p>
 <ul>
-<li>html标签</li>
+<li><p>html 标签</p>
+  <table>
+    <tr v-is="'blog-post-row'"></tr>  // v-is类似绑定一个变量，而我们需要组件名，为字符串，所以用单引号包裹
+  </table></li>
 </ul>
-<pre><code>&lt;table&gt;
-  &lt;tr v-is=&quot;&#39;blog-post-row&#39;&quot;&gt;&lt;/tr&gt;  // v-is类似绑定一个变量，而我们需要组件名，为字符串，所以用单引号包裹
-&lt;/table&gt; 
-</code></pre>
 <h2 id="6-事件"><a href="#6-事件" class="headerlink" title="6. 事件"></a>6. 事件</h2><ul>
-<li>vue3中去除了 <code>$on</code>、<code>$off</code>、<code>$once</code>、三种方法，仅保留<code>$emit</code>。</li>
+<li>vue3 中去除了 <code>$on</code>、<code>$off</code>、<code>$once</code>、三种方法，仅保留<code>$emit</code>。</li>
 </ul>
-<h2 id="7-过滤器"><a href="#7-过滤器" class="headerlink" title="7. 过滤器"></a>7. 过滤器</h2><p>vue3中移除了过滤器的功能，建议使用methods或者computed 来代替，实际上在vue2中也完全可以这两种方式实现</p>
+<h2 id="7-过滤器"><a href="#7-过滤器" class="headerlink" title="7. 过滤器"></a>7. 过滤器</h2><p>vue3 中移除了过滤器的功能，建议使用 methods 或者 computed 来代替，实际上在 vue2 中也完全可以这两种方式实现</p>
 <h3 id="7-1-局部过滤器"><a href="#7-1-局部过滤器" class="headerlink" title="7.1. 局部过滤器"></a>7.1. 局部过滤器</h3><h4 id="7-1-1-vue2"><a href="#7-1-1-vue2" class="headerlink" title="7.1.1. vue2"></a>7.1.1. vue2</h4><pre><code>&lt;p&gt;&#123;&#123;message|toLower&#125;&#125;&lt;/p&gt;
 
 data() &#123;
@@ -516,86 +491,76 @@ filters: &#123;
 &#125;
 </code></pre>
 <h4 id="7-1-2-vue3"><a href="#7-1-2-vue3" class="headerlink" title="7.1.2. vue3"></a>7.1.2. vue3</h4><ul>
-<li>vue3用computed或者methods来定义</li>
-</ul>
-<pre><code>&lt;p&gt;&#123;&#123;messageToLower&#125;&#125;&lt;/p&gt;
-
-import &#123;    
-    computed,
-    ref,    
-&#125; from &#39;vue&#39;;
-
-setup()&#123;
-
-    let message = ref(&#39;ABC&#39;)
-    let messageToLower = computed(() =&gt; &#123;
-        // console.log(message)
-        return message.value.toLowerCase()
-    &#125;)
-    return&#123;
-        messageToLower,
-    &#125;
-    
-&#125;
+<li><p>vue3 用 computed 或者 methods 来定义</p>
+  <p></p>
+  
+<p>  import {    </p>
+<pre><code>  computed,
+  ref,    
 </code></pre>
+<p>  } from ‘vue’;</p>
+<p>  setup(){</p>
+<pre><code>  let message = ref(&#39;ABC&#39;)
+  let messageToLower = computed(() =&gt; &#123;
+      // console.log(message)
+      return message.value.toLowerCase()
+  &#125;)
+  return&#123;
+      messageToLower,
+  &#125;
+  
+</code></pre>
+<p>  }</p>
+</li>
+</ul>
 <h3 id="7-2-全局过滤器"><a href="#7-2-全局过滤器" class="headerlink" title="7.2. 全局过滤器"></a>7.2. 全局过滤器</h3><h4 id="7-2-1-vue2"><a href="#7-2-1-vue2" class="headerlink" title="7.2.1. vue2"></a>7.2.1. vue2</h4><pre><code>Vue.filter(&#39;toLower&#39;,  (value)=&gt; &#123;
     return value.toLowerCase()
 &#125;)
 </code></pre>
 <h4 id="7-2-2-vue3"><a href="#7-2-2-vue3" class="headerlink" title="7.2.2. vue3"></a>7.2.2. vue3</h4><ul>
-<li>在main.js中注册</li>
-</ul>
-<pre><code>const app =createApp(App)
-app.config.globalProperties.$filter=&#123;
-    toLower(value)&#123;
-        return value.toLowerCase()
-    &#125;
-&#125;
-</code></pre>
-<ul>
-<li>使用</li>
+<li><p>在 main.js 中注册</p>
+<p>const app =createApp(App)<br>app.config.globalProperties.$filter={<br>toLower(value){<br>return value.toLowerCase()<br>}<br>}</p>
+</li>
+<li><p>使用</p>
+</li>
 </ul>
 <p><code>&lt;p&gt;&#123;&#123;$filters.toLower(message)&#125;&#125;&lt;/p&gt;</code></p>
 <h2 id="8-根节点"><a href="#8-根节点" class="headerlink" title="8. 根节点"></a>8. 根节点</h2><h4 id="8-0-1-vue2"><a href="#8-0-1-vue2" class="headerlink" title="8.0.1. vue2"></a>8.0.1. vue2</h4><ul>
-<li>vue2的 <code>template</code>中只能存在一个根节点</li>
+<li><p>vue2 的 <code>template</code>中只能存在一个根节点</p>
+  <template>
+    <div id="app">
+        ...
+    </div>
+  </template></li>
 </ul>
-<pre><code>&lt;template&gt;
-  &lt;div id=&quot;app&quot;&gt;
-      ...
-  &lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
 <h4 id="8-0-2-vue3"><a href="#8-0-2-vue3" class="headerlink" title="8.0.2. vue3"></a>8.0.2. vue3</h4><ul>
-<li>vue3中可以存在多个节点</li>
+<li><p>vue3 中可以存在多个节点</p>
+  <template>
+    <div>...</div>
+    <a>...</a>
+    <p>...</p>
+  </template></li>
 </ul>
-<pre><code>&lt;template&gt;
-  &lt;div&gt;...&lt;/div&gt;
-  &lt;a&gt;...&lt;/a&gt;
-  &lt;p&gt;...&lt;/p&gt;
-&lt;/template&gt;
-</code></pre>
 <h2 id="9-内联模板"><a href="#9-内联模板" class="headerlink" title="9. 内联模板"></a>9. 内联模板</h2><h4 id="9-0-1-vue2"><a href="#9-0-1-vue2" class="headerlink" title="9.0.1. vue2"></a>9.0.1. vue2</h4><ul>
-<li><p>利用inline-template属性</p>
+<li><p>利用 inline-template 属性</p>
 </li>
-<li><p>在vue2中文档提示了这么一段话，所以几乎没有用过</p>
+<li><p>在 vue2 中文档提示了这么一段话，所以几乎没有用过</p>
 <p>不过，<code>inline-template</code> 会让模板的作用域变得更加难以理解。所以作为最佳实践，请在组件内优先选择 <code>template</code> 选项或 <code>.vue</code> 文件里的一个 <code>&lt;template&gt;</code> 元素来定义模板。&gt;</p>
 </li>
 </ul>
 <h4 id="9-0-2-vue3"><a href="#9-0-2-vue3" class="headerlink" title="9.0.2. vue3"></a>9.0.2. vue3</h4><p>移除了此功能，</p>
-<h2 id="10-唯一的key"><a href="#10-唯一的key" class="headerlink" title="10. 唯一的key"></a>10. 唯一的key</h2><h3 id="10-1-v-if中的key"><a href="#10-1-v-if中的key" class="headerlink" title="10.1. v-if中的key"></a>10.1. v-if中的key</h3><h4 id="10-1-1-vue2"><a href="#10-1-1-vue2" class="headerlink" title="10.1.1. vue2"></a>10.1.1. vue2</h4><ul>
-<li>在vue2中，v-if，v-else中的key是为了控制某个组件或者元素的复用</li>
-<li>不带key的话会复用，**&lt; hello-world &gt;**组件只创建一次</li>
-</ul>
-<pre><code>&lt;template v-if=&quot;loginType === &#39;username&#39;&quot;&gt;
-   &lt;hello-world title=&quot;username&quot;&gt;&lt;/hello-world&gt;
-&lt;/template&gt;
-&lt;template v-else&gt;
-   &lt;hello-world title=&quot;email&quot;&gt;&lt;/hello-world&gt;
-&lt;/template&gt;
-&lt;button @click=&quot;changeType&quot;&gt;切换&lt;/button&gt;
-</code></pre>
-<ul>
-<li><p>带key的话每次切换都会重新去渲染组件（前提是key不同）</p>
+<h2 id="10-唯一的-key"><a href="#10-唯一的-key" class="headerlink" title="10. 唯一的 key"></a>10. 唯一的 key</h2><h3 id="10-1-v-if-中的-key"><a href="#10-1-v-if-中的-key" class="headerlink" title="10.1. v-if 中的 key"></a>10.1. v-if 中的 key</h3><h4 id="10-1-1-vue2"><a href="#10-1-1-vue2" class="headerlink" title="10.1.1. vue2"></a>10.1.1. vue2</h4><ul>
+<li><p>在 vue2 中，v-if，v-else 中的 key 是为了控制某个组件或者元素的复用</p>
+</li>
+<li><p>不带 key 的话会复用，**&lt; hello-world &gt;**组件只创建一次</p>
+  <template v-if="loginType === 'username'">
+     <hello-world title="username"></hello-world>
+  </template>
+  <template v-else>
+     <hello-world title="email"></hello-world>
+  </template>
+  <button @click="changeType">切换</button></li>
+<li><p>带 key 的话每次切换都会重新去渲染组件（前提是 key 不同）</p>
   <template v-if="loginType === 'username'">
       <hello-world title="username" key="a"></hello-world>
   </template>
@@ -604,16 +569,16 @@ app.config.globalProperties.$filter=&#123;
   </template>
   <button @click="changeType">切换</button></li>
 </ul>
-<h4 id="10-1-2-vue3"><a href="#10-1-2-vue3" class="headerlink" title="10.1.2. vue3"></a>10.1.2. vue3</h4><p>vue3中默认是带有key的，这个key始终保持唯一，与其他的key不同，不能通过故意使用相同的 <code>key</code> 来强制重用分支。</p>
+<h4 id="10-1-2-vue3"><a href="#10-1-2-vue3" class="headerlink" title="10.1.2. vue3"></a>10.1.2. vue3</h4><p>vue3 中默认是带有 key 的，这个 key 始终保持唯一，与其他的 key 不同，不能通过故意使用相同的 <code>key</code> 来强制重用分支。</p>
 <pre><code>&lt;div v-if=&quot;condition&quot;&gt;Yes&lt;/div&gt;
 &lt;div v-else&gt;No&lt;/div&gt;
 </code></pre>
-<h3 id="10-2-template中v-for的key"><a href="#10-2-template中v-for的key" class="headerlink" title="10.2. template中v-for的key"></a>10.2. template中v-for的key</h3><h4 id="10-2-1-vue2"><a href="#10-2-1-vue2" class="headerlink" title="10.2.1. vue2"></a>10.2.1. vue2</h4><p>vue2中，在template标签上，可以使用v-for指令，但是不能绑定key，只能在子节点上面去绑定唯一的key</p>
+<h3 id="10-2-template-中-v-for-的-key"><a href="#10-2-template-中-v-for-的-key" class="headerlink" title="10.2. template 中 v-for 的 key"></a>10.2. template 中 v-for 的 key</h3><h4 id="10-2-1-vue2"><a href="#10-2-1-vue2" class="headerlink" title="10.2.1. vue2"></a>10.2.1. vue2</h4><p>vue2 中，在 template 标签上，可以使用 v-for 指令，但是不能绑定 key，只能在子节点上面去绑定唯一的 key</p>
 <pre><code>&lt;template v-for=&quot;item in list&quot;&gt;
   &lt;div :key=&quot;item.id&quot;&gt;...&lt;/div&gt;
 &lt;/template&gt;
 </code></pre>
-<h4 id="10-2-2-vue3"><a href="#10-2-2-vue3" class="headerlink" title="10.2.2. vue3"></a>10.2.2. vue3</h4><p>vue3中可以将key绑定到template上</p>
+<h4 id="10-2-2-vue3"><a href="#10-2-2-vue3" class="headerlink" title="10.2.2. vue3"></a>10.2.2. vue3</h4><p>vue3 中可以将 key 绑定到 template 上</p>
 <pre><code>&lt;template v-for=&quot;item in list&quot; :key=&quot;item.id&quot;&gt;
   &lt;div&gt;...&lt;/div&gt;
 &lt;/template&gt;
@@ -686,15 +651,15 @@ app.config.globalProperties.$filter=&#123;
                 <a href="/2021/06/22/%E6%96%87%E7%AB%A021/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="JavaScript事件、事件类型、事件流和事件模型">
+                        <img src="/medias/banner/15.jpg" class="responsive-img" alt="13 行 JavaScript 代码让你看起来像是高手">
                         
-                        <span class="card-title">JavaScript事件、事件类型、事件流和事件模型</span>
+                        <span class="card-title">13 行 JavaScript 代码让你看起来像是高手</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。
+                            有趣的13 行 JavaScript 代码
                         
                     </div>
                     <div class="publish-info">
@@ -720,6 +685,10 @@ app.config.globalProperties.$filter=&#123;
                         <span class="chip bg-color">JavaScript</span>
                     </a>
                     
+                    <a href="/tags/%E8%BD%AC%E8%BD%BD/">
+                        <span class="chip bg-color">转载</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -734,7 +703,7 @@ app.config.globalProperties.$filter=&#123;
                 <a href="/2021/05/26/%E6%96%87%E7%AB%A019/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="webapck">
+                        <img src="/medias/banner/13.jpg" class="responsive-img" alt="webapck">
                         
                         <span class="card-title">webapck</span>
                     </div>
@@ -1136,34 +1105,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -1179,63 +1150,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>

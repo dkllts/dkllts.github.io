@@ -309,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -527,7 +527,7 @@
         for (var i = 0; i &lt; 60; i++) &#123;
             context.save();
             context.fillStyle = &quot;#EFEFEF&quot;;
-            context.strokeStyle = &quot;#000&quot;;   
+            context.strokeStyle = &quot;#000&quot;;
             if (i % 5 == 0) &#123;
                 context.lineWidth = 3;
             &#125;
@@ -549,7 +549,7 @@
         context.stroke();
         context.closePath();
         context.restore();
-    
+
         var r = radius - 25;
         context.font = &quot;bold 20px 宋体&quot;;
         Drawtext(&quot;1&quot;, centerx + (Math.cos(60 * Math.PI / 180) * r), centery - (Math.sin(60 * Math.PI / 180) * r));
@@ -572,23 +572,23 @@
         context.stroke();
         context.closePath();
         context.restore();
-    
+
         drawpoint(centerx, centery, radius);
-    
+
     &#125;
-    
+
     function drawpoint(centerx, centery, radius) &#123;
         var date = new Date();
         var h = date.getHours();
         h = h &lt; 13 ? h : h - 12;
         var m = date.getMinutes();
         var s = date.getSeconds();
-    
+
         var th = date.getHours() &lt; 10 ? &quot;0&quot; + date.getHours() : date.getHours();
         var tm = m &lt; 10 ? &quot;0&quot; + m : m;
         var ts = s &lt; 10 ? &quot;0&quot; + s : s;
         document.getElementById(&quot;currtime&quot;).innerHTML = th + &quot;:&quot; + tm + &quot;:&quot; + ts;
-    
+
         var hr = h * 30 * Math.PI / 180 + (m / 60) * 30 * Math.PI / 180 + 90 * Math.PI / 180;
         var mr = m * 6 * Math.PI / 180 + s / 60 * 6 * Math.PI / 180 + 90 * Math.PI / 180;
         var sr = s * 6 * Math.PI / 180 + 90 * Math.PI / 180;
@@ -599,20 +599,20 @@
         context.beginPath();
         context.moveTo(centerx + 20 * Math.cos(hr), centery + 20 * Math.sin(hr));
         context.lineTo(centerx - (radius - 120) * Math.cos(hr), centery - (radius - 120) * Math.sin(hr));
-    
+
         context.moveTo(centerx + 20 * Math.cos(mr), centery + 20 * Math.sin(mr));
         context.lineTo(centerx - (radius - 80) * Math.cos(mr), centery - (radius - 80) * Math.sin(mr));
-    
-    
+
+
         context.moveTo(centerx + 20 * Math.cos(sr), centery + 20 * Math.sin(sr));
         context.lineTo(centerx - (radius - 50) * Math.cos(sr), centery - (radius - 50) * Math.sin(sr));
-    
+
         context.closePath();
         context.fill();
         context.stroke();
         context.restore();
     &#125;
-    
+
     function Drawtext(text, x, y) &#123;
         context.save();
         x -= (context.measureText(text).width / 2);
@@ -622,7 +622,7 @@
         context.fillText(text, 0, 0);
         context.restore();
     &#125;
-    
+
     window.onload = DrawClock;
 &lt;/script&gt;
 &lt;/head&gt;
@@ -634,7 +634,7 @@
 &lt;/html&gt;
 </code></pre>
 <p>方法作用解释：</p>
-<p>DrawClock方法取得Canvas上下文</p>
+<p>DrawClock 方法取得 Canvas 上下文</p>
 <p>drawbackground 方法主要是画时钟的背景部分：边框、文字、刻度线</p>
 <p>drawpoint 方法用来画时、分、秒线</p>
 <p>Drawtext 方法是添加文字的</p>
@@ -706,8 +706,7 @@
                 <a href="/2020/12/07/%E6%96%87%E7%AB%A06/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="React框架-总结">
+                        <img src="/medias/banner/5.jpg" class="responsive-img" alt="React框架-总结">
                         
                         <span class="card-title">React框架-总结</span>
                     </div>
@@ -755,7 +754,7 @@
                 <a href="/2020/10/23/%E6%96%87%E7%AB%A04/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/10.jpg" class="responsive-img" alt="欲罢不能的node.js">
+                        <img src="/medias/banner/0005.jpg" class="responsive-img" alt="欲罢不能的node.js">
                         
                         <span class="card-title">欲罢不能的node.js</span>
                     </div>
@@ -1247,34 +1246,36 @@ $(function () {
                     
 
                         
-
-                            <!-- 雪花特效 -->
                             
-                              <script type="text/javascript">
-                                // 只在桌面版网页启用特效
-                                var windowWidth = $(window).width();
-                                if (windowWidth > 768) {
-                                  document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
-                                }
-                              </script>
+                              <script src="/js/wenzi.js" type="text/javascript"></script>
                               
-
-                                <!-- 鼠标星星特效 -->
+                                <!-- 雪花特效 -->
                                 
                                   <script type="text/javascript">
                                     // 只在桌面版网页启用特效
                                     var windowWidth = $(window).width();
                                     if (windowWidth > 768) {
-                                      document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                      document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
                                     }
                                   </script>
                                   
 
+                                    <!-- 鼠标星星特效 -->
                                     
+                                      <script type="text/javascript">
+                                        // 只在桌面版网页启用特效
+                                        var windowWidth = $(window).width();
+                                        if (windowWidth > 768) {
+                                          document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+                                        }
+                                      </script>
+                                      
 
-                                        <!-- Baidu Analytics -->
+                                        
 
-                                          <!-- Baidu Push -->
+                                            <!-- Baidu Analytics -->
+
+                                              <!-- Baidu Push -->
 
 <script>
     (function () {
@@ -1290,63 +1291,63 @@ $(function () {
     })();
 </script>
 
-                                            
-                                              <script
-                                                src="/libs/others/clicklove.js"
-                                                async="async"></script>
-                                              
                                                 
-                                                  <script async
-                                                    src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                  <script
+                                                    src="/libs/others/clicklove.js"
+                                                    async="async"></script>
                                                   
-
                                                     
+                                                      <script async
+                                                        src="/libs/others/busuanzi.pure.mini.js"></script>
+                                                      
 
-                                                        <script type="text/javascript">
-                                                          var OriginTitile = document.title,
-                                                            st;
-                                                          document.addEventListener("visibilitychange", function () {
-                                                            document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
-                                                              "今夕复何夕,共此明月光～", st = setTimeout(function () {
-                                                                document.title = OriginTitile
-                                                              }, 3e3))
-                                                          })
-                                                        </script>
                                                         
 
-                                                            <!--腾讯兔小巢-->
+                                                            <script type="text/javascript">
+                                                              var OriginTitile = document.title,
+                                                                st;
+                                                              document.addEventListener("visibilitychange", function () {
+                                                                document.hidden ? (document.title = "故人江海别,几度隔山川～", clearTimeout(st)) : (document.title =
+                                                                  "今夕复何夕,共此明月光～", st = setTimeout(function () {
+                                                                    document.title = OriginTitile
+                                                                  }, 3e3))
+                                                              })
+                                                            </script>
                                                             
+
+                                                                <!--腾讯兔小巢-->
                                                                 
-                                                                  <script type="text/javascript"
-                                                                    color="0,0,0"
-                                                                    pointColor="255,255,255"
-                                                                    opacity='0.7'
-                                                                    zIndex="-1"
-                                                                    count="99"
-                                                                    src="/libs/background/canvas-nest.js"></script>
-                                                                  
-
                                                                     
+                                                                      <script type="text/javascript"
+                                                                        color="0,0,0"
+                                                                        pointColor="255,255,255"
+                                                                        opacity='0.7'
+                                                                        zIndex="-1"
+                                                                        count="99"
+                                                                        src="/libs/background/canvas-nest.js"></script>
                                                                       
-                                                                        <script type="text/javascript"
-                                                                          size="150"
-                                                                          alpha='0.6'
-                                                                          zIndex="-1"
-                                                                          src="/libs/background/ribbon-refresh.min.js"
-                                                                          async="async"></script>
-                                                                        
 
+                                                                        
                                                                           
                                                                             <script type="text/javascript"
-                                                                              src="/libs/background/ribbon-dynamic.js"
+                                                                              size="150"
+                                                                              alpha='0.6'
+                                                                              zIndex="-1"
+                                                                              src="/libs/background/ribbon-refresh.min.js"
                                                                               async="async"></script>
                                                                             
 
                                                                               
-                                                                                <script
-                                                                                  src="/libs/instantpage/instantpage.js"
-                                                                                  type="module"></script>
+                                                                                <script type="text/javascript"
+                                                                                  src="/libs/background/ribbon-dynamic.js"
+                                                                                  async="async"></script>
                                                                                 
+
+                                                                                  
+                                                                                    <script
+                                                                                      src="/libs/instantpage/instantpage.js"
+                                                                                      type="module"></script>
+                                                                                    
 
         </body>
         <script>
