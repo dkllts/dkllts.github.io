@@ -1834,14 +1834,25 @@ thead {
 footer {
     padding-bottom: 1px;
 }
-
+.row{
+    margin-bottom: 0;
+}
+.page-footer{
+    padding-top: 0;
+}
 footer .social-statis {
     margin-top: 10px;
     position: relative;
 }
 
 footer a {
+    color: #3b3f3d;
+}
+footer a:hover {
     color: #fff;
+}
+#icp span{
+    color: #9d9999;
 }
 
 footer .copy-right {
