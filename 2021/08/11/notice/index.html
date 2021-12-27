@@ -109,6 +109,17 @@
   
   <li class="hide-on-med-and-down nav-item">
     
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
     <a href="/friends" class="waves-effect waves-light">
       
       <i class="fas fa-address-book" style="zoom: 0.6;"></i>
@@ -193,6 +204,17 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
 		</a>
           
         </li>
@@ -284,19 +306,6 @@
 </header>
 
             
-<script src="/libs/cryptojs/crypto-js.min.js"></script>
-<script>
-    (function() {
-        let pwd = '';
-        if (pwd && pwd.length > 0) {
-            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
-                alert('密码错误，将返回主页');
-                location.href = '/';
-            }
-        }
-    })();
-</script>
-
 
 
 
@@ -352,7 +361,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-08-10
+                    2021-08-11
                 </div>
                 
 
@@ -375,9 +384,8 @@
             <div id="articleContent">
                 <p>本站内部引入音乐组件(播放器在左下角)</p>
 <p>可完成基本播放器功能(播放顺序为随机播放)</p>
-<p>播放器音量默认为0.7(记忆模式,可调节)</p>
+<p>播放器音量默认为0.7(修改后默认记忆模式,数据清除后恢复默认音量)</p>
 <p>本站留言和评论功能暂时关闭</p>
-<p>友情链接中的象棋游戏欢迎大家测试bug</p>
 <p>如有疑问可联系本站内置联系方式</p>
 <p>有些加密过的文章就不要试着打开了(我自己都不一定记得密码)</p>
 
@@ -406,7 +414,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/dkllts/dkllts.github.io/2020/08/10/notice/">https://github.com/dkllts/dkllts.github.io/2020/08/10/notice/</a>
+                    <a href="https://github.com/dkllts/dkllts.github.io/2021/08/11/notice/">https://github.com/dkllts/dkllts.github.io/2021/08/11/notice/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -456,7 +464,7 @@
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
     
 
@@ -495,30 +503,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/08/18/article0/">
+                <a href="/2021/09/01/article24/">
                     <div class="card-image">
                         
-                        <img src="/medias/banner/img/0004.jpg" class="responsive-img" alt="数组扁平化">
+                        <img src="/medias/banner/17.jpg" class="responsive-img" alt="炫酷的 CSS 文字特效">
                         
-                        <span class="card-title">数组扁平化</span>
+                        <span class="card-title">炫酷的 CSS 文字特效</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            将一个多维数组转化为一个一维数组。
+                            css是前端开发者所必备的技能！那么，在开发过程中你对css效果又了解多少呢？在社区中看到一篇关于css文字特效的文章，摘取部分分享给大家
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-18
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-09-01
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JavaScript/" class="post-category">
-                                    JavaScript
+                            <a href="/categories/CSS/" class="post-category">
+                                    CSS
                                 </a>
                             
                             
@@ -528,8 +536,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BD%AC%E8%BD%BD/">
+                        <span class="chip bg-color">转载</span>
                     </a>
                     
                 </div>
@@ -540,45 +552,44 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/08/10/notice/">
+                <a href="/2021/08/10/article23/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="阅读须知">
+                        <img src="/medias/banner/16.jpg" class="responsive-img" alt="冗余导航（路由冗余）解决方式">
                         
-                        <span class="card-title">阅读须知</span>
+                        <span class="card-title">冗余导航（路由冗余）解决方式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本站浏览须知
+                            重复点击路由，导致提示避免到当前位置的冗余导航
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%85%B6%E4%BB%96/" class="post-category">
-                                    其他
+                            <a href="/categories/Vue/" class="post-category">
+                                    Vue
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%85%B6%E4%BB%96/">
-                        <span class="chip bg-color">其他</span>
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
                     </a>
                     
                 </div>
@@ -656,8 +667,8 @@
 
 
               <footer class="page-footer bg-color">
-    
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+  
+    <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
 <style>
     .aplayer .aplayer-lrc p {
         
@@ -710,90 +721,86 @@
 <script src="/libs/aplayer/APlayer.min.js"></script>
 <script src="/libs/aplayer/Meting.min.js"></script>
 
+      
+
+        <div class="container row center-align">
+          <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <a href="/about" target="_blank">
+              天上-琳琅
+            </a>
+            &nbsp; &nbsp;<a href="https://hexo.io/" target="_blank"></a>
+            &nbsp;&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank"></a>
+            <br>
+            <p>
+              <span id="sitetime"></span><span class="my-face">ღゝ◡╹)ノ♡</span>
+            </p>
             
-
-                <div class="container row center-align">
-                    <!-- 底部标头 -->
-                    <div class="col s12 m8 l8 copy-right">
-                        <div>
-                            Copyright&nbsp;&copy;
-                            <a href="/about" target="_blank">
-                                天上-琳琅
-                            </a>&nbsp; &nbsp;
-                        </div>
-
-                        <!-- 运行时间渲染 -->
-                        <p>
-                            <span id="sitetime"></span><span class="my-face">ღゝ◡╹)ノ♡</span>
-                        </p>
+                  
+                    
+                      
                         
-                                    
-                                        
-                                            
-                                                
-                                                    
-                                                        <span id="busuanzi_container_site_pv">
-                                                            &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                                                                <span id="busuanzi_value_site_pv"
-                                                                    class="white-color"></span>
-                                                        </span>
-                                                        
-                                                            
-                                                                <span id="busuanzi_container_site_uv">
-                                                                    &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                                                                        <span id="busuanzi_value_site_uv"
-                                                                            class="white-color"></span>
-                                                                </span>
-                                                                
-                                                                    <br>
+                          
+                            <span id="busuanzi_container_site_pv">
+                              &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                                <span id="busuanzi_value_site_pv" class="white-color"></span>
+                            </span>
+                            
+                              
+                                <span id="busuanzi_container_site_uv">
+                                  &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                                </span>
+                                
+                                  <br>
 
-                                                                    <!-- 运行天数提醒. -->
-                                                                    <script>
-                                                                        function siteTime() {
-                                                                            window.setTimeout("siteTime()", 1000);
-                                                                            var seconds = 1000;
-                                                                            var minutes = seconds * 60;
-                                                                            var hours = minutes * 60;
-                                                                            var days = hours * 24;
-                                                                            var years = days * 365;
-                                                                            var today = new Date();
-                                                                            var todayYear = today.getFullYear();
-                                                                            var todayMonth = today.getMonth() + 1;
-                                                                            var todayDate = today.getDate();
-                                                                            var todayHour = today.getHours();
-                                                                            var todayMinute = today.getMinutes();
-                                                                            var todaySecond = today.getSeconds();
+                                  <!-- 运行天数提醒. -->
+                                  <script>
+                                    function siteTime() {
+                                      window.setTimeout("siteTime()", 1000);
+                                      var seconds = 1000;
+                                      var minutes = seconds * 60;
+                                      var hours = minutes * 60;
+                                      var days = hours * 24;
+                                      var years = days * 365;
+                                      var today = new Date();
+                                      var todayYear = today.getFullYear();
+                                      var todayMonth = today.getMonth() + 1;
+                                      var todayDate = today.getDate();
+                                      var todayHour = today.getHours();
+                                      var todayMinute = today.getMinutes();
+                                      var todaySecond = today.getSeconds();
 
-                                                                            /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
-                                                                            year - 作为date对象的年份，为4位年份值
-                                                                            month - 0-11之间的整数，做为date对象的月份
-                                                                            day - 1-31之间的整数，做为date对象的天数
-                                                                            hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
-                                                                            minutes - 0-59之间的整数，做为date对象的分钟数
-                                                                            seconds - 0-59之间的整数，做为date对象的秒数
-                                                                            microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+                                      /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+                                      year - 作为date对象的年份，为4位年份值
+                                      month - 0-11之间的整数，做为date对象的月份
+                                      day - 1-31之间的整数，做为date对象的天数
+                                      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+                                      minutes - 0-59之间的整数，做为date对象的分钟数
+                                      seconds - 0-59之间的整数，做为date对象的秒数
+                                      microseconds - 0-999之间的整数，做为date对象的毫秒数 */
 
-                                                                            var t1 = Date.UTC(2020, 08, 10, 00, 00, 00); //北京时间2020-08-10 00:00:00
-                                                                            var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                                                                            var diff = t2 - t1;
-                                                                            var diffYears = Math.floor(diff / years);
-                                                                            var diffDays = Math.floor((diff / days) - diffYears * 365);
-                                                                            var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                                                                            var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
-                                                                            var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes *
-                                                                                minutes) / seconds);
-                                                                            document.getElementById("sitetime").innerHTML = "本站已勉强运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours +
-                                                                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒 ";
-                                                                        }
-                                                                        /*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
-                                                                        siteTime();
-                                                                    </script>
-                                                                    <br>
-                                                                    <!-- ICP备案号 -->
-                                                                    <!--  -->
-                    </div>
-                    <div class="col s12 m4 l4 social-link social-statis">
-                        
+                                      var t1 = Date.UTC(2020, 08, 10, 00, 00, 00); //北京时间2020-08-10 00:00:00
+                                      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                                      var diff = t2 - t1;
+                                      var diffYears = Math.floor(diff / years);
+                                      var diffDays = Math.floor((diff / days) - diffYears * 365);
+                                      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                                      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+                                      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes *
+                                        minutes) / seconds);
+                                      document.getElementById("sitetime").innerHTML = "本站已勉强运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours +
+                                        " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒 ";
+                                    }
+                                    /*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+                                    siteTime();
+                                  </script>
+
+                                  <br>
+                                  
+          </div>
+          <div class="col s12 m4 l4 social-link social-statis">
+            
     <a href="https://github.com/dkllts" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
@@ -821,8 +828,8 @@
 
 
 
-                    </div>
-                </div>
+          </div>
+        </div>
 </footer>
 
 <div class="progress-bar"></div>

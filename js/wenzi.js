@@ -3,7 +3,7 @@ var a_idx = 0;
 jQuery(document).ready(function ($) {
   $("body").click(function (e) {
     // var a = new Array("❤富强❤","❤民主❤","❤文明❤","❤和谐❤","❤自由❤","❤平等❤","❤公正❤","❤法治❤","❤爱国❤","❤敬业❤","❤诚信❤","❤友善❤");
-    var a = new Array("雪是大浪漫", "你是小人间", "执子之手", "与子偕老", "看世间美景", "赏人间绝色", "最是人间留不住", "朱颜辞镜花辞树", "把酒祝东风", "且共从容","垂杨紫陌洛城东");
+      var a = new Array("小傻瓜", "我会一直在啊", "往事已成空", "还如一梦中", "看世间美景", "赏人间绝色", "雪是大浪漫", "你是小人间", "最是人间留不住", "朱颜辞镜花辞树", "万象更新");
     var $i = $("<span></span>").text(a[a_idx]);
     a_idx = (a_idx + 1) % a.length;
     var x = e.pageX,
@@ -21,7 +21,7 @@ jQuery(document).ready(function ($) {
       "top": y - 180,
       "opacity": 0
     },
-      2000,
+      1500,
       function () {
         $i.remove();
       });
