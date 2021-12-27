@@ -1834,7 +1834,9 @@ thead {
 footer {
     padding-bottom: 1px;
 }
-
+.row{
+    margin-bottom: 0;
+}
 footer .social-statis {
     margin-top: 10px;
     position: relative;
@@ -1842,6 +1844,10 @@ footer .social-statis {
 
 footer a {
     color: #fff;
+}
+
+footer a:hover {
+    color: #363b41;
 }
 
 footer .copy-right {
