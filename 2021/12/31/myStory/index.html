@@ -284,6 +284,19 @@
 </header>
 
             
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '871a45c0b8c83b56431d9bb3c0370f40d2e103b6bcaf38951368246ff02daf83';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
