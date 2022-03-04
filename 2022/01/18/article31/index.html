@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="飞阁-流丹">
-    <meta name="description" content="飞阁-流丹">
+    <meta name="keywords" content="keep-alive, 飞阁-流丹">
+    <meta name="description" content="Vue中常用的组件keep-alive的基本原理">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>飞阁-流丹</title>
+    <title>keep-alive | 飞阁-流丹</title>
     <link rel="icon" type="image/png" href="/logo3.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -284,690 +284,769 @@
 </header>
 
             
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                飞阁-流丹
-                
-            </div>
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "今夕复何夕,共此明月光",
-                            
-                                "本站名取自《滕王阁序》层峦耸翠,上出重霄;飞阁流丹,下临无地。",
-                            
-                                "彼方尚有荣光在,少年不惧岁月长",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "总有世间一两风,填我十万八千梦",
-                            
-                                "In me the tiger sniffs the rose.",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 80,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/24.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">keep-alive</h1>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Vue/">
+                                <span class="chip bg-color">Vue</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                <span class="chip bg-color">前端</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Vue/" class="post-category">
+                                Vue
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-18
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>可能大家在平时的开发中会经常遇到这样的场景：有一个可以进行筛选的列表页<code>List.vue</code>，点击某一项时进入相应的详情页面，等到你从详情页返回<code>List.vue</code>时，发现列表页居然刷新了！刚刚的筛选条件都没了！！！</p>
+<h2 id="keep-alive"><a href="#keep-alive" class="headerlink" title="keep-alive"></a>keep-alive</h2><h3 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h3><ul>
+<li><code>keep-alive</code>是一个<code>Vue全局组件</code></li>
+<li><code>keep-alive</code>本身不会渲染出来，也不会出现在父组件链中</li>
+<li><code>keep-alive</code>包裹动态组件时，会缓存不活动的组件，而不是销毁它们</li>
+</ul>
+<h3 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a>怎么用？</h3><p><code>keep-alive</code>接收三个参数：</p>
+<ul>
+<li><code>include</code>：可传<code>字符串、正则表达式、数组</code>，名称匹配成功的组件会被缓存</li>
+<li><code>exclude</code>：可传<code>字符串、正则表达式、数组</code>，名称匹配成功的组件不会被缓存</li>
+<li><code>max</code>：可传<code>数字</code>，限制缓存组件的最大数量</li>
+</ul>
+<p><code>include</code>和<code>exclude</code>，传<code>数组</code>情况居多</p>
+<h4 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h4><pre><code>&lt;keep-alive :include=&quot;allowList&quot; :exclude=&quot;noAllowList&quot; :max=&quot;amount&quot;&gt; 
+    &lt;component :is=&quot;currentComponent&quot;&gt;&lt;/component&gt; 
+&lt;/keep-alive&gt;
+</code></pre>
+<h4 id="路由组件"><a href="#路由组件" class="headerlink" title="路由组件"></a>路由组件</h4><pre><code>&lt;keep-alive :include=&quot;allowList&quot; :exclude=&quot;noAllowList&quot; :max=&quot;amount&quot;&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/keep-alive&gt;
+</code></pre>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="组件基础"><a href="#组件基础" class="headerlink" title="组件基础"></a>组件基础</h3><p>前面说了，<code>keep-alive</code>是一个<code>Vue全局组件</code>，他接收三个参数：</p>
+<ul>
+<li><code>include</code>：可传<code>字符串、正则表达式、数组</code>，名称匹配成功的组件会被缓存</li>
+<li><code>exclude</code>：可传<code>字符串、正则表达式、数组</code>，名称匹配成功的组件不会被缓存</li>
+<li><code>max</code>：可传<code>数字</code>，限制缓存组件的最大数量，超过<code>max</code>则按照<code>LRU算法</code>进行置换</li>
+</ul>
+<p>顺便说说<code>keep-alive</code>在各个生命周期里都做了啥吧：</p>
+<ul>
+<li><code>created</code>：初始化一个<code>cache、keys</code>，前者用来存缓存组件的虚拟dom集合，后者用来存缓存组件的key集合</li>
+<li><code>mounted</code>：实时监听<code>include、exclude</code>这两个的变化，并执行相应操作</li>
+<li><code>destroyed</code>：删除掉所有缓存相关的东西</li>
+</ul>
+<p>之前说了，<code>keep-alive</code>不会被渲染到页面上，所以<code>abstract</code>这个属性至关重要！</p>
+<pre><code>// src/core/components/keep-alive.js
+
+export default &#123;
+  name: &#39;keep-alive&#39;,
+  abstract: true, // 判断此组件是否需要在渲染成真实DOM
+  props: &#123;
+    include: patternTypes,
+    exclude: patternTypes,
+    max: [String, Number]
+  &#125;,
+  created() &#123;
+    this.cache = Object.create(null) // 创建对象来存储  缓存虚拟dom
+    this.keys = [] // 创建数组来存储  缓存key
+  &#125;,
+  mounted() &#123;
+    // 实时监听include、exclude的变动
+    this.$watch(&#39;include&#39;, val =&gt; &#123;
+      pruneCache(this, name =&gt; matches(val, name))
+    &#125;)
+    this.$watch(&#39;exclude&#39;, val =&gt; &#123;
+      pruneCache(this, name =&gt; !matches(val, name))
+    &#125;)
+  &#125;,
+  destroyed() &#123;
+    for (const key in this.cache) &#123; // 删除所有的缓存
+      pruneCacheEntry(this.cache, key, this.keys)
+    &#125;
+  &#125;,
+  render() &#123;
+      // 下面讲
+  &#125;
+&#125;
+</code></pre>
+<h3 id="pruneCacheEntry函数"><a href="#pruneCacheEntry函数" class="headerlink" title="pruneCacheEntry函数"></a>pruneCacheEntry函数</h3><p>咱们上面实现的生命周期<code>destroyed</code>中，执行了<code>删除所有缓存</code>这个操作，而这个操作是通过调用<code>pruneCacheEntry</code>来实现的，那咱们来说说<code>pruneCacheEntry</code>里做了啥吧 </p>
+<pre><code>// src/core/components/keep-alive.js
+
+function pruneCacheEntry (
+  cache: VNodeCache,
+  key: string,
+  keys: Array&lt;string&gt;,
+  current?: VNode
+) &#123;
+  const cached = cache[key]
+  if (cached &amp;&amp; (!current || cached.tag !== current.tag)) &#123;
+    cached.componentInstance.$destroy() // 执行组件的destory钩子函数
+  &#125;
+  cache[key] = null  // 设为null
+  remove(keys, key) // 删除对应的元素
+&#125;
+</code></pre>
+<p>总结一下就是做了三件事：</p>
+<ul>
+<li>1、遍历集合，执行所有缓存组件的<code>$destroy</code>方法</li>
+<li>2、将<code>cache</code>对应<code>key</code>的内容设置为<code>null</code></li>
+<li>3、删除<code>keys</code>中对应的元素</li>
+</ul>
+<h3 id="render函数"><a href="#render函数" class="headerlink" title="render函数"></a>render函数</h3><p>以下称<code>include</code>为白名单，<code>exclude</code>为黑名单 </p>
+<p><code>render</code>函数里主要做了这些事：</p>
+<ul>
+<li><p>第一步：获取到<code>keep-alive</code>包裹的第一个组件以及它的<code>组件名称</code></p>
+</li>
+<li><p>第二步：判断此<code>组件名称</code>是否能被<code>白名单、黑名单</code>匹配，如果<code>不能被白名单匹配 || 能被黑名单匹配</code>，则直接返回<code>VNode</code>，不往下执行，如果不符合，则往下执行<code>第三步</code></p>
+</li>
+<li><p>第三步：根据<code>组件ID、tag</code>生成<code>缓存key</code>，并在缓存集合中查找是否已缓存过此组件。如果已缓存过，直接取出缓存组件，并更新<code>缓存key</code>在<code>keys</code>中的位置（这是<code>LRU算法</code>的关键），如果没缓存过，则继续<code>第四步</code></p>
+</li>
+<li><p>第四步：分别在<code>cache、keys</code>中保存<code>此组件</code>以及他的<code>缓存key</code>，并检查数量是否超过<code>max</code>，超过则根据<code>LRU算法</code>进行删除</p>
+</li>
+<li><p>第五步：将此组件实例的<code>keepAlive</code>属性设置为true，这很重要哦，下面会讲到的！</p>
+<pre><code>  // src/core/components/keep-alive.js
+  render() &#123;
+    const slot = this.$slots.default
+    const vnode: VNode = getFirstComponentChild(slot) // 找到第一个子组件对象
+    const componentOptions: ?VNodeComponentOptions = vnode &amp;&amp; vnode.componentOptions
+    if (componentOptions) &#123; // 存在组件参数
+      // check pattern
+      const name: ?string = getComponentName(componentOptions) // 组件名
+      const &#123; include, exclude &#125; = this
+      if ( // 条件匹配
+        // not included
+        (include &amp;&amp; (!name || !matches(include, name))) ||
+        // excluded
+        (exclude &amp;&amp; name &amp;&amp; matches(exclude, name))
+      ) &#123;
+        return vnode
+      &#125;
+
+      const &#123; cache, keys &#125; = this
+      const key: ?string = vnode.key == null // 定义组件的缓存key
+        // same constructor may get registered as different local components
+        // so cid alone is not enough (#3269)
+        ? componentOptions.Ctor.cid + (componentOptions.tag ? `::$&#123;componentOptions.tag&#125;` : &#39;&#39;)
+        : vnode.key
+      if (cache[key]) &#123; // 已经缓存过该组件
+        vnode.componentInstance = cache[key].componentInstance
+        // make current key freshest
+        remove(keys, key)
+        keys.push(key) // 调整key排序
+      &#125; else &#123;
+        cache[key] = vnode // 缓存组件对象
+        keys.push(key)
+        // prune oldest entry
+        if (this.max &amp;&amp; keys.length &gt; parseInt(this.max)) &#123; // 超过缓存数限制，将第一个删除
+          pruneCacheEntry(cache, keys[0], keys, this._vnode)
+        &#125;
+      &#125;
+
+      vnode.data.keepAlive = true // 渲染和执行被包裹组件的钩子函数需要用到
+    &#125;
+    return vnode || (slot &amp;&amp; slot[0])
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h3 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h3><p>咱们先来看看Vue一个组件是怎么渲染的，咱们从<code>render</code>开始说：</p>
+<ul>
+<li><code>render</code>：此函数会将组件转成<code>VNode</code></li>
+<li><code>patch</code>：此函数在初次渲染时会直接渲染根据拿到的<code>VNode</code>直接渲染成<code>真实DOM</code>，第二次渲染开始就会拿<code>VNode</code>会跟<code>旧VNode</code>对比，打补丁（diff算法对比发生在此阶段），然后渲染成<code>真实DOM</code></li>
+</ul>
+<h4 id="keep-alive本身渲染"><a href="#keep-alive本身渲染" class="headerlink" title="keep-alive本身渲染"></a>keep-alive本身渲染</h4><p>刚刚说了，<code>keep-alive</code>自身组件不会被渲染到页面上，那是怎么做到的呢？其实就是通过判断组件实例上的<code>abstract</code>的属性值，如果是<code>true</code>的话，就跳过该实例，该实例也不会出现在父级链上</p>
+<pre><code>// src/core/instance/lifecycle.js
+
+export function initLifecycle (vm: Component) &#123;
+  const options = vm.$options
+  // 找到第一个非abstract的父组件实例
+  let parent = options.parent
+  if (parent &amp;&amp; !options.abstract) &#123;
+    while (parent.$options.abstract &amp;&amp; parent.$parent) &#123;
+      parent = parent.$parent
+    &#125;
+    parent.$children.push(vm)
+  &#125;
+  vm.$parent = parent
+  // ...
+&#125;
+</code></pre>
+<h4 id="包裹组件渲染"><a href="#包裹组件渲染" class="headerlink" title="包裹组件渲染"></a>包裹组件渲染</h4><p>咱们再来说说被<code>keep-alive</code>包裹着的组件是如何使用缓存的吧。刚刚说了<code>VNode -&gt; 真实DOM</code>是发生在<code>patch</code>的阶段，而其实这也是要细分的：<code>VNode -&gt; 实例化 -&gt; _update -&gt; 真实DOM</code>，而组件使用缓存的判断就发生在<code>实例化</code>这个阶段，而这个阶段调用的是<code>createComponent</code>函数，那我们就来说说这个函数吧：</p>
+<pre><code>// src/core/vdom/patch.js
+
+function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) &#123;
+  let i = vnode.data
+  if (isDef(i)) &#123;
+    const isReactivated = isDef(vnode.componentInstance) &amp;&amp; i.keepAlive
+    if (isDef(i = i.hook) &amp;&amp; isDef(i = i.init)) &#123;
+      i(vnode, false /* hydrating */)
+    &#125;
+
+    if (isDef(vnode.componentInstance)) &#123;
+      initComponent(vnode, insertedVnodeQueue)
+      insert(parentElm, vnode.elm, refElm) // 将缓存的DOM（vnode.elm）插入父元素中
+      if (isTrue(isReactivated)) &#123;
+        reactivateComponent(vnode, insertedVnodeQueue, parentElm, refElm)
+      &#125;
+      return true
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<p>在第一次加载被包裹组件时，因为<code>keep-alive</code>的<code>render</code>先于包裹组件加载之前执行，所以此时<code>vnode.componentInstance</code>的值是<code>undefined</code>，而<code>keepAlive</code>是<code>true</code>，则代码走到<code>i(vnode, false /* hydrating */)</code>就不往下走了</p>
+<p>再次访问包裹组件时，<code>vnode.componentInstance</code>的值就是已经缓存的组件实例，那么会执行<code>insert(parentElm, vnode.elm, refElm)</code>逻辑，这样就直接把上一次的DOM插入到了父元素中。</p>
+<p>文章来源：稀土掘金  作者：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7043401297302650917">Sunshine_Lin</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">琳琅-天上</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://llts.ltd/2022/01/18/article31/">https://llts.ltd/2022/01/18/article31/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">琳琅-天上</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Vue/">
+                                    <span class="chip bg-color">Vue</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                    <span class="chip bg-color">前端</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/01/18/article31/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/banner/24.jpg" class="responsive-img" alt="keep-alive">
+                        
+                        <span class="card-title">keep-alive</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Vue中常用的组件keep-alive的基本原理
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Vue/" class="post-category">
+                                    Vue
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/06/article30/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/banner/23.jpg" class="responsive-img" alt="关于ES6，你知道多少">
+                        
+                        <span class="card-title">关于ES6，你知道多少</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            总结一下工作中常用的ES6语法，或许可以节省很多时间
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ES6/" class="post-category">
+                                    ES6
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                    <a href="/tags/ES6/">
+                        <span class="chip bg-color">ES6</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
 </div>
 
 
 <script>
-    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 飞阁-流丹<br />'
+            + '文章作者: 天上-琳琅<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
 </script>
 
 
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
     </div>
 </div>
 
+<!-- TOC 悬浮按钮. -->
 
-<main class="content">
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
 
     
-
-    
-
-    <!-- 所有文章卡片 -->
-    <article id="articles" class="container articles">
-        <div class="row article-row">
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/06/22/article21/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/15.jpg" class="responsive-img" alt="13 行 JavaScript 代码让你看起来像是高手">
-                            
-                            <span class="card-title">13 行 JavaScript 代码让你看起来像是高手</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                有趣的13 行 JavaScript 代码
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-22
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/JavaScript/" class="post-category">
-                                    JavaScript
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/JavaScript/">
-                            <span class="chip bg-color">JavaScript</span>
-                        </a>
-                        
-                        <a href="/tags/%E8%BD%AC%E8%BD%BD/">
-                            <span class="chip bg-color">转载</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/06/04/article20/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/14.jpg" class="responsive-img" alt="vue2与vue3">
-                            
-                            <span class="card-title">vue2与vue3</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Vue2与Vue3的区别
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-04
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Vue/" class="post-category">
-                                    Vue
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Vue/">
-                            <span class="chip bg-color">Vue</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/05/26/article19/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/13.jpg" class="responsive-img" alt="webapck">
-                            
-                            <span class="card-title">webapck</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                webapck搭建环境，让你知道vue中的h函数的作用和虚拟节点如何上树！
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-26
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/webapck/" class="post-category">
-                                    webapck
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Vue/">
-                            <span class="chip bg-color">Vue</span>
-                        </a>
-                        
-                        <a href="/tags/webapck/">
-                            <span class="chip bg-color">webapck</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/05/08/article18/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/12.jpg" class="responsive-img" alt="ES6 Promise用法">
-                            
-                            <span class="card-title">ES6 Promise用法</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。ES6 规定，Promise对象是一个构造函数，用来生成Promise实例。
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-08
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/ES6/" class="post-category">
-                                    ES6
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%BD%AC%E8%BD%BD/">
-                            <span class="chip bg-color">转载</span>
-                        </a>
-                        
-                        <a href="/tags/ES6/">
-                            <span class="chip bg-color">ES6</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/04/26/article17/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/11.jpg" class="responsive-img" alt="JavaScript事件、事件类型、事件流和事件模型">
-                            
-                            <span class="card-title">JavaScript事件、事件类型、事件流和事件模型</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                当我们与浏览器中 Web 页面进行某些类型的交互时，事件就发生了。事件可能是用户在某些内容上的点击、鼠标经过某个特定元素或按下键盘上的某些按键。事件还可能是 Web 浏览器中发生的事情，比如说某个 Web 页面加载完成，或者是用户滚动窗口或改变窗口大小。通过使用 JavaScript ，你可以监听特定事件的发生，并规定让某些事件发生以对这些事件做出响应。
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-26
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/JavaScript/" class="post-category">
-                                    JavaScript
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/JavaScript/">
-                            <span class="chip bg-color">JavaScript</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/04/04/article16/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/10.jpg" class="responsive-img" alt="Vue3项目搭建规范">
-                            
-                            <span class="card-title">Vue3项目搭建规范</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                在之前的开发中主要用的是vue2，最近空闲时间比较多，接下来有新项目，本着偷懒的本能，自己打算看下vue3基础以备后期开发应用，并对其进行性能优化和配置。
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-04
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Vue/" class="post-category">
-                                    Vue
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Vue/">
-                            <span class="chip bg-color">Vue</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/03/18/article15/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/img/0003.jpg" class="responsive-img" alt="如何基于 React 封装一个组件">
-                            
-                            <span class="card-title">如何基于 React 封装一个组件</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                在使用组件时传入组件文档中说明的属性值如 primary ，那么这个组件的字体颜色会变为 primary 对应的颜色，这是如何做到的？还有别人封装的组件类名都有自己独特的前缀，这是如何处理的呢，难道是 css 类名全部加上前缀吗，这也太麻烦了！
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-18
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/React/" class="post-category">
-                                    React
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/React/">
-                            <span class="chip bg-color">React</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/03/11/article14/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/img/0007.jpg" class="responsive-img" alt="HTTP图解">
-                            
-                            <span class="card-title">HTTP图解</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                底层知识必须过硬，不然再创新的技术，也理解不深入，比如python web开发工程师，想要学习任何一个框架，底层都是http和socket，底层抓牢了，学起来会很轻松，所以今天特意写了一篇底层的博客，来源于《HTTP图解》。可以自行前去观看，比我个人了解得要全面很多!
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/HTTP/" class="post-category">
-                                    HTTP
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/HTTP/">
-                            <span class="chip bg-color">HTTP</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/03/04/article13/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/9.jpg" class="responsive-img" alt="MySQL索引详解">
-                            
-                            <span class="card-title">MySQL索引详解</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                一般的应用系统，读写比例在10:1左右，而且插入操作和一般的更新操作很少出现性能问题，在生产环境中，我们遇到最多的，也是最容易出问题的，还是一些复杂的查询操作，因此对查询语句的优化显然是重中之重。说起加速查询，就不得不提到索引了
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-04
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/MySQL/">
-                            <span class="chip bg-color">MySQL</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/02/22/article12/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/8.jpg" class="responsive-img" alt="html完整语法学习">
-                            
-                            <span class="card-title">html完整语法学习</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                超文本标记语言（英语：HyperText Markup Language，简称：HTML）是一种用于创建网页的标准标记语言。可以使用 HTML 来建立自己的 WEB 站点，HTML 运行在浏览器上，由浏览器来解析。
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-22
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/HTML/" class="post-category">
-                                    HTML
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/HTML/">
-                            <span class="chip bg-color">HTML</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/02/09/article11/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/img/0008.jpg" class="responsive-img" alt="使用 CSS 轻松实现一些高频出现的奇形怪状按钮">
-                            
-                            <span class="card-title">使用 CSS 轻松实现一些高频出现的奇形怪状按钮</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                总会有人问相关的问题，怎么样使用 CSS 实现一个内切角按钮呢、怎么样实现一个带箭头的按钮呢？本文基于一些高频出现在设计稿中的，使用 CSS 实现稍微有点难度和技巧性的按钮，讲解使用 CSS 如何尽可能的实现它们。
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/CSS/" class="post-category">
-                                    CSS
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/CSS/">
-                            <span class="chip bg-color">CSS</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/02/01/article10/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/banner/7.jpg" class="responsive-img" alt="windows注册表自启项">
-                            
-                            <span class="card-title">windows注册表自启项</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                如何通过修改Windows注册表项让程序在电脑开机时自动启动，或者删除程序的自动启动
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-01
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Windows/" class="post-category">
-                                    Windows
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Windows/">
-                            <span class="chip bg-color">Windows</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-        </div>
-    </article>
 
 </main>
-
-
-<div class="container paging">
-    <div class="row">
-        <div class="col s6 m4 l4">
-            
-            <a href="/"
-               class="left btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            
-        </div>
-        <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">2 / 3</div>
-        </div>
-        <div class="col s6 m4 l4">
-            
-            <a href="/page/3/"
-               class="right btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fas fa-angle-right"></i>
-            </a>
-            
-        </div>
-    </div>
-</div>
 
 
 
