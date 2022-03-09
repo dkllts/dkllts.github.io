@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: HTML5, 飞阁-流丹">
-    <meta name="description" content="飞阁-流丹">
+    <meta name="keywords" content="Vue响应式原理, 飞阁-流丹">
+    <meta name="description" content="Vue的响应式是如何实现的？">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签: HTML5 | 飞阁-流丹</title>
+    <title>Vue响应式原理 | 飞阁-流丹</title>
     <link rel="icon" type="image/png" href="/logo3.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -283,288 +283,568 @@
 
 </header>
 
-            <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                飞阁-流丹
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "今夕复何夕,共此明月光",
-                            
-                                "本站名取自《滕王阁序》层峦耸翠,上出重霄;飞阁流丹,下临无地。",
-                            
-                                "彼方尚有荣光在,少年不惧岁月长",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "总有世间一两风,填我十万八千梦",
-                            
-                                "In me the tiger sniffs the rose.",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 80,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
+            
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
-    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页');
+                location.href = '/';
+            }
+        }
+    })();
 </script>
 
 
-    </div>
-</div>
 
-<main class="content">
 
-    
-
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/JavaScript/" title="JavaScript: 7">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="JavaScript" style="background-color: #F9EBEA;">JavaScript
-                        <span class="tag-length">7</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/CSS/" title="CSS: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="CSS" style="background-color: #F5EEF8;">CSS
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Windows/" title="Windows: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Windows" style="background-color: #D5F5E3;">Windows
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/MySQL/" title="MySQL: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="MySQL" style="background-color: #E8F8F5;">MySQL
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/HTML/" title="HTML: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="HTML" style="background-color: #FEF9E7;">HTML
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/HTTP/" title="HTTP: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="HTTP" style="background-color: #F8F9F9;">HTTP
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/React/" title="React: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="React" style="background-color: #82E0AA;">React
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Vue/" title="Vue: 8">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Vue" style="background-color: #D7BDE2;">Vue
-                        <span class="tag-length">8</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/webapck/" title="webapck: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="webapck" style="background-color: #A3E4D7;">webapck
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E8%BD%AC%E8%BD%BD/" title="转载: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="转载" style="background-color: #85C1E9;">转载
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Vite/" title="Vite: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Vite" style="background-color: #F8C471;">Vite
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E5%85%B6%E4%BB%96/" title="其他: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="其他" style="background-color: #F9E79F;">其他
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Golang/" title="Golang: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Golang" style="background-color: #F5EEF8;">Golang
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Java/" title="Java: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Java" style="background-color: #FFF;">Java
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Node/" title="Node: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Node" style="background-color: #85C1E9;">Node
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/HTML5/" title="HTML5: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="HTML5" style="background-color: #A3E4D7;">HTML5
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Linux/" title="Linux: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Linux" style="background-color: #E8F8F5;">Linux
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/ES6/" title="ES6: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="ES6" style="background-color: #F8C471;">ES6
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="前端" style="background-color: #FEF9E7;">前端
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Vue响应式原理</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Vue/">
+                                <span class="chip bg-color">Vue</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                <span class="chip bg-color">前端</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Vue/" class="post-category">
+                                Vue
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-02-01
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/4/24/162f71d7977c8a3f~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<p>看过Vue官方文档的同学，对这张图应该已然相当熟悉了。</p>
+<p>vue的响应式是如何实现的？</p>
+<p>听过太多回答，通过<code>Object.defineProperty</code>，可是再详细的问时，对方浑然不知。</p>
+<p>来看下面这段代码</p>
+<pre><code>const Observer = function(data) &#123;
+  // 循环修改为每个属性添加get set
+  for (let key in data) &#123;
+    defineReactive(data, key);
+  &#125;
+&#125;
+
+const defineReactive = function(obj, key) &#123;
+  // 局部变量dep，用于get set内部调用
+  const dep = new Dep();
+  // 获取当前值
+  let val = obj[key];
+  Object.defineProperty(obj, key, &#123;
+    // 设置当前描述属性为可被循环
+    enumerable: true,
+    // 设置当前描述属性可被修改
+    configurable: true,
+    get() &#123;
+      console.log(&#39;in get&#39;);
+      // 调用依赖收集器中的addSub，用于收集当前属性与Watcher中的依赖关系
+      dep.depend();
+      return val;
+    &#125;,
+    set(newVal) &#123;
+      if (newVal === val) &#123;
+        return;
+      &#125;
+      val = newVal;
+      // 当值发生变更时，通知依赖收集器，更新每个需要更新的Watcher，
+      // 这里每个需要更新通过什么断定？dep.subs
+      dep.notify();
+    &#125;
+  &#125;);
+&#125;
+
+const observe = function(data) &#123;
+  return new Observer(data);
+&#125;
+
+const Vue = function(options) &#123;
+  const self = this;
+  // 将data赋值给this._data，源码这部分用的Proxy所以我们用最简单的方式临时实现
+  if (options &amp;&amp; typeof options.data === &#39;function&#39;) &#123;
+    this._data = options.data.apply(this);
+  &#125;
+  // 挂载函数
+  this.mount = function() &#123;
+    new Watcher(self, self.render);
+  &#125;
+  // 渲染函数
+  this.render = function() &#123;
+    with(self) &#123;
+      _data.text;
+    &#125;
+  &#125;
+  // 监听this._data
+  observe(this._data);  
+&#125;
+
+const Watcher = function(vm, fn) &#123;
+  const self = this;
+  this.vm = vm;
+  // 将当前Dep.target指向自己
+  Dep.target = this;
+  // 向Dep方法添加当前Wathcer
+  this.addDep = function(dep) &#123;
+    dep.addSub(self);
+  &#125;
+  // 更新方法，用于触发vm._render
+  this.update = function() &#123;
+    console.log(&#39;in watcher update&#39;);
+    fn();
+  &#125;
+  // 这里会首次调用vm._render，从而触发text的get
+  // 从而将当前的Wathcer与Dep关联起来
+  this.value = fn();
+  // 这里清空了Dep.target，为了防止notify触发时，不停的绑定Watcher与Dep，
+  // 造成代码死循环
+  Dep.target = null;
+&#125;
+
+const Dep = function() &#123;
+  const self = this;
+  // 收集目标
+  this.target = null;
+  // 存储收集器中需要通知的Watcher
+  this.subs = [];
+  // 当有目标时，绑定Dep与Wathcer的关系
+  this.depend = function() &#123;
+    if (Dep.target) &#123;
+      // 这里其实可以直接写self.addSub(Dep.target)，
+      // 没有这么写因为想还原源码的过程。
+      Dep.target.addDep(self);
+    &#125;
+  &#125;
+  // 为当前收集器添加Watcher
+  this.addSub = function(watcher) &#123;
+    self.subs.push(watcher);
+  &#125;
+  // 通知收集器中所的所有Wathcer，调用其update方法
+  this.notify = function() &#123;
+    for (let i = 0; i &lt; self.subs.length; i += 1) &#123;
+      self.subs[i].update();
+    &#125;
+  &#125;
+&#125;
+
+const vue = new Vue(&#123;
+  data() &#123;
+    return &#123;
+      text: &#39;hello world&#39;
+    &#125;;
+  &#125;
+&#125;)
+
+vue.mount(); // in get
+vue._data.text = &#39;123&#39;; 
+// in watcher update /n in get
+</code></pre>
+<p>这里用不到100行的代码，实现了一个简易的vue响应式。当然，这里如果不考虑期间的过程，我相信，40行代码之内可以搞定。但是我这里不想省略，为什么呢？我怕你把其中的过程自动忽略掉，怕别人问你相关东西的时候，明明自己看过了，却被怼的哑口无言。总之，我是为了你好，多喝热水。</p>
+<h4 id="Dep的作用是什么？"><a href="#Dep的作用是什么？" class="headerlink" title="Dep的作用是什么？"></a>Dep的作用是什么？</h4><p> <code>依赖收集器，这不是官方的名字蛤，我自己起的，为了好记。 </code></p>
+<p>用两个例子来看看依赖收集器的作用吧。</p>
+<ul>
+<li><p>例子1，毫无意义的渲染是不是没必要？</p>
+<pre><code>  const vm = new Vue(&#123;
+      data() &#123;
+          return &#123;
+              text: &#39;hello world&#39;,
+              text2: &#39;hey&#39;,
+          &#125;
+      &#125;
+  &#125;)
+</code></pre>
+<p>  当<code>vm.text2</code>的值发生变化时，会再次调用<code>render</code>，而<code>template</code>中却没有使用<code>text2</code>，所以这里处理<code>render</code>是不是毫无意义？</p>
+<p>  针对这个例子还记得我们上面模拟实现的没，在<code>Vue</code>的<code>render</code>函数中，我们调用了本次渲染相关的值，所以，与渲染无关的值，并不会触发<code>get</code>，也就不会在依赖收集器中添加到监听(<code>addSub</code>方法不会触发)，即使调用<code>set</code>赋值，<code>notify</code>中的<code>subs</code>也是空的。OK，继续回归demo，来一小波测试去印证下我说的吧。</p>
+<pre><code>  const vue = new Vue(&#123;
+    data() &#123;
+      return &#123;
+        text: &#39;hello world&#39;,
+        text2: &#39;hey&#39;
+      &#125;;
+    &#125;
+  &#125;)
+  
+  vue.mount(); // in get
+  vue._data.text = &#39;456&#39;; // in watcher update /n in get
+  vue._data.text2 = &#39;123&#39;; // nothing
+</code></pre>
+</li>
+<li><p>例子2，多个Vue实例引用同一个data时，通知谁？是不是应该俩都通知？ </p>
+<pre><code>  let commonData = &#123;
+    text: &#39;hello world&#39;
+  &#125;;
+  
+  const vm1 = new Vue(&#123;
+    data() &#123;
+      return commonData;
+    &#125;
+  &#125;)
+  
+  const vm2 = new Vue(&#123;
+    data() &#123;
+      return commonData;
+    &#125;
+  &#125;)
+  
+  vm1.mount(); // in get
+  vm2.mount(); // in get
+  commonData.text = &#39;hey&#39; // 输出了两次 in watcher update /n in get
+</code></pre>
+</li>
+</ul>
+<p>希望通过这两个例子，你已经大概清楚了<code>Dep</code>的作用，有没有原来就那么回事的感觉？有就对了。总结一下吧(以下依赖收集器实为<code>Dep</code>)：</p>
+<ul>
+<li><code>vue</code>将<code>data</code>初始化为一个<code>Observer</code>并对对象中的每个值，重写了其中的<code>get</code>、<code>set</code>，<code>data</code>中的每个<code>key</code>，都有一个独立的依赖收集器。</li>
+<li>在<code>get</code>中，向依赖收集器添加了监听</li>
+<li>在mount时，实例了一个<code>Watcher</code>，将收集器的目标指向了当前<code>Watcher</code></li>
+<li>在<code>data</code>值发生变更时，触发<code>set</code>，触发了依赖收集器中的所有监听的更新，来触发<code>Watcher.update</code></li>
+</ul>
+<p>稀土掘金作者：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903597986037768">JserWang</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">琳琅-天上</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://llts.ltd/2022/02/01/article32/">https://llts.ltd/2022/02/01/article32/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">琳琅-天上</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Vue/">
+                                    <span class="chip bg-color">Vue</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                    <span class="chip bg-color">前端</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="HTML5" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2020/11/19/article5/">
-                        <div class="card-image tag-image">
-                            
-                            <img src="/medias/banner/4.jpg" class="responsive-img" alt="HTML5时钟">
-                            
-                            <span class="card-title">HTML5时钟</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/HTML5/" class="post-category">
-                                HTML5
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+    
+
+</div>
+
                 </div>
             </div>
             
         </div>
-    </article>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/02/01/article32/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/banner/1.jpg" class="responsive-img" alt="Vue响应式原理">
+                        
+                        <span class="card-title">Vue响应式原理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Vue的响应式是如何实现的？
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Vue/" class="post-category">
+                                    Vue
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/18/article31/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/banner/24.jpg" class="responsive-img" alt="keep-alive">
+                        
+                        <span class="card-title">keep-alive</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Vue中常用的组件keep-alive的基本原理
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Vue/" class="post-category">
+                                    Vue
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 飞阁-流丹<br />'
+            + '文章作者: 天上-琳琅<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    
+
 </main>
 
 
